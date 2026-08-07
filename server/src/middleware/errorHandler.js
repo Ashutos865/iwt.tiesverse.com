@@ -4,6 +4,11 @@ import { config } from '../config.js';
 const MULTER_MESSAGES = {
   LIMIT_FILE_SIZE: `File too large — maximum ${config.maxFileBytes / (1024 * 1024)} MB per file.`,
   LIMIT_UNEXPECTED_FILE: 'Unsupported file. Upload a JPG, PNG, WebP or PDF under the size limit.',
+  // Not a file at all — one of the typed answers is enormous. Saying "file
+  // upload rejected" sends people to re-crop a photo that was never the problem.
+  LIMIT_FIELD_VALUE: 'One of your answers is too long. Please shorten it and try again.',
+  LIMIT_FIELD_COUNT: 'Too many fields in this application.',
+  LIMIT_PART_COUNT: 'This application has too many parts.',
 };
 
 export function notFound(_req, res) {

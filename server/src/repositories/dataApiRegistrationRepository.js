@@ -61,6 +61,14 @@ async function call(pathSuffix, { method = 'GET', body, timeoutMs = 15000 } = {}
       const detail = json?.error || text.slice(0, 200) || res.statusText;
       const err = new Error(`Data API ${method} ${pathSuffix} failed (${res.status}): ${detail}`);
       err.status = res.status;
+      // A rejected write is the applicant's problem to fix (a field too long, a
+      // file too big), so let them read why instead of "Something went wrong".
+      // 5xx stays hidden: that is ours, and may name internals.
+      if (res.status >= 400 && res.status < 500) {
+        err.expose = true;
+        err.code = 'STORAGE_REJECTED';
+        err.message = typeof detail === 'string' ? detail : JSON.stringify(detail);
+      }
       throw err;
     }
     return json;
