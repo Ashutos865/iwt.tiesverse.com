@@ -25,27 +25,40 @@ app.use(errorHandler);
 
 await init();
 
-const server = app.listen(config.port, () => {
+const server = app.listen(config.port);
+
+server.on('listening', () => {
   console.log(`[iwt] API listening on http://localhost:${config.port}`);
   console.log(`[iwt] QR passes will point at ${config.publicBaseUrl}/verify/...`);
 });
 
-/* A port clash is the most common way this fails to start — an earlier run, or
-   a --watch restart racing its own shutdown. Say what to do about it rather
-   than printing a raw stack trace. */
+/* A port clash is the usual way this fails to start, and it is usually
+   transient: --watch starts the replacement before the old process has finished
+   releasing the socket. Retry briefly before giving up, so an ordinary file save
+   never drops you into "port already in use" for something that clears itself.
+   A port genuinely held by another program still fails, with advice. */
+const RETRY_MS = 400;
+const RETRY_LIMIT = 10;
+let retries = 0;
+
 server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error('');
-    console.error(`[iwt] Port ${config.port} is already in use.`);
-    console.error('[iwt] Something else is already running there — most likely an');
-    console.error('[iwt] earlier instance of this server. Stop it, or set PORT in');
-    console.error('[iwt] server/.env to a free port.');
-    console.error('');
-    console.error(`[iwt]   npx kill-port ${config.port}`);
-    console.error('');
-    process.exit(1);
+  if (err.code !== 'EADDRINUSE') throw err;
+
+  if (retries < RETRY_LIMIT) {
+    retries += 1;
+    if (retries === 1) console.log(`[iwt] Port ${config.port} is busy, waiting for it to free…`);
+    setTimeout(() => server.listen(config.port), RETRY_MS);
+    return;
   }
-  throw err;
+
+  console.error('');
+  console.error(`[iwt] Port ${config.port} is still in use after ${(RETRY_LIMIT * RETRY_MS) / 1000}s.`);
+  console.error('[iwt] Something else is holding it — an earlier instance of this');
+  console.error('[iwt] server, or another program. Free it, or set PORT in server/.env.');
+  console.error('');
+  console.error(`[iwt]   npx kill-port ${config.port}`);
+  console.error('');
+  process.exit(1);
 });
 
 /* --watch sends SIGTERM before restarting. Closing the listener lets the next
