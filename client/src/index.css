@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper font-sans text-ink-900 antialiased;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  /* Primary action — deep river teal, as on the mockup's REGISTER NOW. */
+  .btn-primary {
+    @apply btn bg-brand-600 text-white hover:bg-brand-700;
+  }
+  /* Dark alternative — petrol ink surface. */
+  .btn-dark {
+    @apply btn bg-ink-900 text-white hover:bg-ink-700;
+  }
+  /* Outlined secondary — like the mockup's REQUEST INVITATION. */
+  .btn-ghost {
+    @apply btn border border-brand-600/40 bg-white text-brand-700 hover:border-brand-600 hover:bg-brand-50;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+
+  .card {
+    @apply rounded-xl border border-ink-100 bg-white p-6 shadow-sm;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink-800;
+  }
+  .input {
+    @apply w-full rounded-md border border-ink-200 bg-white px-3 py-2 text-sm text-ink-900 outline-none transition placeholder:text-ink-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20;
+  }
+  .input-error {
+    @apply border-red-400 focus:border-red-500 focus:ring-red-500/20;
+  }
+  .hint {
+    @apply mt-1 text-xs text-ink-600/70;
+  }
+  .error-text {
+    @apply mt-1 text-xs font-medium text-red-600;
+  }
+
+  /* Thin rule with a centred diamond — the mockup's hero divider. */
+  .hero-divider {
+    @apply relative my-5 h-px w-40 bg-brand-500/50;
+  }
+  .hero-divider::after {
+    content: '◆';
+    @apply absolute -top-2 left-1/2 -translate-x-1/2 bg-transparent text-[10px] text-brand-500;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
