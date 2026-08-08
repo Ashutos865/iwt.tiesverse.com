@@ -22,7 +22,7 @@ export function rulesFor(field) {
 
   const validators = {};
 
-  if (field.type === 'email') {
+  if (field.type === 'email' || field.type === 'emailVerify') {
     validators.email = (v) => !v || EMAIL_RE.test(v) || 'Enter a valid email address.';
   }
   if (field.type === 'url') {

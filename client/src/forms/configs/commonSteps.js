@@ -19,7 +19,8 @@ export const personalFields = [
   },
   { name: 'nationality', label: 'Nationality', type: 'text', required: true, placeholder: 'e.g. Indian' },
   { name: 'dob', label: 'Date of birth', type: 'date', required: true },
-  { name: 'email', label: 'Email address', type: 'email', required: true, hint: 'All correspondence goes here.' },
+  { name: 'email', label: 'Email address', type: 'emailVerify', required: true,
+    hint: 'Verify this address so we can send your pass.' },
   { name: 'phone', label: 'Phone (with country code)', type: 'tel', required: true, placeholder: '+91 98765 43210' },
   { name: 'linkedin', label: 'LinkedIn profile', type: 'url', placeholder: 'https://linkedin.com/in/…' },
 ];

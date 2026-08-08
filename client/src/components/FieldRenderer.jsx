@@ -1,5 +1,6 @@
 import { Controller } from 'react-hook-form';
 import FileInput from './FileInput.jsx';
+import EmailVerify from './EmailVerify.jsx';
 import { rulesFor } from '../forms/validation.js';
 
 /**
@@ -31,6 +32,9 @@ export default function FieldRenderer({ field, form }) {
 
   function renderControl() {
     switch (field.type) {
+      case 'emailVerify':
+        return <EmailVerify field={field} form={form} inputClass={inputClass} rules={rules} />;
+
       case 'textarea':
         return (
           <textarea

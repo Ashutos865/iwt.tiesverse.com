@@ -16,6 +16,7 @@ function buildFormData(config, values) {
 
   const data = {};
   for (const [name, value] of Object.entries(values)) {
+    if (name === 'emailToken') continue;          // proof, not an answer
     if (value instanceof File) {
       formData.append(name, value);
     } else if (value !== undefined && value !== '') {
@@ -23,6 +24,7 @@ function buildFormData(config, values) {
     }
   }
   formData.append('data', JSON.stringify(data));
+  if (values.emailToken) formData.append('emailToken', values.emailToken);
   return formData;
 }
 

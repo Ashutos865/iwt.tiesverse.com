@@ -21,6 +21,12 @@
     @apply btn bg-ink-900 text-white hover:bg-ink-700;
   }
   /* Outlined secondary — like the mockup's REQUEST INVITATION. */
+  /* Sits where the Verify button was, so the row does not reflow on success. */
+  .ev-badge {
+    @apply inline-flex items-center whitespace-nowrap rounded-lg border border-emerald-600/30
+           bg-emerald-50 px-3 text-sm font-semibold text-emerald-700;
+  }
+
   .btn-ghost {
     @apply btn border border-brand-600/40 bg-white text-brand-700 hover:border-brand-600 hover:bg-brand-50;
   }

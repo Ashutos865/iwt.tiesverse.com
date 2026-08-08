@@ -37,6 +37,13 @@ async function request(path, { method = 'GET', body, admin = false, isFormData =
 }
 
 export const api = {
+  // Email verification. Rate limits, expiry and attempt caps all live on the
+  // server; these just carry the request.
+  sendEmailCode: (email) =>
+    request('/api/registrations/verify/send', { method: 'POST', body: { email } }),
+  checkEmailCode: (email, code) =>
+    request('/api/registrations/verify/check', { method: 'POST', body: { email, code } }),
+
   submitRegistration: (formData) =>
     request('/api/registrations', { method: 'POST', body: formData, isFormData: true }),
 

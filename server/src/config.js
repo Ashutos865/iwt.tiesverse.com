@@ -26,6 +26,11 @@ export const config = {
   // rows land; the log says loudly which one is in use.
   storageFallback: String(process.env.STORAGE_FALLBACK ?? 'true').toLowerCase() !== 'false',
 
+  // Require a verified email before a registration is accepted. Off by default:
+  // turning it on mid-event would reject applicants who are part-way through a
+  // form they started before the change.
+  requireEmailOtp: String(process.env.REQUIRE_EMAIL_OTP ?? 'false').toLowerCase() === 'true',
+
   dataApi: {
     baseUrl: (process.env.DATA_API_URL || 'https://admin.tiesverse.com').replace(/\/$/, ''),
     slug: process.env.DATA_API_SLUG || 'iwt-summit-2026',
