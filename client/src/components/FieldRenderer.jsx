@@ -14,7 +14,10 @@ export default function FieldRenderer({ field, form }) {
   const inputClass = `input ${error ? 'input-error' : ''}`;
 
   const wide =
-    field.type === 'textarea' || field.type === 'checkboxes' || field.type === 'file' || field.full;
+    field.type === 'textarea' || field.type === 'checkboxes' || field.type === 'file'
+    // Needs room for the address, the Verify button and the code row beside it;
+    // in one narrow column the address is clipped mid-word.
+    || field.type === 'emailVerify' || field.full;
 
   return (
     <div className={wide ? 'sm:col-span-2 xl:col-span-3' : ''}>

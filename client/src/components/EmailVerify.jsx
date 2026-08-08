@@ -48,7 +48,17 @@ export default function EmailVerify({ field, form, inputClass, rules }) {
     try {
       res = await api.sendEmailCode(email.trim());
     } catch (err) {
-      setStage(stage === 'code' ? 'code' : 'idle');
+      // A cooldown means a code IS already out there, so show the box rather
+      // than leaving someone holding a code with nowhere to type it.
+      const wait = Number(err.fields?.retry_after || err.retry_after || 0);
+      const cooling = err.status === 429 || /try again in/i.test(err.message || '');
+      if (cooling) {
+        setStage('code');
+        setCooldown(wait || 60);
+        setTimeout(() => codeRef.current?.focus(), 50);
+      } else {
+        setStage(stage === 'code' ? 'code' : 'idle');
+      }
       setProblem(err.message || 'Could not send the code.');
       return;
     }
