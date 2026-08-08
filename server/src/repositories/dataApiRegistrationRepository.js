@@ -120,13 +120,33 @@ export async function init() {
  * Draws a registration number from the store's own atomic counter, then writes
  * the record. The counter is a single database statement, so two submissions
  * arriving together cannot be handed the same number.
+ *
+ * If the write fails the number is handed back, so a refused attempt does not
+ * burn an id. Without this a busy moment left the counter far ahead of the real
+ * number of applicants: 200 people arriving at once consumed 200 numbers even
+ * though only some of them registered.
  */
 export async function createWithId(prefix, build) {
   const seq = await call('/sequence/', { method: 'POST', body: { name: prefix } });
   const registrationId = `IWT26-${prefix}-${String(seq.value).padStart(5, '0')}`;
   const record = build(registrationId);
-  const created = await call('/records/', { method: 'POST', body: toRow(record) });
-  return { ...record, _recordId: created?.id };
+
+  try {
+    const created = await call('/records/', { method: 'POST', body: toRow(record) });
+    return { ...record, _recordId: created?.id };
+  } catch (err) {
+    // Best effort: the applicant's error is what matters, so a failed release
+    // must not replace it with a different one.
+    try {
+      await call('/sequence/', {
+        method: 'POST',
+        body: { name: prefix, release: seq.value },
+      });
+    } catch {
+      /* the number stays spent; ids remain unique, the sequence just skips one */
+    }
+    throw err;
+  }
 }
 
 export async function findByRegistrationId(registrationId) {
