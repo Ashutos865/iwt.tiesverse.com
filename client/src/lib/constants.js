@@ -1,28 +1,95 @@
+/**
+ * Event constants.
+ *
+ * SOURCE OF TRUTH: "Concept Note — Indus Waters Treaty Dialogue 2026"
+ * (Tiesverse Foundation). Do not add figures, dates or names that the concept
+ * note does not state.
+ *
+ * This is a ONE-TIME, SINGLE-DAY dialogue on 19 September 2026 — the 66th
+ * anniversary of the Treaty's signing in Karachi on 19 September 1960. There
+ * is no previous edition and no annual series, so nothing here should ever
+ * read "two days", "Day 2", "this edition" or "the 2026 theme".
+ */
+
 export const SUMMIT = {
-  name: 'Indus Water Treaty Dialogue 2026',
-  displayTitle: 'Indus Water Treaty 2026',
-  kicker: 'New Delhi International Dialogue on',
+  // The concept note titles the event "Dialogue on the Indus Waters Treaty 2026".
+  name: 'Dialogue on the Indus Waters Treaty 2026',
   shortName: 'IWT Dialogue 2026',
-  theme: 'Blood and Water Cannot Flow Together: Law, Reciprocity and Regional Security',
-  dates: '19–20 September 2026',
+  kicker: 'Dialogue by Tiesverse Foundation on',
+  // Rendered as two lines in the hero.
+  displayTitle: 'Indus',
+  displaySubtitle: 'Waters Treaty',
+  theme: 'Blood and Water cannot flow together',
+  // Singular by design — the dialogue convenes on one day only.
+  date: '19 September 2026',
   venue: 'Bharat Mandapam, New Delhi',
+  format: 'Single-day plenary format',
+  // 19 September 1960, Karachi — 2026 is the 66th anniversary.
+  treatySignedYear: 1960,
+  anniversary: '66th',
+
+  about:
+    'In April 2025, following the Pahalgam terror attack that killed 26 civilians, '
+    + 'India placed the 1960 Indus Waters Treaty in abeyance. The Treaty was originally '
+    + 'signed “in a spirit of goodwill and friendship”. Its suspension forces an '
+    + 'examination of what happens to that legal framework when one party adopts '
+    + 'terrorism as a primary instrument of statecraft. The Dialogue convenes jurists, '
+    + 'water-resource engineers, security scholars and diplomats to establish that '
+    + "India's decision is a lawful, measured response to treaty bad faith and "
+    + 'state-sponsored violence.',
+
+  // TODO(secretariat): these addresses were placeholders in the original build and
+  // are NOT in the concept note. Replace with the real secretariat contacts before
+  // launch. The concept note gives only the organisation's site, tiesverse.com.
   email: 'info@induswatertreaty.org',
   supportEmail: 'support@induswatertreaty.org',
-  phone: '+91 11 XXXX XXXX',
-  about:
-    'The Indus Water Treaty has been one of the most enduring agreements in South Asia. Today, emerging realities demand a fresh assessment of its relevance, obligations and the path forward. The Dialogue aims to foster meaningful conversation, encourage cooperation and build consensus on the future of water, peace and prosperity in the region.',
+  // Deliberately null: the previous build rendered a literal "+91 11 XXXX XXXX"
+  // on live pages. Every consumer guards on this, so setting a real number here
+  // is all that is needed to bring it back.
+  phone: null,
 };
 
-export const STATS = [
-  { value: '500+', label: 'Delegates' },
-  { value: '30+', label: 'Countries' },
-  { value: '40+', label: 'Speakers' },
-  { value: '10+', label: 'Ministers' },
-  { value: '20+', label: 'Sessions' },
-  { value: '1', label: 'New Delhi Declaration' },
-];
+export const ORGANISER = {
+  name: 'Tiesverse Foundation',
+  abbr: 'TIES',
+  website: 'https://www.tiesverse.com',
+  websiteLabel: 'www.tiesverse.com',
+  description:
+    "Tiesverse Foundation (TIES) is Bharat's leading youth-led Research, Media and "
+    + 'Technology organisation aimed at building innovative digital products and '
+    + 'solutions. We combine rigorous research, influential digital media and '
+    + 'cutting-edge technology to identify opportunities, engage large audiences and '
+    + 'deliver impactful outcomes that matter to India, that is Bharat.',
+  // Keep the object of the recognition attached to it. "Recognised by AICTE",
+  // standing alone, reads as AICTE approval of a technical institution — the
+  // regulatory status granted to engineering colleges and their programmes.
+  // TIES is not that. The recognition is for its AI-awareness work with young
+  // people, so the sentence must always say what it is for.
+  credentials:
+    'AICTE, under the Ministry of Education, Government of India, has recognised our '
+    + 'work to spread AI awareness among students and the next generation. TIES is also '
+    + 'known as the youngest organisation to host key sessions at the IndiaAI Summit. We '
+    + 'bring together a dynamic community of passionate students, scholars, policymakers '
+    + 'and industry leaders from top institutions worldwide, working collaboratively on '
+    + 'our operating philosophy of India-First.',
+};
 
-export const PARTNERS = ['ORF', 'RIS', 'CII', 'FICCI', 'ASSOCHAM', 'TERI', 'IWA'];
+/**
+ * Key facts strip.
+ *
+ * Replaces the previous "500+ delegates / 30+ countries / 40+ speakers /
+ * 20+ sessions" band, none of which appears in the concept note — and 20+
+ * sessions directly contradicted a single-day agenda. Every value below is
+ * traceable to the note or to the Treaty's signing date.
+ */
+export const KEY_FACTS = [
+  { value: '1 Day', label: 'Single-day plenary' },
+  { value: '1960', label: 'Treaty signed' },
+  { value: '66th', label: 'Anniversary of signing' },
+  { value: 'Apr 2025', label: 'Placed in abeyance' },
+  { value: '6', label: 'Interlocking themes' },
+  { value: '4', label: 'Analytical sessions' },
+];
 
 export const CATEGORIES = [
   {

@@ -2,36 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Larken — the event title face (Ellen Luff Type Foundry).
+ *
+ * The binary is deliberately NOT in the repository; see
+ * client/public/fonts/README.md. If the file is absent this declaration simply
+ * fails to resolve and the title falls back to Georgia — the page renders
+ * correctly either way, which is what keeps an unlicensed file out of a build.
+ */
+@font-face {
+  font-family: 'Larken';
+  src: url('/fonts/larken.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   body {
     @apply bg-paper font-sans text-ink-900 antialiased;
   }
-  /* Visible keyboard focus everywhere (design.md §37). */
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-500 ring-offset-2;
+    @apply outline-none ring-2 ring-brand-600 ring-offset-2 ring-offset-paper;
+  }
+  /* Headings are sans throughout, following the reference site. */
+  h1, h2, h3, h4 {
+    @apply text-ink-900;
   }
 }
 
 @layer components {
-  /* ── Buttons — min 44px targets (§4.6) ─────────────────────────── */
+  /* ── Buttons — pill-shaped, 44px minimum ───────────────────────── */
   .btn {
-    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded px-5 py-2.5
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill px-6 py-2.5
            text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
-    @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-700;
+    @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800;
   }
   .btn-dark {
-    @apply btn bg-ink-950 text-white hover:bg-navy-900;
+    @apply btn bg-brand-900 text-white hover:bg-brand-800;
   }
+  /* Outlined pill — the reference site's default secondary action. */
   .btn-ghost {
-    @apply btn border border-ink-200 bg-white text-ink-900 hover:border-brand-600 hover:text-brand-700;
+    @apply btn border border-brand-700/40 bg-transparent text-brand-800
+           hover:border-brand-700 hover:bg-brand-50;
   }
   .btn-danger {
     @apply btn bg-bad text-white hover:opacity-90;
   }
   .btn-text {
-    @apply inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700;
+    @apply inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold
+           text-brand-700 hover:text-brand-800 hover:underline;
   }
 
   /* ── Surfaces ──────────────────────────────────────────────────── */
@@ -39,14 +61,69 @@
     @apply rounded-card border border-ink-200 bg-white p-6;
   }
 
-  /* ── Forms — 44px controls, label above (§4.7) ─────────────────── */
+  /* Solid colour tile — the home portal's primary navigation.
+
+     No text colour here on purpose: the supplied palette runs from #064A43 to
+     #DCDCDC, so each tile picks white or ink from its own ground. The inset
+     ring keeps the palest tiles from dissolving into the white page. */
+  .tile {
+    @apply relative flex min-h-[164px] flex-col justify-between overflow-hidden
+           rounded-card p-6 shadow-tile ring-1 ring-inset ring-black/5 transition
+           hover:-translate-y-0.5 hover:shadow-nav
+           sm:min-h-[216px] sm:p-7 lg:min-h-[248px];
+  }
+  .tile-title {
+    @apply text-xl font-bold uppercase leading-tight tracking-tight sm:text-2xl lg:text-3xl;
+  }
+  /* opacity, not a fixed colour, so the subtitle works on either text colour */
+  .tile-sub {
+    @apply mt-2 text-sm leading-snug opacity-80;
+  }
+
+  /* ── Navigation ────────────────────────────────────────────────── */
+  /* The floating nav card under the centred logo. The border is load-bearing:
+     the page ground is white, so fill alone gives the card no edge. */
+  .navcard {
+    @apply rounded-card border border-black bg-white shadow-nav;
+  }
+  .navlink {
+    @apply inline-flex min-h-[44px] items-center gap-1 rounded-pill px-4 text-sm
+           font-semibold text-ink-800 transition hover:bg-brand-50 hover:text-brand-800;
+  }
+  .navlink-active {
+    @apply bg-brand-600 text-white hover:bg-brand-700 hover:text-white;
+  }
+
+  /* ── Page furniture ────────────────────────────────────────────── */
+  .crumbs {
+    @apply flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-500;
+  }
+  .crumbs a {
+    @apply font-medium text-brand-700 hover:underline;
+  }
+  /* Category pill above a page title. */
+  .chip {
+    @apply inline-flex items-center rounded-pill bg-white px-4 py-1.5 text-xs
+           font-bold uppercase tracking-[0.1em] text-brand-800 shadow-tile;
+  }
+  .page-title {
+    @apply text-3xl font-bold leading-tight tracking-tight text-brand-800 sm:text-[42px];
+  }
+  .section-title {
+    @apply text-2xl font-bold tracking-tight text-brand-800 sm:text-3xl;
+  }
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.12em] text-brand-700;
+  }
+
+  /* ── Forms ─────────────────────────────────────────────────────── */
   .label {
-    @apply mb-1.5 block text-sm font-medium text-ink-800;
+    @apply mb-1.5 block text-sm font-semibold text-ink-800;
   }
   .input {
-    @apply min-h-[44px] w-full rounded border border-ink-200 bg-white px-3 py-2 text-[15px]
-           text-ink-900 outline-none transition placeholder:text-ink-500/60
-           focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20;
+    @apply min-h-[44px] w-full rounded border border-ink-200 bg-white px-3.5 py-2 text-[15px]
+           text-ink-900 outline-none transition placeholder:text-ink-500/70
+           focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20;
   }
   .input-error {
     @apply border-bad focus:border-bad focus:ring-bad/20;
@@ -58,45 +135,24 @@
     @apply mt-1 text-xs font-medium text-bad;
   }
 
-  /* ── Status pills — text + tone, never color alone (§4.1) ─────── */
+  /* ── Status pills — colour is always paired with words ─────────── */
   .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+    @apply inline-flex items-center gap-1.5 rounded-pill px-3 py-1 text-xs font-semibold;
   }
   .pill-ok    { @apply pill bg-ok-bg text-ok; }
   .pill-warn  { @apply pill bg-warn-bg text-warn; }
   .pill-bad   { @apply pill bg-bad-bg text-bad; }
-  .pill-info  { @apply pill bg-brand-50 text-brand-700; }
+  .pill-info  { @apply pill bg-brand-100 text-brand-800; }
   .pill-muted { @apply pill bg-ink-100 text-ink-700; }
 
-  /* Sits where the Verify button was, so the row does not reflow on success. */
   .ev-badge {
     @apply inline-flex items-center whitespace-nowrap rounded border border-ok/30
            bg-ok-bg px-3 text-sm font-semibold text-ok;
   }
 
-  /* ── Page hero band (§5.3): navy overlay, H1 + one support line ── */
-  .page-hero {
-    @apply relative bg-navy-950 text-white;
-  }
-  .page-hero-inner {
-    @apply mx-auto flex min-h-[160px] max-w-shell flex-col justify-center px-4 py-10
-           sm:min-h-[200px] sm:px-8;
-  }
-  .page-hero h1 {
-    @apply font-display text-3xl font-semibold tracking-tight sm:text-4xl;
-  }
-  .page-hero p {
-    @apply mt-2 max-w-2xl text-sm text-white/80 sm:text-base;
-  }
-
-  /* Section eyebrow label */
-  .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.12em] text-brand-600;
-  }
-
   /* Container */
   .shell {
-    @apply mx-auto w-full max-w-shell px-4 sm:px-8;
+    @apply mx-auto w-full max-w-shell px-4 sm:px-6;
   }
 }
 

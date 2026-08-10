@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../../lib/api.js';
-import { DAYS, SESSION_TYPES, SPEAKER_CATEGORIES, TRACKS } from '../../content/summit.js';
+import { SESSION_GROUPS } from '../../content/summit.js';
+
+// Kept here, not in the content file: these are choices the FORM offers, and
+// the public pages no longer define them.
+const SPEAKER_CATEGORIES = [
+  'Government', 'Diplomats', 'Military', 'Academia', 'Think Tanks', 'Industry', 'Legal',
+];
 
 /**
  * Content manager: everything the public site shows, editable without a code
@@ -23,7 +29,7 @@ const TYPES = [
       { name: 'designation', label: 'Designation', required: true, placeholder: 'e.g. Professor of International Law' },
       { name: 'organization', label: 'Organisation', placeholder: 'e.g. Jindal School of International Affairs' },
       { name: 'country', label: 'Country', placeholder: 'e.g. India' },
-      { name: 'category', label: 'Category', type: 'select', options: SPEAKER_CATEGORIES.filter((c) => c !== 'All') },
+      { name: 'category', label: 'Category', type: 'select', options: SPEAKER_CATEGORIES },
       { name: 'photo_url', label: 'Photo URL', placeholder: 'https://…', hint: 'Portrait, ideally 4:5. Leave blank for a monogram.' },
       { name: 'bio', label: 'Short bio', type: 'textarea', hint: '80–180 words, as it should appear publicly.' },
       { name: 'order', label: 'Display order', type: 'number', hint: 'Lower shows first.' },
@@ -37,19 +43,18 @@ const TYPES = [
     fields: [
       { name: 'title', label: 'Session title', required: true },
       {
-        name: 'day', label: 'Day', type: 'select', required: true,
-        options: DAYS.map((d) => d.key),
-        optionLabels: DAYS.map((d) => `${d.label} — ${d.date}`),
+        name: 'kind', label: 'Row type', type: 'select', required: true,
+        options: ['session', 'break'],
+        optionLabels: ['Session (counts in the programme)', 'Break / registration / lunch'],
+        hint: 'Breaks show in the agenda but are not counted as sessions.',
       },
       { name: 'start', label: 'Start time', required: true, placeholder: '09:00' },
       { name: 'end', label: 'End time', placeholder: '09:45' },
-      { name: 'type', label: 'Session type', type: 'select', options: SESSION_TYPES },
-      { name: 'track', label: 'Track', type: 'select', options: TRACKS },
-      { name: 'room', label: 'Room / venue', placeholder: 'Plenary Hall' },
+      { name: 'group', label: 'Session group', type: 'select', options: SESSION_GROUPS },
       { name: 'description', label: 'Description', type: 'textarea' },
-      { name: 'order', label: 'Display order', type: 'number' },
+      { name: 'order', label: 'Display order', type: 'number', hint: 'Lower shows first. Use the running order.' },
     ],
-    summary: (i) => `${i.start || '--:--'} · ${i.title}`,
+    summary: (i) => `${i.start || '--:--'} · ${i.title}${i.kind === 'break' ? ' (break)' : ''}`,
   },
   {
     kind: 'partner',

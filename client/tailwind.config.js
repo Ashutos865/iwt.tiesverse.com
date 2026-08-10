@@ -1,59 +1,101 @@
 /** @type {import('tailwindcss').Config} */
-// Navy institutional system per design.md §4.1. The semantic names (ink,
-// brand, paper) are kept so every existing component re-skins without markup
-// changes: ink = navy/text scale, brand = action blue, paper = page ground.
+/**
+ * Design tokens.
+ *
+ * Structure follows cop30.br — warm off-white ground, floating pill
+ * navigation, solid-colour tile grid, heavy rounding, one sans family. The
+ * palette does NOT follow COP30's earth tones: it is built from the teal in
+ * the supplied logo (#58A0A0) so the site stays on-brand with its own mark.
+ *
+ * Semantic names (ink, brand, paper) are unchanged from the previous system so
+ * every existing component re-skins without markup edits: ink = text scale,
+ * brand = teal action colour, paper = page ground.
+ */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
-        // Ink text scale + line color (design(1).md §5.1).
+        // Text + surface scale, warmed slightly so it sits on the ivory ground.
+        // Every value below is contrast-checked against the ground it is used
+        // on: body text >= 4.5:1 on paper, white text >= 4.5:1 on brand-600
+        // and on every tile colour.
         ink: {
-          50: '#F7F8F6',   // paper
-          100: '#EFF2F0',
-          200: '#D8E2E8',  // --line borders
-          500: '#586875',  // --ink-600 meta text
-          600: '#4A5A68',
-          700: '#3A4B59',
-          800: '#253746',  // --ink-800 secondary body
-          900: '#0A1722',  // --ink-950 body/titles
-          950: '#041C2C',  // header/footer navy
+          50: '#FAFAF8',
+          100: '#F1F0EC',
+          200: '#DEDBD1',  // hairlines, borders
+          500: '#66685F',  // meta text — 4.71:1 on paper, 5.66:1 on white
+          600: '#5A5D59',
+          700: '#474A48',  // secondary body — 8.15:1
+          800: '#2E3230',
+          900: '#1C201F',  // primary body — 14.96:1
+          950: '#0F1413',
         },
-        // River blue — actions, links, active nav, small emphasis only.
+        // Teal, derived from the logo: 500 is the logo colour exactly.
+        // 600 is the darkest tint that still carries white text at AA.
         brand: {
-          50: '#EEF9FD',   // --river-050
-          100: '#DFF3FB',  // --river-100
-          400: '#38AFE0',  // --river-400 logo accent
-          500: '#1597D1',  // --river-500 hover
-          600: '#0C7DB8',  // --river-600 primary action
-          700: '#08699F',  // --river-700
+          50: '#F2F8F8',
+          100: '#DFEDED',
+          200: '#C0DBDB',
+          300: '#9AC7C7',
+          400: '#76B0B0',
+          500: '#58A0A0',  // ← logo
+          600: '#427E7E',  // primary CTA — 4.65:1 with white
+          700: '#3A6D6E',  // links on paper — 5.31:1
+          800: '#2E5657',  // titles — 7.38:1
+          900: '#244243',
+          950: '#172B2C',
         },
-        // Deep aquatic navy surfaces.
-        navy: {
-          800: '#0B3A5C',
-          900: '#082A43',
-          950: '#041C2C',  // header / footer
-          975: '#021624',  // deepest shell / hero
+        // Plain white page ground, per the client's instruction.
+        //
+        // Nothing can now separate a white surface from the ground by fill, so
+        // the nav card and content cards carry a hairline border and a shadow
+        // instead — see .navcard / .card in index.css. Removing either makes
+        // them dissolve into the page.
+        paper: '#FFFFFF',
+        // Supplied brand palette (KBMD3Signs colour card), named as on the card.
+        //
+        // These are NOT interchangeable: only the two darkest carry white text
+        // at AA. Contrast with white / with ink-900:
+        //   bluegreen  10.15 / 1.62  -> white text
+        //   turquoise   5.23 / 3.15  -> white text
+        //   keppel      2.95 / 5.57  -> DARK text
+        //   cadet       2.10 / 7.82  -> DARK text
+        //   gainsboro   1.37 / 12.00 -> DARK text
+        // Every tile therefore sets its own text colour; see TILES in Home.jsx.
+        tile: {
+          bluegreen: '#064A43',
+          turquoise: '#0F7A6B',
+          keppel: '#3AA69B',
+          cadet: '#95B9C0',
+          gainsboro: '#DCDCDC',
         },
-        // Very restrained diplomatic accent: 1px rules, tiny labels only.
-        silt: { 500: '#B79A62' },
-        paper: '#F7F8F6',
-        // Status pairs — always used WITH text/icon, never color alone.
-        ok: { DEFAULT: '#18794E', bg: '#EAF7F0' },
-        warn: { DEFAULT: '#946200', bg: '#FFF4D6' },
-        bad: { DEFAULT: '#B42318', bg: '#FDECEA' },
+        ok: { DEFAULT: '#1F7A4C', bg: '#E8F5EE' },
+        warn: { DEFAULT: '#8A6100', bg: '#FDF3D9' },
+        bad: { DEFAULT: '#A8321F', bg: '#FBEAE7' },
       },
       fontFamily: {
-        display: ['"Source Serif 4"', 'Georgia', '"Times New Roman"', 'serif'],
-        sans: ['"Source Sans 3"', 'Inter', 'system-ui', 'sans-serif'],
+        // Larken — the event title only.
+        title: ['Larken', 'Georgia', 'serif'],
+        // COP30 is single-family. `display` is kept as a token name so the
+        // existing font-display classes flip to sans without touching markup.
+        display: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
       },
       maxWidth: {
-        shell: '1280px',   // content container per §4.3
-        wide: '1440px',    // operations/dashboard views
+        shell: '1180px',
+        wide: '1440px',
+        prose: '760px',
       },
       borderRadius: {
-        DEFAULT: '6px',
-        card: '8px',
+        DEFAULT: '8px',
+        card: '14px',
+        pill: '999px',
+      },
+      boxShadow: {
+        // The floating nav card and tiles sit on the ground, not in it.
+        nav: '0 6px 24px -8px rgba(16, 32, 32, 0.18), 0 2px 6px -2px rgba(16, 32, 32, 0.08)',
+        tile: '0 2px 10px -4px rgba(16, 32, 32, 0.18)',
       },
     },
   },

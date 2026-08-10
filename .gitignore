@@ -7,3 +7,14 @@ server/uploads/*
 !server/uploads/.gitkeep
 *.log
 .DS_Store
+
+# Licensed font binaries. This repository is public — committing a paid
+# typeface here would publish it to anyone who clones the repo, which no
+# desktop or webfont licence permits. Keep the files local; see
+# client/public/fonts/README.md.
+client/public/fonts/*
+!client/public/fonts/README.md
+
+# Scratch assets shared for review — never committed.
+assets-inbox/*
+!assets-inbox/README.md

@@ -22,7 +22,7 @@ function ActionRail() {
         <h2 className="eyebrow">Media contact</h2>
         <p className="mt-2 text-sm text-ink-700">Secretariat press desk</p>
         <a className="btn-text" href={`mailto:${SUMMIT.email}`}>{SUMMIT.email}</a>
-        <p className="text-sm text-ink-700">{SUMMIT.phone}</p>
+        {SUMMIT.phone && <p className="text-sm text-ink-700">{SUMMIT.phone}</p>}
       </div>
       <div className="card">
         <h2 className="eyebrow">Media kit</h2>
@@ -88,9 +88,13 @@ export default function Media() {
               </a>
             </div>
           ) : items.length === 0 ? (
-            <div className="card text-center">
+            <div className="card">
               <p className="font-semibold text-ink-900">Nothing published under {tab} yet.</p>
-              <p className="mt-1 text-sm text-ink-700">Releases appear here as they are issued.</p>
+              <p className="mt-1 text-sm leading-relaxed text-ink-700">
+                Releases and advisories are posted here as the secretariat issues them, each with
+                its date. Accredited media are notified directly — apply for accreditation to be
+                on that list.
+              </p>
             </div>
           ) : (
             <div className="grid gap-3">

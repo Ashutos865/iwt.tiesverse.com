@@ -76,7 +76,7 @@ function Sidebar({ activeSlug }) {
         <p className="mt-2 text-ink-700">
           For any assistance with registration, please contact us at
         </p>
-        <p className="mt-2 font-semibold text-ink-900">{SUMMIT.phone}</p>
+        {SUMMIT.phone && <p className="mt-2 font-semibold text-ink-900">{SUMMIT.phone}</p>}
         <a href={`mailto:${SUMMIT.supportEmail}`} className="font-semibold text-brand-700 hover:underline">
           {SUMMIT.supportEmail}
         </a>
