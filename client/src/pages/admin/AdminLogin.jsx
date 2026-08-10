@@ -1,12 +1,18 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api, setAdminKey } from '../../lib/api.js';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+
+  // A scan that hit the staff gate sends ?next=/verify/<token> so sign-in
+  // lands straight back on the pass being checked. Only same-site paths.
+  const rawNext = params.get('next') || '';
+  const next = rawNext.startsWith('/') && !rawNext.startsWith('//') ? rawNext : '/admin/applications';
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -15,7 +21,7 @@ export default function AdminLogin() {
     try {
       await api.adminLogin(password);
       setAdminKey(password);
-      navigate('/admin/applications', { replace: true });
+      navigate(next, { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {

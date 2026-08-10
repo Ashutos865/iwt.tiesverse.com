@@ -63,16 +63,21 @@ export default function AdminList() {
           <h1 className="font-display text-2xl text-ink-900">Applications</h1>
           <p className="text-sm text-ink-600/70">{data.total} total</p>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            clearAdminKey();
-            navigate('/admin', { replace: true });
-          }}
-          className="btn-ghost !py-1.5 !text-xs"
-        >
-          Sign out
-        </button>
+        <div className="flex items-center gap-2">
+          <Link to="/admin/checkin" className="btn-primary !py-1.5 !text-xs">
+            📷 Check-in scanner
+          </Link>
+          <button
+            type="button"
+            onClick={() => {
+              clearAdminKey();
+              navigate('/admin', { replace: true });
+            }}
+            className="btn-ghost !py-1.5 !text-xs"
+          >
+            Sign out
+          </button>
+        </div>
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-2">

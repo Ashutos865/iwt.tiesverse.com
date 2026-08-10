@@ -52,7 +52,11 @@ export const api = {
       `/api/registrations/status?email=${encodeURIComponent(email)}&registrationId=${encodeURIComponent(registrationId)}`,
     ),
 
-  verifyPass: (token) => request(`/api/verify/${encodeURIComponent(token)}`),
+  // Badge verification is STAFF ONLY — both calls carry the admin key, so a
+  // scanned QR reveals nothing to anyone who is not signed in.
+  verifyPass: (token) => request(`/api/verify/${encodeURIComponent(token)}`, { admin: true }),
+  checkinPass: (token) =>
+    request(`/api/verify/${encodeURIComponent(token)}/checkin`, { method: 'POST', admin: true }),
 
   adminLogin: (password) => request('/api/admin/login', { method: 'POST', body: { password } }),
 

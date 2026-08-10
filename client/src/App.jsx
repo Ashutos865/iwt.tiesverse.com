@@ -15,6 +15,7 @@ import Verify from './pages/Verify.jsx';
 import AdminLogin from './pages/admin/AdminLogin.jsx';
 import AdminList from './pages/admin/AdminList.jsx';
 import AdminDetail from './pages/admin/AdminDetail.jsx';
+import AdminCheckin from './pages/admin/AdminCheckin.jsx';
 import { getAdminKey } from './lib/api.js';
 
 /** Keeps unauthenticated eyes off admin screens; the API enforces it for real. */
@@ -40,6 +41,14 @@ export default function App() {
         <Route path="/verify/:token" element={<Verify />} />
 
         <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/admin/checkin"
+          element={
+            <RequireAdmin>
+              <AdminCheckin />
+            </RequireAdmin>
+          }
+        />
         <Route
           path="/admin/applications"
           element={
