@@ -466,9 +466,12 @@ export const FAQ = [
   },
   {
     q: 'Who is organising the dialogue?',
+    // Never shorten this to "recognised by AICTE" — see ORGANISER.credentials
+    // in lib/constants.js for why the object of the recognition has to stay.
     a: 'Tiesverse Foundation (TIES), a youth-led research, media and technology '
-      + 'organisation recognised by AICTE under the Ministry of Education, Government of '
-      + 'India.',
+      + 'organisation. Its work spreading AI awareness among students and the next '
+      + 'generation is recognised by AICTE under the Ministry of Education, Government '
+      + 'of India.',
   },
   {
     q: 'Can I follow the proceedings remotely?',

@@ -60,12 +60,18 @@ export const ORGANISER = {
     + 'solutions. We combine rigorous research, influential digital media and '
     + 'cutting-edge technology to identify opportunities, engage large audiences and '
     + 'deliver impactful outcomes that matter to India, that is Bharat.',
+  // Keep the object of the recognition attached to it. "Recognised by AICTE",
+  // standing alone, reads as AICTE approval of a technical institution — the
+  // regulatory status granted to engineering colleges and their programmes.
+  // TIES is not that. The recognition is for its AI-awareness work with young
+  // people, so the sentence must always say what it is for.
   credentials:
-    'Backed by recognition from AICTE under the Ministry of Education, Government of '
-    + 'India, and known as the youngest organisation to host key sessions at the IndiaAI '
-    + 'Summit. We bring together a dynamic community of passionate students, scholars, '
-    + 'policymakers and industry leaders from top institutions worldwide, working '
-    + 'collaboratively on our operating philosophy of India-First.',
+    'AICTE, under the Ministry of Education, Government of India, has recognised our '
+    + 'work to spread AI awareness among students and the next generation. TIES is also '
+    + 'known as the youngest organisation to host key sessions at the IndiaAI Summit. We '
+    + 'bring together a dynamic community of passionate students, scholars, policymakers '
+    + 'and industry leaders from top institutions worldwide, working collaboratively on '
+    + 'our operating philosophy of India-First.',
 };
 
 /**
