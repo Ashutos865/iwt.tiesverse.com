@@ -67,12 +67,13 @@
      #DCDCDC, so each tile picks white or ink from its own ground. The inset
      ring keeps the palest tiles from dissolving into the white page. */
   .tile {
-    @apply relative flex min-h-[168px] flex-col justify-between overflow-hidden
+    @apply relative flex min-h-[164px] flex-col justify-between overflow-hidden
            rounded-card p-6 shadow-tile ring-1 ring-inset ring-black/5 transition
-           hover:-translate-y-0.5 hover:shadow-nav;
+           hover:-translate-y-0.5 hover:shadow-nav
+           sm:min-h-[216px] sm:p-7 lg:min-h-[248px];
   }
   .tile-title {
-    @apply text-xl font-bold uppercase leading-tight tracking-tight sm:text-2xl;
+    @apply text-xl font-bold uppercase leading-tight tracking-tight sm:text-2xl lg:text-3xl;
   }
   /* opacity, not a fixed colour, so the subtitle works on either text colour */
   .tile-sub {

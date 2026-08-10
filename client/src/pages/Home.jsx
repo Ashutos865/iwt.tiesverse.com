@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Countdown from '../components/Countdown.jsx';
 import MandalaDivider from '../components/MandalaDivider.jsx';
 import { ORGANISER, SUMMIT } from '../lib/constants.js';
 import { BACKGROUND, FAQ } from '../content/summit.js';
@@ -61,12 +60,13 @@ export default function Home() {
       */}
       <h1 className="sr-only">{SUMMIT.name}</h1>
 
-      <section className="shell flex justify-center pb-10 pt-2">
-        <Countdown className="w-full max-w-2xl" />
-      </section>
-
-      {/* Portal tiles */}
-      <section className="shell pb-14">
+      {/*
+        The countdown sat above this grid and was removed for now. The tiles
+        take the freed height rather than leaving a gap: `.tile` grows from
+        168px to a responsive floor, so the grid still fills the first screen.
+        components/Countdown.jsx is kept intact for when it comes back.
+      */}
+      <section className="shell pb-14 pt-2">
         <div className="grid gap-4 sm:grid-cols-4">
           {TILES.map((t) => (
             <Link key={t.to} to={t.to} className={`tile ${t.bg} ${t.text} ${t.span || ''}`}>
