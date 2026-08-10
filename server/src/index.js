@@ -2,10 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import { config } from './config.js';
 import { init } from './repositories/registrationRepository.js';
+import { init as initContent } from './repositories/contentRepository.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 import registrationRoutes from './routes/registrations.js';
 import adminRoutes from './routes/admin.js';
 import verifyRoutes from './routes/verify.js';
+import contentRoutes from './routes/content.js';
 
 const app = express();
 
@@ -19,11 +21,13 @@ app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.use('/api/registrations', registrationRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/verify', verifyRoutes);
+app.use('/api/content', contentRoutes);
 
 app.use('/api', notFound);
 app.use(errorHandler);
 
 await init();
+await initContent();
 
 const server = app.listen(config.port);
 

@@ -67,6 +67,15 @@ export const api = {
     return request(`/api/admin/registrations?${qs}`, { admin: true });
   },
 
+  // Site content — public read, admin writes.
+  contentAll: () => request('/api/content'),
+  contentCreate: (kind, body) =>
+    request(`/api/content/${kind}`, { method: 'POST', body, admin: true }),
+  contentUpdate: (kind, id, body) =>
+    request(`/api/content/${kind}/${encodeURIComponent(id)}`, { method: 'PATCH', body, admin: true }),
+  contentDelete: (kind, id) =>
+    request(`/api/content/${kind}/${encodeURIComponent(id)}`, { method: 'DELETE', admin: true }),
+
   adminCheckins: () => request('/api/admin/checkins', { admin: true }),
 
   adminDetail: (id) => request(`/api/admin/registrations/${encodeURIComponent(id)}`, { admin: true }),

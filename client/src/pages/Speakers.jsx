@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
-import { SPEAKER_CATEGORIES, SPEAKERS } from '../content/summit.js';
+import { SPEAKER_CATEGORIES } from '../content/summit.js';
+import useSiteContent from '../lib/useSiteContent.js';
 
 function SpeakerCard({ sp }) {
   return (
@@ -24,6 +25,7 @@ function SpeakerCard({ sp }) {
 }
 
 export default function Speakers() {
+  const { speakers: SPEAKERS } = useSiteContent();
   const [category, setCategory] = useState('All');
   const [query, setQuery] = useState('');
 
@@ -33,7 +35,7 @@ export default function Speakers() {
       (category === 'All' || sp.category === category)
       && (!q || `${sp.name} ${sp.designation} ${sp.organization}`.toLowerCase().includes(q)),
     );
-  }, [category, query]);
+  }, [category, query, SPEAKERS]);
 
   return (
     <>

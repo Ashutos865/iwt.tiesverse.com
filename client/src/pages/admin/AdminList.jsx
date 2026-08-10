@@ -64,6 +64,9 @@ export default function AdminList() {
           <p className="text-sm text-ink-600/70">{data.total} total</p>
         </div>
         <div className="flex items-center gap-2">
+          <Link to="/admin/content" className="btn-ghost !py-1.5 !text-xs">
+            Content
+          </Link>
           <Link to="/admin/checkins" className="btn-ghost !py-1.5 !text-xs">
             ✓ Check-ins
           </Link>

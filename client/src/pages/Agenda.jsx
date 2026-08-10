@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
-import { DAYS, SESSIONS, SESSION_TYPES, TRACKS } from '../content/summit.js';
+import { DAYS, SESSION_TYPES, TRACKS } from '../content/summit.js';
+import useSiteContent from '../lib/useSiteContent.js';
 
 const TYPE_TONE = {
   Plenary: 'pill-info',
@@ -54,6 +55,7 @@ function SessionRow({ s, open, onToggle }) {
 }
 
 export default function Agenda() {
+  const { sessions: SESSIONS } = useSiteContent();
   const [day, setDay] = useState(DAYS[0].key);
   const [track, setTrack] = useState('');
   const [type, setType] = useState('');
@@ -69,7 +71,7 @@ export default function Agenda() {
       && (!type || s.type === type)
       && (!q || s.title.toLowerCase().includes(q) || s.description.toLowerCase().includes(q)),
     );
-  }, [day, track, type, query]);
+  }, [day, track, type, query, SESSIONS]);
 
   const activeFilters = [track && { k: 'track', v: track }, type && { k: 'type', v: type }].filter(Boolean);
 

@@ -17,6 +17,7 @@ import AdminList from './pages/admin/AdminList.jsx';
 import AdminDetail from './pages/admin/AdminDetail.jsx';
 import AdminCheckin from './pages/admin/AdminCheckin.jsx';
 import AdminCheckins from './pages/admin/AdminCheckins.jsx';
+import AdminContent from './pages/admin/AdminContent.jsx';
 import { getAdminKey } from './lib/api.js';
 
 /** Keeps unauthenticated eyes off admin screens; the API enforces it for real. */
@@ -47,6 +48,14 @@ export default function App() {
           element={
             <RequireAdmin>
               <AdminCheckin />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/content"
+          element={
+            <RequireAdmin>
+              <AdminContent />
             </RequireAdmin>
           }
         />

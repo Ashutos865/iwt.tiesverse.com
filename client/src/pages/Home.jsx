@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RiverConfluenceVisual from '../components/RiverConfluenceVisual.jsx';
 import { EVENT_EDITION, SUMMIT, eventPhase } from '../lib/constants.js';
-import { FAQ, PARTNER_TIERS, PRESS_ITEMS, SESSIONS, SPEAKERS } from '../content/summit.js';
+import useSiteContent from '../lib/useSiteContent.js';
 
 /* ── shared section furniture ────────────────────────────────────────── */
 function Eyebrow({ children, light = false }) {
@@ -171,7 +171,8 @@ function DialogueContext() {
 
 /* ── 4. Featured speakers (§10) ──────────────────────────────────────── */
 function FeaturedSpeakers() {
-  const featured = SPEAKERS.slice(0, 4);
+  const { speakers } = useSiteContent();
+  const featured = speakers.slice(0, 4);
   return (
     <section className="bg-white">
       <div className="shell py-24">
@@ -208,8 +209,9 @@ function FeaturedSpeakers() {
 
 /* ── 5. Programme highlights — two-day editorial timeline (§11) ──────── */
 function ProgrammePreview() {
-  const day1 = SESSIONS.filter((s) => s.day === 'day1').slice(0, 5);
-  const day2 = SESSIONS.filter((s) => s.day === 'day2').slice(0, 5);
+  const { sessions } = useSiteContent();
+  const day1 = sessions.filter((s) => s.day === 'day1').slice(0, 5);
+  const day2 = sessions.filter((s) => s.day === 'day2').slice(0, 5);
   const Day = ({ label, date, sessions }) => (
     <div>
       <p className="border-b-2 border-navy-900 pb-3 text-[13px] font-bold uppercase tracking-[0.14em] text-ink-900">
@@ -246,7 +248,8 @@ function ProgrammePreview() {
 
 /* ── 6. Institutions + partners (§12, §14) ───────────────────────────── */
 function InstitutionsAndPartners() {
-  const tiers = PARTNER_TIERS.filter((t) => t.members.length > 0);
+  const { partnerTiers } = useSiteContent();
+  const tiers = partnerTiers.filter((t) => t.members.length > 0);
   return (
     <section className="bg-white">
       <div className="shell py-24">
@@ -301,7 +304,8 @@ function WhyAttend() {
 
 /* ── 8. News & media (§15) ───────────────────────────────────────────── */
 function NewsMedia() {
-  const [featured, ...rest] = PRESS_ITEMS;
+  const { press } = useSiteContent();
+  const [featured, ...rest] = press;
   return (
     <section className="bg-paper">
       <div className="shell py-24">
@@ -342,13 +346,14 @@ function NewsMedia() {
 
 /* ── 9. FAQ (§16) ────────────────────────────────────────────────────── */
 function FaqSection() {
+  const { faq } = useSiteContent();
   const [open, setOpen] = useState(null);
   return (
     <section id="faq" className="bg-white">
       <div className="mx-auto max-w-[820px] px-4 py-24 sm:px-8">
         <SectionHeader eyebrow="Questions" title="Before you apply" />
         <div className="divide-y divide-ink-200 border-y border-ink-200">
-          {FAQ.map((f, i) => (
+          {faq.map((f, i) => (
             <div key={f.q}>
               <button
                 type="button"

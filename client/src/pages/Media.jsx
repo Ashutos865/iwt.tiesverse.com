@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
-import { PRESS_ITEMS } from '../content/summit.js';
+import useSiteContent from '../lib/useSiteContent.js';
 import { SUMMIT } from '../lib/constants.js';
 
 const TABS = ['Press Releases', 'Media Advisories', 'Media Kit'];
@@ -38,6 +38,7 @@ function ActionRail() {
 }
 
 export default function Media() {
+  const { press: PRESS_ITEMS } = useSiteContent();
   const [tab, setTab] = useState(TABS[0]);
   const items = PRESS_ITEMS.filter((p) =>
     tab === 'Press Releases' ? p.type === 'Press Release'

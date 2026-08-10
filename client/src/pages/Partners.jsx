@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
-import { PARTNER_TIERS } from '../content/summit.js';
+import useSiteContent from '../lib/useSiteContent.js';
 import { SUMMIT, STATS } from '../lib/constants.js';
 
 /** Normalized logo box (§11.2): fixed bounding box, contain, name as text. */
@@ -13,6 +13,7 @@ function PartnerLogo({ name }) {
 }
 
 export default function Partners() {
+  const { partnerTiers: PARTNER_TIERS } = useSiteContent();
   const tiersWithMembers = PARTNER_TIERS.filter((t) => t.members.length > 0);
   const openTiers = PARTNER_TIERS.filter((t) => t.members.length === 0).map((t) => t.tier);
 
