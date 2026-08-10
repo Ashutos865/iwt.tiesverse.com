@@ -12,18 +12,20 @@ async function transporter() {
   if (!config.ses.accessKeyId || !config.ses.secretAccessKey) return null;
   if (!transporterPromise) {
     transporterPromise = (async () => {
-      const [{ default: nodemailer }, ses] = await Promise.all([
+      const [{ default: nodemailer }, sesv2] = await Promise.all([
         import('nodemailer'),
-        import('@aws-sdk/client-ses'),
+        import('@aws-sdk/client-sesv2'),
       ]);
-      const client = new ses.SESClient({
+      const sesClient = new sesv2.SESv2Client({
         region: config.ses.region,
         credentials: {
           accessKeyId: config.ses.accessKeyId,
           secretAccessKey: config.ses.secretAccessKey,
         },
       });
-      return nodemailer.createTransport({ SES: { ses: client, aws: ses } });
+      return nodemailer.createTransport({
+        SES: { sesClient, SendEmailCommand: sesv2.SendEmailCommand },
+      });
     })();
   }
   return transporterPromise;
