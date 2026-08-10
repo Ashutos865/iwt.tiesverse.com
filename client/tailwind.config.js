@@ -23,8 +23,8 @@ export default {
         ink: {
           50: '#FAFAF8',
           100: '#F1F0EC',
-          200: '#E1E0DA',  // hairlines, borders
-          500: '#6B6D69',  // meta text — 4.75:1 on paper
+          200: '#DEDBD1',  // hairlines, borders
+          500: '#66685F',  // meta text — 4.71:1 on paper, 5.66:1 on white
           600: '#5A5D59',
           700: '#474A48',  // secondary body — 8.15:1
           800: '#2E3230',
@@ -46,7 +46,11 @@ export default {
           900: '#244243',
           950: '#172B2C',
         },
-        paper: '#F5F4F0',  // warm off-white page ground
+        // Warm off-white page ground. Deliberately a full step below white so
+        // the white nav card and content cards read as floating ON it rather
+        // than merging into it — at #F5F4F0 the separation was only 1.10:1 and
+        // the nav bar looked like part of the page.
+        paper: '#EDEAE2',
         // Solid tile grounds for the home portal. All carry white text at AA.
         tile: {
           teal: '#3A6D6E',
