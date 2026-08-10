@@ -99,8 +99,10 @@ export default function Agenda() {
         lead="One day, four analytical sessions, and the adoption of the New Delhi Declaration."
       />
 
-      {/* Single-day header — replaces the day tabs a two-day event would need. */}
-      <div className="sticky top-16 z-20 border-b border-ink-200 bg-white lg:top-[72px]">
+      {/* Single-day header — replaces the day tabs a two-day event would need.
+          Not sticky: the nav card already occupies the top of the viewport, and
+          a second stuck bar would need to track its height. */}
+      <div className="border-y border-ink-200 bg-white">
         <div className="shell flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-3">
           <div>
             <p className="text-sm font-bold text-ink-900">{SUMMIT.date}</p>
@@ -141,7 +143,7 @@ export default function Agenda() {
           {SPEAKER_DISCLAIMER}
         </p>
 
-        <div className="mt-8 max-w-4xl rounded-card bg-navy-950 p-6 text-white sm:flex sm:items-center sm:justify-between">
+        <div className="mt-8 max-w-4xl rounded-card bg-tile-navy p-6 text-white sm:flex sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-lg font-semibold">Attend the dialogue</p>
             <p className="mt-1 text-sm text-white/70">

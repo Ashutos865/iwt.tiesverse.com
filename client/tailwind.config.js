@@ -1,59 +1,87 @@
 /** @type {import('tailwindcss').Config} */
-// Navy institutional system per design.md §4.1. The semantic names (ink,
-// brand, paper) are kept so every existing component re-skins without markup
-// changes: ink = navy/text scale, brand = action blue, paper = page ground.
+/**
+ * Design tokens.
+ *
+ * Structure follows cop30.br — warm off-white ground, floating pill
+ * navigation, solid-colour tile grid, heavy rounding, one sans family. The
+ * palette does NOT follow COP30's earth tones: it is built from the teal in
+ * the supplied logo (#58A0A0) so the site stays on-brand with its own mark.
+ *
+ * Semantic names (ink, brand, paper) are unchanged from the previous system so
+ * every existing component re-skins without markup edits: ink = text scale,
+ * brand = teal action colour, paper = page ground.
+ */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
-        // Navy + ink text scale — headers, dark panels, body text.
+        // Text + surface scale, warmed slightly so it sits on the ivory ground.
+        // Every value below is contrast-checked against the ground it is used
+        // on: body text >= 4.5:1 on paper, white text >= 4.5:1 on brand-600
+        // and on every tile colour.
         ink: {
-          50: '#F7F9FB',   // surface-2
-          100: '#EEF3F7',
-          200: '#DCE4EB',  // line-200 borders
-          500: '#6D7B89',  // meta text
-          600: '#5A6B7C',
-          700: '#445466',  // secondary body
-          800: '#26364A',
-          900: '#172433',  // primary body/titles
-          950: '#03182E',  // navy-950: global header/footer
+          50: '#FAFAF8',
+          100: '#F1F0EC',
+          200: '#E1E0DA',  // hairlines, borders
+          500: '#6B6D69',  // meta text — 4.75:1 on paper
+          600: '#5A5D59',
+          700: '#474A48',  // secondary body — 8.15:1
+          800: '#2E3230',
+          900: '#1C201F',  // primary body — 14.96:1
+          950: '#0F1413',
         },
-        // Action blue — primary buttons, active tabs, links.
+        // Teal, derived from the logo: 500 is the logo colour exactly.
+        // 600 is the darkest tint that still carries white text at AA.
         brand: {
-          50: '#EEF7FC',   // blue-050 selected backgrounds
-          100: '#D9EDF8',
-          400: '#2396D3',  // blue-500 secondary accent
-          500: '#1B87C5',
-          600: '#1577B8',  // blue-600 primary
-          700: '#0F5E93',
+          50: '#F2F8F8',
+          100: '#DFEDED',
+          200: '#C0DBDB',
+          300: '#9AC7C7',
+          400: '#76B0B0',
+          500: '#58A0A0',  // ← logo
+          600: '#427E7E',  // primary CTA — 4.65:1 with white
+          700: '#3A6D6E',  // links on paper — 5.31:1
+          800: '#2E5657',  // titles — 7.38:1
+          900: '#244243',
+          950: '#172B2C',
         },
-        // Dark navy surfaces between 950 and 800 (hero overlays, side nav).
-        navy: {
-          800: '#0A365B',
-          900: '#062947',
-          950: '#03182E',
+        paper: '#F5F4F0',  // warm off-white page ground
+        // Solid tile grounds for the home portal. All carry white text at AA.
+        tile: {
+          teal: '#3A6D6E',
+          pine: '#24504A',
+          navy: '#1B3A4B',
+          petrol: '#1F5566',
+          bronze: '#8A5A2B',
+          slate: '#454F52',
         },
-        paper: '#F7F9FB',  // page background (surface-2)
-        // Status pairs — always used WITH text/icon, never color alone.
-        ok: { DEFAULT: '#18794E', bg: '#EAF7F0' },
-        warn: { DEFAULT: '#9A6700', bg: '#FFF4D6' },
-        bad: { DEFAULT: '#B42318', bg: '#FDECEA' },
+        ok: { DEFAULT: '#1F7A4C', bg: '#E8F5EE' },
+        warn: { DEFAULT: '#8A6100', bg: '#FDF3D9' },
+        bad: { DEFAULT: '#A8321F', bg: '#FBEAE7' },
       },
       fontFamily: {
-        // The event title only. Falls back to the display serif when the
-        // Larken binary is absent — see client/public/fonts/README.md.
-        title: ['Larken', '"Source Serif 4"', 'Georgia', 'serif'],
-        display: ['"Source Serif 4"', 'Georgia', 'serif'],
+        // Larken — the event title only.
+        title: ['Larken', 'Georgia', 'serif'],
+        // COP30 is single-family. `display` is kept as a token name so the
+        // existing font-display classes flip to sans without touching markup.
+        display: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         sans: ['Inter', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
       },
       maxWidth: {
-        shell: '1280px',   // content container per §4.3
-        wide: '1440px',    // operations/dashboard views
+        shell: '1180px',
+        wide: '1440px',
+        prose: '760px',
       },
       borderRadius: {
-        DEFAULT: '6px',
-        card: '8px',
+        DEFAULT: '8px',
+        card: '14px',
+        pill: '999px',
+      },
+      boxShadow: {
+        // The floating nav card and tiles sit on the ground, not in it.
+        nav: '0 6px 24px -8px rgba(16, 32, 32, 0.18), 0 2px 6px -2px rgba(16, 32, 32, 0.08)',
+        tile: '0 2px 10px -4px rgba(16, 32, 32, 0.18)',
       },
     },
   },

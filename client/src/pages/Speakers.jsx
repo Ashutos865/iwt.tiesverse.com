@@ -19,7 +19,7 @@ import { SESSIONS, SPEAKERS, SPEAKER_DISCLAIMER } from '../content/summit.js';
 function SpeakerCard({ sp }) {
   return (
     <article className="card flex flex-col !p-0 text-center">
-      <div className="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-t-card bg-gradient-to-b from-navy-900 to-navy-950">
+      <div className="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-t-card bg-gradient-to-b from-brand-700 to-brand-900">
         {sp.photo ? (
           <img src={sp.photo} alt="" className="h-full w-full object-cover" />
         ) : (
@@ -86,7 +86,7 @@ export default function Speakers() {
           </div>
         </section>
 
-        <div className="mt-10 rounded-card bg-navy-950 p-6 text-white sm:flex sm:items-center sm:justify-between">
+        <div className="mt-10 rounded-card bg-tile-navy p-6 text-white sm:flex sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-lg font-semibold">Speaking at the Dialogue</p>
             <p className="mt-1 text-sm text-white/70">

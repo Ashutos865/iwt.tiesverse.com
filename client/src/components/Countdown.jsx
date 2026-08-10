@@ -38,12 +38,15 @@ function Unit({ value, label, pad = true }) {
       <span className="font-sans text-4xl font-bold leading-none tabular-nums text-white sm:text-5xl">
         {pad ? String(value).padStart(2, '0') : value}
       </span>
-      <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/50 sm:text-xs">
+      <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/60 sm:text-xs">
         {label}
       </span>
     </div>
   );
 }
+
+// Dark teal card: on the warm off-white ground the counter needs its own
+// surface to read as a distinct object rather than floating text.
 
 export default function Countdown({ className = '' }) {
   const [now, setNow] = useState(() => Date.now());
@@ -62,10 +65,8 @@ export default function Countdown({ className = '' }) {
   const { days, hours, minutes, seconds } = split(Math.max(0, START - now));
 
   return (
-    <div
-      className={`rounded-card border border-white/10 bg-white/[0.04] px-5 py-5 sm:px-8 ${className}`}
-    >
-      <p className="text-center text-xs font-medium text-white/50">
+    <div className={`rounded-card bg-brand-900 px-5 py-6 shadow-tile sm:px-8 ${className}`}>
+      <p className="text-center text-xs font-medium text-white/60">
         {SUMMIT.shortName}, {SUMMIT.date}
       </p>
 
