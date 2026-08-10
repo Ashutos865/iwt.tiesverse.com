@@ -15,13 +15,13 @@ import { config } from '../config.js';
 export const KINDS = ['speaker', 'session', 'partner', 'press', 'faq'];
 
 /* ── Data API backend ─────────────────────────────────────────────────── */
-const apiBase = () => `${config.dataApi.baseUrl}/api/data/v1/${config.dataApi.slug}-content`;
+const apiBase = () => `${config.dataApi.baseUrl}/api/data/v1/${config.contentApi.slug}`;
 
 async function apiCall(suffix, { method = 'GET', body } = {}) {
   const res = await fetch(`${apiBase()}${suffix}`, {
     method,
     headers: {
-      'X-Api-Key': config.dataApi.adminKey,
+      'X-Api-Key': config.contentApi.adminKey,
       Origin: config.dataApi.origin || config.publicBaseUrl,
       ...(body ? { 'Content-Type': 'application/json' } : {}),
     },
@@ -54,7 +54,7 @@ const apiBackend = {
   async list(kind) {
     const qs = kind ? `?where.kind=${encodeURIComponent(kind)}&page_size=500` : '?page_size=500';
     const res = await apiCall(`/records/${qs}`);
-    return (res?.results || []).map(fromApiRow).filter(Boolean);
+    return (res?.results || []).map(fromApiRow).filter((i) => i && !i.deleted);
   },
   async create(item) {
     await apiCall('/records/', { method: 'POST', body: toApiRow(item) });
@@ -70,10 +70,13 @@ const apiBackend = {
     return clean;
   },
   async remove(id) {
+    // The Data API is GET/PATCH only, so removal flags the record instead of
+    // deleting the row; list() filters flagged items out.
     const rows = await apiCall(`/records/?where.itemId=${encodeURIComponent(id)}&page_size=1`);
     const current = fromApiRow(rows?.results?.[0]);
     if (!current) return false;
-    await apiCall(`/records/${current._recordId}/`, { method: 'DELETE' });
+    const merged = { ...current, deleted: true, deletedAt: new Date().toISOString() };
+    await apiCall(`/records/${current._recordId}/`, { method: 'PATCH', body: toApiRow(merged) });
     return true;
   },
 };
@@ -132,7 +135,7 @@ let backendName = 'json';
 export function activeBackend() { return backendName; }
 
 export async function init() {
-  if (config.storage === 'dataapi' && config.dataApi.adminKey) {
+  if (config.storage === 'dataapi' && config.contentApi.adminKey) {
     try {
       await apiBackend.init();
       active = apiBackend;

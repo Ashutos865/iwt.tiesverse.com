@@ -40,6 +40,13 @@ export const config = {
     origin: process.env.DATA_API_ORIGIN || '',
   },
 
+  // Site content lives in a sibling Data API store with its own key, so a
+  // content key can be rotated without touching registrations.
+  contentApi: {
+    slug: process.env.CONTENT_API_SLUG || `${process.env.DATA_API_SLUG || 'iwt-summit-2026'}-content`,
+    adminKey: process.env.CONTENT_API_ADMIN_KEY || '',
+  },
+
   // AWS SES for transactional mail (approval emails). Same account as the
   // admin backend; unset keys simply disable outgoing mail.
   ses: {
