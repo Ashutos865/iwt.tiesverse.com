@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import StatusBadge from '../../components/StatusBadge.jsx';
-import { api, clearAdminKey } from '../../lib/api.js';
+import { api, clearAdminKey , getAdminKey } from '../../lib/api.js';
 
 const labelise = (key) =>
   key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase());
@@ -70,6 +70,9 @@ export default function AdminDetail() {
 
   const decidable = record.status === 'received' || record.status === 'under_review';
   const files = Object.entries(record.files).filter(([, meta]) => meta);
+  // Identity documents require the admin key. <img> and target=_blank cannot
+  // set headers, so it is appended per-URL rather than sent as a header.
+  const docUrl = (url) => `${url}${url.includes('?') ? '&' : '?'}key=${encodeURIComponent(getAdminKey())}`;
 
   return (
     <div className="mx-auto max-w-4xl px-5 py-10">
@@ -115,13 +118,13 @@ export default function AdminDetail() {
             {files.map(([field, meta]) => (
               <a
                 key={field}
-                href={meta.url}
+                href={docUrl(meta.url)}
                 target="_blank"
                 rel="noreferrer"
                 className="group rounded-lg border border-ink-100 p-3 transition hover:border-brand-400"
               >
                 {meta.mimetype.startsWith('image/') ? (
-                  <img src={meta.url} alt="" className="h-28 w-full rounded object-cover" />
+                  <img src={docUrl(meta.url)} alt="" className="h-28 w-full rounded object-cover" />
                 ) : (
                   <div className="flex h-28 items-center justify-center rounded bg-ink-50 text-sm font-semibold text-ink-600/70">
                     PDF

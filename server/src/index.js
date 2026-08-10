@@ -4,6 +4,7 @@ import { config } from './config.js';
 import { init } from './repositories/registrationRepository.js';
 import { init as initContent } from './repositories/contentRepository.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
+import { checkPassword } from './middleware/adminAuth.js';
 import registrationRoutes from './routes/registrations.js';
 import adminRoutes from './routes/admin.js';
 import verifyRoutes from './routes/verify.js';
@@ -14,8 +15,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Uploads are served by unguessable filename only — see the README security note.
-app.use('/uploads', express.static(config.uploadsPath, { maxAge: '1d' }));
+// Identity documents (Aadhaar, passports, student IDs) are STAFF ONLY. An
+// unguessable filename is not access control: a forwarded link, a browser
+// history export or a shared screenshot leaks the document permanently. The
+// admin key is required, and these responses must never be cached by shared
+// proxies.
+app.use(
+  '/uploads',
+  (req, res, next) => {
+    if (!checkPassword(req.headers['x-admin-key'] || req.query.key)) {
+      res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'Staff access only.' } });
+      return;
+    }
+    res.setHeader('Cache-Control', 'private, no-store');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    next();
+  },
+  express.static(config.uploadsPath, { maxAge: 0 }),
+);
 
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.use('/api/registrations', registrationRoutes);
