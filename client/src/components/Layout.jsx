@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { SUMMIT } from '../lib/constants.js';
+import { ORGANISER, SUMMIT } from '../lib/constants.js';
 
 // Public navigation per design.md §3.1, in this order.
 const NAV = [
@@ -31,7 +31,7 @@ function Wordmark() {
   return (
     <span className="leading-tight">
       <span className="block text-sm font-bold uppercase tracking-wide text-white">
-        Indus Water Treaty
+        Indus Waters Treaty
       </span>
       <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-400">
         Dialogue 2026 · New Delhi
@@ -136,10 +136,11 @@ export default function Layout() {
               <Wordmark />
             </div>
             <p className="mt-4 text-xs leading-relaxed">
-              {SUMMIT.dates} · {SUMMIT.venue}
+              {SUMMIT.date} · {SUMMIT.venue}
             </p>
             <p className="mt-2 max-w-xs text-xs leading-relaxed text-white/50">
-              A policy dialogue on law, water security and regional cooperation in South Asia.
+              A one-day dialogue on the Indus Waters Treaty, convened on the {SUMMIT.anniversary}{' '}
+              anniversary of its signing.
             </p>
           </div>
 
@@ -167,15 +168,24 @@ export default function Layout() {
 
           <div className="text-sm">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">Contact</p>
-            <p>Indus Water Treaty Dialogue Secretariat</p>
+            <p>Indus Waters Treaty Dialogue Secretariat</p>
             <p>New Delhi, India</p>
-            <p className="mt-2">{SUMMIT.phone}</p>
-            <a href={`mailto:${SUMMIT.email}`} className="hover:text-white">{SUMMIT.email}</a>
+            {SUMMIT.phone && <p className="mt-2">{SUMMIT.phone}</p>}
+            <a href={`mailto:${SUMMIT.email}`} className="mt-2 block hover:text-white">{SUMMIT.email}</a>
+            <p className="mt-3 text-[11px] uppercase tracking-[0.15em] text-white/50">Organised by</p>
+            <a
+              href={ORGANISER.website}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="hover:text-white"
+            >
+              {ORGANISER.name}
+            </a>
           </div>
         </div>
         <div className="border-t border-white/10">
           <div className="shell flex flex-col items-center gap-2 py-4 text-xs text-white/40 sm:flex-row sm:justify-between">
-            <span>© 2026 Indus Water Treaty Dialogue. All rights reserved.</span>
+            <span>© 2026 {ORGANISER.name}. All rights reserved.</span>
             <span className="flex gap-4">
               <Link to="/about#code-of-conduct" className="hover:text-white/70">Code of Conduct</Link>
               <Link to="/contact" className="hover:text-white/70">Support</Link>

@@ -7,7 +7,7 @@ export default function QRPassCard({ registration }) {
       <div className="bg-ink-900 px-6 py-4 text-white">
         <p className="font-display text-lg leading-none">Indus Water Treaty Dialogue 2026</p>
         <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/60">
-          {SUMMIT.dates} · {SUMMIT.venue}
+          {SUMMIT.date} · {SUMMIT.venue}
         </p>
       </div>
 

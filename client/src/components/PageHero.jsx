@@ -17,7 +17,7 @@ export default function PageHero({ title, lead, meta = true, children }) {
         {lead && <p>{lead}</p>}
         {meta && (
           <p className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-brand-400">
-            {SUMMIT.dates} · {SUMMIT.venue}
+            {SUMMIT.date} · {SUMMIT.venue}
           </p>
         )}
         {children}

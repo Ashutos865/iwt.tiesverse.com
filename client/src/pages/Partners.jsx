@@ -1,9 +1,23 @@
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
-import { PARTNER_TIERS } from '../content/summit.js';
-import { SUMMIT, STATS } from '../lib/constants.js';
+import { DELIVERABLES, PARTNER_TIERS } from '../content/summit.js';
+import { SUMMIT } from '../lib/constants.js';
 
-/** Normalized logo box (§11.2): fixed bounding box, contain, name as text. */
+/**
+ * Partners.
+ *
+ * PARTNER_TIERS is empty until partnerships are actually signed. The previous
+ * build listed ORF, RIS, CII, FICCI, ASSOCHAM, TERI and IWA here — real
+ * institutions, none of them named in the concept note. Publishing an
+ * organisation's name as a partner of a politically-charged dialogue it has
+ * not agreed to is a misrepresentation, so the tiers render only when they
+ * have members and the page otherwise says the programme is open.
+ *
+ * The pitch below sells what the concept note actually promises — the
+ * evidentiary record and the New Delhi Declaration — not invented audience
+ * figures.
+ */
+
 function PartnerLogo({ name }) {
   return (
     <div className="flex h-24 items-center justify-center rounded-card border border-ink-200 bg-white px-6">
@@ -18,7 +32,10 @@ export default function Partners() {
 
   return (
     <>
-      <PageHero title="Partners" lead="Collaborating for a secure and sustainable future of the Indus basin." />
+      <PageHero
+        title="Partners"
+        lead="Institutions backing an evidence-led dialogue on the Indus Waters Treaty."
+      />
 
       <div className="shell py-10 lg:py-14">
         {tiersWithMembers.map((t) => (
@@ -31,42 +48,56 @@ export default function Partners() {
         ))}
 
         {openTiers.length > 0 && (
-          <p className="mb-10 text-sm text-ink-500">
-            {openTiers.join(', ')} — open for the 2026 edition.
-          </p>
+          <div className="mb-10 rounded-card border border-ink-200 bg-white p-5">
+            <h2 className="eyebrow">Partnership programme</h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink-700">
+              {tiersWithMembers.length === 0
+                ? 'Partners are announced here as agreements are concluded. Every tier is currently open:'
+                : 'The following tiers remain open:'}{' '}
+              {openTiers.join(', ')}.
+            </p>
+          </div>
         )}
 
-        {/* Become a partner (§11.3) — inline substance, not only a PDF */}
+        {/* Become a partner — the offer, stated in terms of the actual outputs. */}
         <section id="become-a-partner" className="rounded-card bg-navy-950 p-8 text-white">
           <h2 className="font-display text-2xl font-semibold">Become a partner</h2>
-          <p className="mt-2 max-w-2xl text-sm text-white/75">
-            Partnership places your institution inside a two-day policy dialogue attended by government,
-            diplomatic, defence, academic, industry and media participants — with visibility across the
-            venue, the programme and the published outcomes.
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/75">
+            Partnership associates your institution with a single-day policy dialogue at Bharat
+            Mandapam convened on the sixty-sixth anniversary of the Treaty&rsquo;s signing, and
+            with the durable record it produces — a legal-policy white paper, a sourced evidence
+            and cartography exhibit, and the New Delhi Declaration on the Indus Waters Treaty.
           </p>
+
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {STATS.slice(0, 3).map((s) => (
-              <div key={s.label} className="rounded-card bg-white/5 p-4">
-                <p className="font-display text-2xl font-semibold text-brand-400">{s.value}</p>
-                <p className="text-xs uppercase tracking-wide text-white/60">{s.label}</p>
+            {DELIVERABLES.slice(0, 3).map((d) => (
+              <div key={d.n} className="rounded-card bg-white/5 p-4">
+                <p className="font-display text-sm font-semibold text-white/40">{d.n}</p>
+                <p className="mt-1 text-sm font-semibold text-brand-400">{d.title}</p>
               </div>
             ))}
           </div>
+
           <ul className="mt-6 grid gap-2 text-sm text-white/80 sm:grid-cols-2">
-            <li>· Programme association across tiers, from presenting to supporting</li>
+            <li>· Programme association across tiers, from dialogue to supporting partner</li>
             <li>· Branding at the venue and in official publications</li>
             <li>· Delegate passes within the agreed allocation</li>
             <li>· Association with the New Delhi Declaration and white paper</li>
           </ul>
+
           <div className="mt-7 flex flex-wrap gap-3">
             <Link to="/register/sponsor" className="btn-primary">Request a partnership meeting</Link>
-            <a href={`mailto:${SUMMIT.email}?subject=Partnership%20enquiry`} className="btn-ghost !border-white/30 !bg-transparent !text-white">
+            <a
+              href={`mailto:${SUMMIT.email}?subject=Partnership%20enquiry`}
+              className="btn-ghost !border-white/30 !bg-transparent !text-white"
+            >
               Write to the secretariat
             </a>
           </div>
+
           <p className="mt-4 text-xs text-white/50">
-            Partnership is a separate track from participant registration — submitting an enquiry does not
-            create an event badge.
+            Partnership is a separate track from participant registration — submitting an enquiry
+            does not create an event badge.
           </p>
         </section>
       </div>

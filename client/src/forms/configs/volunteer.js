@@ -23,12 +23,12 @@ export default {
           label: 'Days you are available',
           type: 'checkboxes',
           required: true,
+          // The dialogue is a single day — 19 September 2026 — with set-up the
+          // day before and wrap-up the day after.
           options: [
-            '16 Feb (set-up)',
-            '17 Feb (Day 1)',
-            '18 Feb (Day 2)',
-            '19 Feb (Day 3)',
-            '20 Feb (wrap-up)',
+            '18 Sept (set-up)',
+            '19 Sept (event day)',
+            '20 Sept (wrap-up)',
           ],
         },
         {

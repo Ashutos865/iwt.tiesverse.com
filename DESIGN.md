@@ -222,8 +222,14 @@ Stacked cards:
 - The registration number is always shown in mono, always copyable, and
   called "registration number" (never "ID") in applicant-facing copy.
 - CTAs are imperative and short: Register Now, Save & Continue, Check Status.
-- Dates spell the month ("19–20 September 2026"), venue is always
+- Dates spell the month ("19 September 2026"), venue is always
   "Bharat Mandapam, New Delhi".
+- The dialogue is **one day** and **one time only**. Never write "two days",
+  "Day 2", "this edition", "the 2026 edition" or "the 2026 theme" — there is no
+  annual series and no prior edition. The date is the 66th anniversary of the
+  Treaty's signing on 19 September 1960, and saying so is the point.
+- The treaty is the "Indus **Waters** Treaty" (plural), per the instrument
+  itself and the concept note.
 
 ## 7. Responsive & print
 

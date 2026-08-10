@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { STATS, SUMMIT } from '../lib/constants.js';
-import { FAQ, PILLARS, PARTNER_TIERS, SESSIONS, WHY_ATTEND } from '../content/summit.js';
+import { KEY_FACTS, ORGANISER, SUMMIT } from '../lib/constants.js';
+import { BACKGROUND, DELIVERABLES, FAQ, PILLARS, SESSIONS, THEMES } from '../content/summit.js';
 
+// One day only: 19 September 2026, 09:00–18:00 IST.
 const EVENT_START = new Date('2026-09-19T09:00:00+05:30');
-const EVENT_END = new Date('2026-09-20T18:00:00+05:30');
+const EVENT_END = new Date('2026-09-19T18:00:00+05:30');
 
 const STEPS = [
   { n: '01', title: 'Apply', body: 'Choose your category and complete the application in a few minutes.' },
@@ -39,7 +40,7 @@ function Mandala() {
   );
 }
 
-/** Countdown before the event, "Live now" during, gone after (§6.1). */
+/** Countdown before the day, "Live now" during, gone after. */
 function EventPhase() {
   const now = Date.now();
   if (now >= EVENT_END.getTime()) return null;
@@ -68,13 +69,13 @@ function SectionHead({ eyebrow, title, action }) {
 }
 
 export default function Home() {
-  const featured = useMemo(() => SESSIONS.filter((s) => ['Plenary', 'Keynote', 'Fireside Chat', 'Special Address'].includes(s.type)).slice(0, 4), []);
-  const partnerNames = PARTNER_TIERS.flatMap((t) => t.members);
   const [openFaq, setOpenFaq] = useState(null);
+  // The four analytical sessions plus the valedictory — the substance of the day.
+  const programme = SESSIONS.filter((s) => s.kind === 'session' && s.id !== 'inaugural');
 
   return (
     <>
-      {/* Hero — navy ground per the reference, mandala artwork right (§6.1). */}
+      {/* Hero */}
       <section className="relative overflow-hidden bg-navy-950 text-white">
         <div className="pointer-events-none absolute -right-24 top-1/2 hidden h-[560px] w-[560px] -translate-y-1/2 opacity-50 lg:block">
           <Mandala />
@@ -85,20 +86,26 @@ export default function Home() {
             {SUMMIT.kicker}
           </p>
           <h1 className="mt-4 max-w-2xl font-display text-5xl font-semibold leading-[1.05] sm:text-7xl">
-            Indus Water
+            {SUMMIT.displayTitle}
             <br />
-            Treaty 2026
+            {SUMMIT.displaySubtitle}
           </h1>
 
           <p className="mt-6 max-w-xl font-display text-xl leading-snug text-white/85 sm:text-2xl">
-            {SUMMIT.theme}
+            “{SUMMIT.theme}”
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm font-semibold text-white/85">
-            <span className="inline-flex items-center gap-2"><CalendarIcon /> {SUMMIT.dates}</span>
+            <span className="inline-flex items-center gap-2"><CalendarIcon /> {SUMMIT.date}</span>
             <span className="inline-flex items-center gap-2"><PinIcon /> {SUMMIT.venue}</span>
             <EventPhase />
           </div>
+
+          {/* Why this date — the single most important fact about the event. */}
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/60">
+            Convened on the {SUMMIT.anniversary} anniversary of the signing of the Indus Waters
+            Treaty in {SUMMIT.treatySignedYear}.
+          </p>
 
           <div className="mt-10 flex flex-wrap gap-3">
             <Link to="/register" className="btn-primary uppercase tracking-wide">Register now</Link>
@@ -109,27 +116,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats band */}
+      {/* Key facts — every value traceable to the concept note. */}
       <section className="bg-brand-600 text-white">
         <div className="shell grid grid-cols-2 gap-x-4 gap-y-6 py-8 sm:grid-cols-3 lg:grid-cols-6">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="text-center lg:text-left">
-              <p className="font-display text-3xl font-semibold">{stat.value}</p>
-              <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/70">{stat.label}</p>
+          {KEY_FACTS.map((fact) => (
+            <div key={fact.label} className="text-center lg:text-left">
+              <p className="font-display text-3xl font-semibold">{fact.value}</p>
+              <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-white/70">
+                {fact.label}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* About + how registration works */}
+      {/* Background + how registration works */}
       <section className="shell grid gap-12 py-16 lg:grid-cols-2">
         <div>
-          <p className="eyebrow">About the Dialogue</p>
+          <p className="eyebrow">Background</p>
           <p className="mt-4 font-display text-2xl leading-snug text-ink-900">
-            A fresh assessment of South Asia's most enduring water agreement.
+            What happens to a treaty signed in goodwill when goodwill runs out?
           </p>
-          <p className="mt-4 text-sm leading-relaxed text-ink-700">{SUMMIT.about}</p>
-          <Link to="/about" className="btn-text mt-3">About the Dialogue →</Link>
+          <p className="mt-4 text-sm leading-relaxed text-ink-700">{BACKGROUND[0]}</p>
+          <Link to="/about" className="btn-text mt-3">Read the background note →</Link>
         </div>
         <div>
           <p className="eyebrow">How registration works</p>
@@ -147,70 +156,116 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Theme pillars (§6.3) */}
+      {/* The four analytical pillars previewed in the inaugural session */}
       <section className="bg-white">
         <div className="shell py-16">
-          <SectionHead eyebrow="Theme & context" title="Four questions the Dialogue asks" />
+          <SectionHead
+            eyebrow="The four pillars"
+            title="How the day is argued"
+            action={<Link to="/about" className="btn-text">All six themes →</Link>}
+          />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {PILLARS.map((p) => (
-              <Link key={p.title} to="/agenda" className="card transition hover:border-brand-600">
+              <div key={p.title} className="card">
                 <h3 className="font-display text-lg font-semibold text-ink-900">{p.title}</h3>
-                <p className="mt-1.5 text-sm text-ink-700">{p.text}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Programme highlights (§6.7) */}
-      <section className="shell py-16">
-        <SectionHead
-          eyebrow="Programme highlights"
-          title="On the agenda"
-          action={<Link to="/agenda" className="btn-text">Full agenda →</Link>}
-        />
-        <div className="grid gap-4 sm:grid-cols-2">
-          {featured.map((s) => (
-            <Link key={s.id} to="/agenda" className="card transition hover:border-brand-600">
-              <p className="text-xs font-semibold uppercase tracking-wide text-ink-500">
-                {s.day === 'day1' ? 'Day 1' : 'Day 2'} · {s.start} · {s.type}
-              </p>
-              <h3 className="mt-1.5 font-display text-lg font-semibold text-ink-900">{s.title}</h3>
-              <p className="mt-1 text-sm text-ink-700">{s.description}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Why attend (§6.6) */}
-      <section className="bg-navy-950 text-white">
-        <div className="shell py-16">
-          <p className="eyebrow !text-brand-400">Why attend</p>
-          <h2 className="mt-1.5 font-display text-2xl font-semibold sm:text-3xl">What two days here are worth</h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY_ATTEND.map((w) => (
-              <div key={w.title}>
-                <h3 className="font-display text-lg font-semibold text-brand-400">{w.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-white/75">{w.text}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink-700">{p.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Partners strip (§6.8) */}
-      <section className="border-t border-ink-200 bg-white">
-        <div className="shell flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-8 sm:justify-between">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-ink-500">Our partners</p>
-          {partnerNames.map((partner) => (
-            <span key={partner} className="font-display text-lg font-semibold text-ink-500/70">{partner}</span>
+      {/* Programme */}
+      <section className="shell py-16">
+        <SectionHead
+          eyebrow="Programme"
+          title="On the agenda"
+          action={<Link to="/agenda" className="btn-text">Full running order →</Link>}
+        />
+        <div className="grid gap-4 sm:grid-cols-2">
+          {programme.map((s) => (
+            <Link key={s.id} to="/agenda" className="card transition hover:border-brand-600">
+              <p className="text-xs font-semibold uppercase tracking-wide text-ink-500">
+                {s.start}–{s.end} · {s.type}
+              </p>
+              <h3 className="mt-1.5 font-display text-lg font-semibold leading-snug text-ink-900">
+                {s.title}
+              </h3>
+              <p className="mt-1 line-clamp-3 text-sm text-ink-700">{s.description}</p>
+            </Link>
           ))}
-          <Link to="/partners" className="btn-text !min-h-0 text-xs">All partners →</Link>
         </div>
       </section>
 
-      {/* FAQ (§6.10) */}
-      <section className="shell max-w-3xl py-16">
+      {/* Deliverables — what the dialogue produces */}
+      <section className="bg-navy-950 text-white">
+        <div className="shell py-16">
+          <p className="eyebrow !text-brand-400">Deliverables & outcomes</p>
+          <h2 className="mt-1.5 font-display text-2xl font-semibold sm:text-3xl">
+            What the dialogue leaves behind
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/70">
+            The dialogue is designed not only as a set of panels but as an evidence-generating
+            instrument: every claim advanced is tied to a verifiable, citable source. Six
+            coordinated tracks turn the proceedings into a durable, proof-backed record.
+          </p>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {DELIVERABLES.map((d) => (
+              <div key={d.n}>
+                <p className="font-display text-sm font-semibold text-white/40">{d.n}</p>
+                <h3 className="mt-1 font-display text-lg font-semibold text-brand-400">{d.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/75">{d.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Themes */}
+      <section className="bg-white">
+        <div className="shell py-16">
+          <SectionHead
+            eyebrow="Themes & objectives"
+            title="Six interlocking themes"
+            action={<Link to="/about" className="btn-text">Read them in full →</Link>}
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {THEMES.map((t) => (
+              <div key={t.n} className="card">
+                <p className="font-display text-sm font-semibold text-brand-500">{t.n}</p>
+                <h3 className="mt-1 font-display text-lg font-semibold leading-snug text-ink-900">
+                  {t.title}
+                </h3>
+                <p className="mt-1.5 line-clamp-4 text-sm text-ink-700">{t.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Organiser */}
+      <section className="shell py-16">
+        <div className="card">
+          <p className="eyebrow">The organisation</p>
+          <h2 className="mt-1.5 font-display text-2xl font-semibold text-ink-900">
+            {ORGANISER.name} ({ORGANISER.abbr})
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink-700">
+            {ORGANISER.description}
+          </p>
+          <a
+            href={ORGANISER.website}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn-text mt-2"
+          >
+            {ORGANISER.websiteLabel} →
+          </a>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="shell max-w-3xl pb-16">
         <SectionHead eyebrow="Questions" title="Before you apply" />
         <div className="divide-y divide-ink-200 rounded-card border border-ink-200 bg-white">
           {FAQ.map((f, i) => (
@@ -230,12 +285,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA (§6.11) */}
+      {/* Final CTA */}
       <section className="shell pb-16">
         <div className="rounded-card bg-navy-950 p-8 text-white sm:flex sm:items-center sm:justify-between">
           <div>
             <h3 className="font-display text-2xl">Registration is open</h3>
-            <p className="mt-1 text-sm text-white/70">Seven participation tracks, from delegates to media accreditation.</p>
+            <p className="mt-1 text-sm text-white/70">
+              Seven participation tracks, from delegates to media accreditation.
+            </p>
           </div>
           <div className="mt-5 flex flex-wrap gap-3 sm:mt-0">
             <Link to="/register" className="btn-primary uppercase tracking-wide">Apply to attend</Link>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
-import { SUMMIT } from '../lib/constants.js';
+import { ORGANISER, SUMMIT } from '../lib/constants.js';
 
 const CHANNELS = [
   { title: 'General & registration', desc: 'Questions about attending, applications and approvals.', email: SUMMIT.email },
@@ -27,10 +27,30 @@ export default function Contact() {
 
         <div className="card mt-6">
           <h2 className="eyebrow">Secretariat</h2>
-          <p className="mt-2 text-sm text-ink-700">
-            Indus Water Treaty Dialogue Secretariat<br />
-            New Delhi, India<br />
-            {SUMMIT.phone}
+          <p className="mt-2 text-sm leading-relaxed text-ink-700">
+            Indus Waters Treaty Dialogue Secretariat<br />
+            New Delhi, India
+            {SUMMIT.phone && <><br />{SUMMIT.phone}</>}
+          </p>
+          <p className="mt-3 text-sm text-ink-700">
+            Organised by{' '}
+            <a
+              href={ORGANISER.website}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="font-semibold text-brand-700 underline"
+            >
+              {ORGANISER.name}
+            </a>{' '}
+            ({ORGANISER.abbr}).
+          </p>
+        </div>
+
+        <div className="card mt-6">
+          <h2 className="eyebrow">Event</h2>
+          <p className="mt-2 text-sm leading-relaxed text-ink-700">
+            {SUMMIT.name}<br />
+            {SUMMIT.date} · {SUMMIT.venue}
           </p>
         </div>
 
