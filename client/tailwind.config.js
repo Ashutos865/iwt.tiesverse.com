@@ -46,11 +46,13 @@ export default {
           900: '#244243',
           950: '#172B2C',
         },
-        // Warm off-white page ground. Deliberately a full step below white so
-        // the white nav card and content cards read as floating ON it rather
-        // than merging into it — at #F5F4F0 the separation was only 1.10:1 and
-        // the nav bar looked like part of the page.
-        paper: '#EDEAE2',
+        // Plain white page ground, per the client's instruction.
+        //
+        // Nothing can now separate a white surface from the ground by fill, so
+        // the nav card and content cards carry a hairline border and a shadow
+        // instead — see .navcard / .card in index.css. Removing either makes
+        // them dissolve into the page.
+        paper: '#FFFFFF',
         // Solid tile grounds for the home portal. All carry white text at AA.
         tile: {
           teal: '#3A6D6E',
