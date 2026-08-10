@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Countdown from '../components/Countdown.jsx';
+import MandalaDivider from '../components/MandalaDivider.jsx';
 import { KEY_FACTS, ORGANISER, SUMMIT } from '../lib/constants.js';
 import { BACKGROUND, DELIVERABLES, FAQ, PILLARS, SESSIONS, THEMES } from '../content/summit.js';
-
-// One day only: 19 September 2026, 09:00–18:00 IST.
-const EVENT_START = new Date('2026-09-19T09:00:00+05:30');
-const EVENT_END = new Date('2026-09-19T18:00:00+05:30');
 
 const STEPS = [
   { n: '01', title: 'Apply', body: 'Choose your category and complete the application in a few minutes.' },
@@ -37,22 +35,6 @@ function Mandala() {
         <circle cx="200" cy="200" r="10" fill="currentColor" opacity="0.6" stroke="none" />
       </g>
     </svg>
-  );
-}
-
-/** Countdown before the day, "Live now" during, gone after. */
-function EventPhase() {
-  const now = Date.now();
-  if (now >= EVENT_END.getTime()) return null;
-  if (now >= EVENT_START.getTime()) {
-    return <span className="pill-ok !text-sm">● Live now</span>;
-  }
-  const days = Math.max(0, Math.ceil((EVENT_START.getTime() - now) / 86400000));
-  return (
-    <span className="inline-flex items-baseline gap-2 text-white">
-      <span className="font-display text-4xl font-semibold">{days}</span>
-      <span className="text-xs uppercase tracking-[0.2em] text-white/60">days to go</span>
-    </span>
   );
 }
 
@@ -98,7 +80,6 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm font-semibold text-white/85">
             <span className="inline-flex items-center gap-2"><CalendarIcon /> {SUMMIT.date}</span>
             <span className="inline-flex items-center gap-2"><PinIcon /> {SUMMIT.venue}</span>
-            <EventPhase />
           </div>
 
           {/* Why this date — the single most important fact about the event. */}
@@ -113,6 +94,8 @@ export default function Home() {
               View agenda
             </Link>
           </div>
+
+          <Countdown className="mt-10 max-w-2xl" />
         </div>
       </section>
 
@@ -155,6 +138,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <MandalaDivider className="shell pb-4" />
 
       {/* The four analytical pillars previewed in the inaugural session */}
       <section className="bg-white">
@@ -243,8 +228,10 @@ export default function Home() {
         </div>
       </section>
 
+      <MandalaDivider className="shell py-2" />
+
       {/* Organiser */}
-      <section className="shell py-16">
+      <section className="shell pb-16 pt-10">
         <div className="card">
           <p className="eyebrow">The organisation</p>
           <h2 className="mt-1.5 font-display text-2xl font-semibold text-ink-900">
