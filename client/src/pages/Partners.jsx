@@ -60,7 +60,7 @@ export default function Partners() {
         )}
 
         {/* Become a partner — the offer, stated in terms of the actual outputs. */}
-        <section id="become-a-partner" className="rounded-card bg-tile-navy p-8 text-white">
+        <section id="become-a-partner" className="rounded-card bg-tile-bluegreen p-8 text-white">
           <h2 className="font-display text-2xl font-semibold">Become a partner</h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/75">
             Partnership associates your institution with a single-day policy dialogue at Bharat

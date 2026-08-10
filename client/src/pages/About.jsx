@@ -126,7 +126,7 @@ export default function About() {
           </p>
         </section>
 
-        <section className="mt-12 rounded-card bg-tile-navy p-6 text-white sm:flex sm:items-center sm:justify-between">
+        <section className="mt-12 rounded-card bg-tile-bluegreen p-6 text-white sm:flex sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-lg font-semibold">Join the Dialogue</p>
             <p className="mt-1 text-sm text-white/70">Applications are reviewed before attendance is confirmed.</p>

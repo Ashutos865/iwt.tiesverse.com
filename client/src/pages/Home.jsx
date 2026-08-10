@@ -16,13 +16,23 @@ const STEPS = [
  * real route; the grid is a second, more prominent way into the same places
  * the nav card reaches.
  */
+/*
+ * Colours are the supplied brand palette, and `text` is not decorative — it is
+ * derived from each ground's contrast. White on Keppel is 2.95:1 and on
+ * Gainsboro 1.37:1, so those tiles must take ink instead; see the table in
+ * tailwind.config.js.
+ *
+ * The two wide tiles share Blue-Green deliberately: five colours across six
+ * tiles means one repeat, and bookending the grid with the darkest reads as
+ * intent rather than as running short.
+ */
 const TILES = [
-  { to: '/about', title: 'About the Dialogue', sub: 'Background, six themes and the case for abeyance', bg: 'bg-tile-pine', span: 'sm:col-span-2' },
-  { to: '/agenda', title: 'Agenda', sub: 'The full running order, 09:00–18:00', bg: 'bg-tile-teal' },
-  { to: '/speakers', title: 'Speakers', sub: 'Jurists, engineers, security scholars, diplomats', bg: 'bg-tile-slate' },
-  { to: '/partners', title: 'Partners', sub: 'Partnership programme and tiers', bg: 'bg-tile-petrol' },
-  { to: '/media', title: 'Media Centre', sub: 'Accreditation, releases and the media kit', bg: 'bg-tile-bronze' },
-  { to: '/register', title: 'Register', sub: 'Seven participation tracks', bg: 'bg-tile-navy', span: 'sm:col-span-2' },
+  { to: '/about', title: 'About the Dialogue', sub: 'Background, six themes and the case for abeyance', bg: 'bg-tile-bluegreen', text: 'text-white', span: 'sm:col-span-2' },
+  { to: '/agenda', title: 'Agenda', sub: 'The full running order, 09:00–18:00', bg: 'bg-tile-turquoise', text: 'text-white' },
+  { to: '/speakers', title: 'Speakers', sub: 'Jurists, engineers, security scholars, diplomats', bg: 'bg-tile-keppel', text: 'text-ink-900' },
+  { to: '/partners', title: 'Partners', sub: 'Partnership programme and tiers', bg: 'bg-tile-cadet', text: 'text-ink-900' },
+  { to: '/media', title: 'Media Centre', sub: 'Accreditation, releases and the media kit', bg: 'bg-tile-gainsboro', text: 'text-ink-900' },
+  { to: '/register', title: 'Register', sub: 'Seven participation tracks', bg: 'bg-tile-bluegreen', text: 'text-white', span: 'sm:col-span-2' },
 ];
 
 function SectionHead({ eyebrow, title, action }) {
@@ -59,7 +69,7 @@ export default function Home() {
       <section className="shell pb-14">
         <div className="grid gap-4 sm:grid-cols-4">
           {TILES.map((t) => (
-            <Link key={t.to} to={t.to} className={`tile ${t.bg} ${t.span || ''}`}>
+            <Link key={t.to} to={t.to} className={`tile ${t.bg} ${t.text} ${t.span || ''}`}>
               <span className="tile-title">{t.title}</span>
               <span className="tile-sub">{t.sub}</span>
             </Link>
@@ -134,7 +144,7 @@ export default function Home() {
 
       {/* Final CTA */}
       <section className="shell pb-16">
-        <div className="rounded-card bg-tile-navy p-8 text-white sm:flex sm:items-center sm:justify-between">
+        <div className="rounded-card bg-tile-bluegreen p-8 text-white sm:flex sm:items-center sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold">Registration is open</h2>
             <p className="mt-1 text-sm text-white/75">

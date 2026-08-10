@@ -53,14 +53,22 @@ export default {
         // instead — see .navcard / .card in index.css. Removing either makes
         // them dissolve into the page.
         paper: '#FFFFFF',
-        // Solid tile grounds for the home portal. All carry white text at AA.
+        // Supplied brand palette (KBMD3Signs colour card), named as on the card.
+        //
+        // These are NOT interchangeable: only the two darkest carry white text
+        // at AA. Contrast with white / with ink-900:
+        //   bluegreen  10.15 / 1.62  -> white text
+        //   turquoise   5.23 / 3.15  -> white text
+        //   keppel      2.95 / 5.57  -> DARK text
+        //   cadet       2.10 / 7.82  -> DARK text
+        //   gainsboro   1.37 / 12.00 -> DARK text
+        // Every tile therefore sets its own text colour; see TILES in Home.jsx.
         tile: {
-          teal: '#3A6D6E',
-          pine: '#24504A',
-          navy: '#1B3A4B',
-          petrol: '#1F5566',
-          bronze: '#8A5A2B',
-          slate: '#454F52',
+          bluegreen: '#064A43',
+          turquoise: '#0F7A6B',
+          keppel: '#3AA69B',
+          cadet: '#95B9C0',
+          gainsboro: '#DCDCDC',
         },
         ok: { DEFAULT: '#1F7A4C', bg: '#E8F5EE' },
         warn: { DEFAULT: '#8A6100', bg: '#FDF3D9' },

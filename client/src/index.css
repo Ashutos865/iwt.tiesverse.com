@@ -61,17 +61,22 @@
     @apply rounded-card border border-ink-200 bg-white p-6;
   }
 
-  /* Solid colour tile — the home portal's primary navigation. */
+  /* Solid colour tile — the home portal's primary navigation.
+
+     No text colour here on purpose: the supplied palette runs from #064A43 to
+     #DCDCDC, so each tile picks white or ink from its own ground. The inset
+     ring keeps the palest tiles from dissolving into the white page. */
   .tile {
     @apply relative flex min-h-[168px] flex-col justify-between overflow-hidden
-           rounded-card p-6 text-white shadow-tile transition
+           rounded-card p-6 shadow-tile ring-1 ring-inset ring-black/5 transition
            hover:-translate-y-0.5 hover:shadow-nav;
   }
   .tile-title {
     @apply text-xl font-bold uppercase leading-tight tracking-tight sm:text-2xl;
   }
+  /* opacity, not a fixed colour, so the subtitle works on either text colour */
   .tile-sub {
-    @apply mt-2 text-sm leading-snug text-white/80;
+    @apply mt-2 text-sm leading-snug opacity-80;
   }
 
   /* ── Navigation ────────────────────────────────────────────────── */

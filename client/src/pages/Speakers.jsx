@@ -86,7 +86,7 @@ export default function Speakers() {
           </div>
         </section>
 
-        <div className="mt-10 rounded-card bg-tile-navy p-6 text-white sm:flex sm:items-center sm:justify-between">
+        <div className="mt-10 rounded-card bg-tile-bluegreen p-6 text-white sm:flex sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-lg font-semibold">Speaking at the Dialogue</p>
             <p className="mt-1 text-sm text-white/70">

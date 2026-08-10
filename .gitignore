@@ -14,3 +14,7 @@ server/uploads/*
 # client/public/fonts/README.md.
 client/public/fonts/*
 !client/public/fonts/README.md
+
+# Scratch assets shared for review — never committed.
+assets-inbox/*
+!assets-inbox/README.md
