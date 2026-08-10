@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MandalaDivider from '../components/MandalaDivider.jsx';
 import { ORGANISER, SUMMIT } from '../lib/constants.js';
-import { BACKGROUND, FAQ } from '../content/summit.js';
+import { FAQ } from '../content/summit.js';
 
 const STEPS = [
   { n: '01', title: 'Apply', body: 'Choose your category and complete the application in a few minutes.' },
@@ -77,29 +77,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Background + how registration works */}
-      <section className="shell grid gap-12 py-16 lg:grid-cols-2">
-        <div>
-          <p className="eyebrow">Background</p>
-          <p className="mt-3 text-2xl font-bold leading-snug text-brand-800">
-            What happens to a treaty signed in goodwill when goodwill runs out?
-          </p>
-          <p className="mt-4 text-sm leading-relaxed text-ink-700">{BACKGROUND[0]}</p>
-          <Link to="/about" className="btn-text mt-3">Read the background note →</Link>
-        </div>
-        <div>
-          <p className="eyebrow">How registration works</p>
-          <div className="mt-5 space-y-4">
-            {STEPS.map((step) => (
-              <div key={step.n} className="flex gap-4 rounded-card border border-ink-200 bg-white p-4">
-                <span className="text-2xl font-bold text-brand-600">{step.n}</span>
-                <div>
-                  <h3 className="text-sm font-bold text-ink-900">{step.title}</h3>
-                  <p className="mt-0.5 text-sm text-ink-700">{step.body}</p>
-                </div>
+      {/* How registration works. The Background column that sat beside this was
+          removed; the steps take the full width rather than staying in a
+          half-width column with nothing opposite them. */}
+      <section className="shell py-16">
+        <p className="eyebrow">How registration works</p>
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          {STEPS.map((step) => (
+            <div key={step.n} className="flex gap-4 rounded-card border border-ink-200 bg-white p-5">
+              <span className="text-2xl font-bold text-brand-600">{step.n}</span>
+              <div>
+                <h3 className="text-sm font-bold text-ink-900">{step.title}</h3>
+                <p className="mt-0.5 text-sm text-ink-700">{step.body}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
