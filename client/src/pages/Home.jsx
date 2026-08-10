@@ -4,12 +4,6 @@ import MandalaDivider from '../components/MandalaDivider.jsx';
 import { ORGANISER, SUMMIT } from '../lib/constants.js';
 import { FAQ } from '../content/summit.js';
 
-const STEPS = [
-  { n: '01', title: 'Apply', body: 'Choose your category and complete the application in a few minutes.' },
-  { n: '02', title: 'Review', body: 'The secretariat verifies your details and documents.' },
-  { n: '03', title: 'Invitation', body: 'Approved applicants receive a QR pass for badge collection.' },
-];
-
 /**
  * Portal tiles — the reference site's primary navigation device. Each is a
  * real route; the grid is a second, more prominent way into the same places
@@ -73,24 +67,6 @@ export default function Home() {
               <span className="tile-title">{t.title}</span>
               <span className="tile-sub">{t.sub}</span>
             </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* How registration works. The Background column that sat beside this was
-          removed; the steps take the full width rather than staying in a
-          half-width column with nothing opposite them. */}
-      <section className="shell py-16">
-        <p className="eyebrow">How registration works</p>
-        <div className="mt-5 grid gap-4 sm:grid-cols-3">
-          {STEPS.map((step) => (
-            <div key={step.n} className="flex gap-4 rounded-card border border-ink-200 bg-white p-5">
-              <span className="text-2xl font-bold text-brand-600">{step.n}</span>
-              <div>
-                <h3 className="text-sm font-bold text-ink-900">{step.title}</h3>
-                <p className="mt-0.5 text-sm text-ink-700">{step.body}</p>
-              </div>
-            </div>
           ))}
         </div>
       </section>

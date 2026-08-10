@@ -7,6 +7,14 @@ const ACCESS_TONE = (access) =>
     : access.startsWith('Invitation') ? 'pill-warn'
       : 'pill-info';
 
+// Moved here from the home page: the flow describes what happens after you
+// pick a track, so it belongs beside the tracks rather than on the front page.
+const STEPS = [
+  { n: '01', title: 'Apply', body: 'Choose your category and complete the application in a few minutes.' },
+  { n: '02', title: 'Review', body: 'The secretariat verifies your details and documents.' },
+  { n: '03', title: 'Invitation', body: 'Approved applicants receive a QR pass for badge collection.' },
+];
+
 /**
  * Registration entry (design.md §13): the participant type is chosen BEFORE
  * any form begins. Each card states who it is for, whether it is open, and
@@ -56,6 +64,21 @@ export default function CategoryPicker() {
             </Link>
           ))}
         </div>
+
+        <section className="mt-12">
+          <p className="eyebrow">How registration works</p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            {STEPS.map((step) => (
+              <div key={step.n} className="flex gap-4 rounded-card border border-ink-200 bg-white p-5">
+                <span className="text-2xl font-bold text-brand-600">{step.n}</span>
+                <div>
+                  <h3 className="text-sm font-bold text-ink-900">{step.title}</h3>
+                  <p className="mt-0.5 text-sm text-ink-700">{step.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <p className="mt-8 text-sm text-ink-700">
           Already applied?{' '}
