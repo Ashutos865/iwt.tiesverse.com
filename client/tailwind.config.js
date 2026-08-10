@@ -7,42 +7,45 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Navy + ink text scale — headers, dark panels, body text.
+        // Ink text scale + line color (design(1).md §5.1).
         ink: {
-          50: '#F7F9FB',   // surface-2
-          100: '#EEF3F7',
-          200: '#DCE4EB',  // line-200 borders
-          500: '#6D7B89',  // meta text
-          600: '#5A6B7C',
-          700: '#445466',  // secondary body
-          800: '#26364A',
-          900: '#172433',  // primary body/titles
-          950: '#03182E',  // navy-950: global header/footer
+          50: '#F7F8F6',   // paper
+          100: '#EFF2F0',
+          200: '#D8E2E8',  // --line borders
+          500: '#586875',  // --ink-600 meta text
+          600: '#4A5A68',
+          700: '#3A4B59',
+          800: '#253746',  // --ink-800 secondary body
+          900: '#0A1722',  // --ink-950 body/titles
+          950: '#041C2C',  // header/footer navy
         },
-        // Action blue — primary buttons, active tabs, links.
+        // River blue — actions, links, active nav, small emphasis only.
         brand: {
-          50: '#EEF7FC',   // blue-050 selected backgrounds
-          100: '#D9EDF8',
-          400: '#2396D3',  // blue-500 secondary accent
-          500: '#1B87C5',
-          600: '#1577B8',  // blue-600 primary
-          700: '#0F5E93',
+          50: '#EEF9FD',   // --river-050
+          100: '#DFF3FB',  // --river-100
+          400: '#38AFE0',  // --river-400 logo accent
+          500: '#1597D1',  // --river-500 hover
+          600: '#0C7DB8',  // --river-600 primary action
+          700: '#08699F',  // --river-700
         },
-        // Dark navy surfaces between 950 and 800 (hero overlays, side nav).
+        // Deep aquatic navy surfaces.
         navy: {
-          800: '#0A365B',
-          900: '#062947',
-          950: '#03182E',
+          800: '#0B3A5C',
+          900: '#082A43',
+          950: '#041C2C',  // header / footer
+          975: '#021624',  // deepest shell / hero
         },
-        paper: '#F7F9FB',  // page background (surface-2)
+        // Very restrained diplomatic accent: 1px rules, tiny labels only.
+        silt: { 500: '#B79A62' },
+        paper: '#F7F8F6',
         // Status pairs — always used WITH text/icon, never color alone.
         ok: { DEFAULT: '#18794E', bg: '#EAF7F0' },
-        warn: { DEFAULT: '#9A6700', bg: '#FFF4D6' },
+        warn: { DEFAULT: '#946200', bg: '#FFF4D6' },
         bad: { DEFAULT: '#B42318', bg: '#FDECEA' },
       },
       fontFamily: {
-        display: ['"Source Serif 4"', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
+        display: ['"Source Serif 4"', 'Georgia', '"Times New Roman"', 'serif'],
+        sans: ['"Source Sans 3"', 'Inter', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         shell: '1280px',   // content container per §4.3

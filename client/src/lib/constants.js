@@ -100,3 +100,32 @@ export const SECTORS = [
   'NGO',
   'Student',
 ];
+
+// ── Event edition contract (design(1).md §26) ─────────────────────────────
+// The ONE source for lifecycle facts: countdown, status labels and hero CTAs
+// all derive from here — nothing about the event state is hardcoded twice.
+export const EVENT_EDITION = {
+  name: 'Indus Water Treaty Dialogue',
+  edition: 2026,
+  theme: SUMMIT.theme,
+  startAt: '2026-09-19T09:00:00+05:30',
+  endAt: '2026-09-20T18:00:00+05:30',
+  venue: { name: 'Bharat Mandapam', city: 'New Delhi', country: 'India' },
+  registration: { state: 'open' },   // 'not_open' | 'open' | 'closed'
+  metrics: [
+    { value: '500+', label: 'Delegates' },
+    { value: '30+', label: 'Countries' },
+    { value: '40+', label: 'Speakers' },
+    { value: '10+', label: 'Ministers & Sr. Officials' },
+    { value: '20+', label: 'Sessions' },
+  ],
+};
+
+/** Where the edition is in its life: pre | live | post — plus the countdown. */
+export function eventPhase(now = Date.now()) {
+  const start = new Date(EVENT_EDITION.startAt).getTime();
+  const end = new Date(EVENT_EDITION.endAt).getTime();
+  if (now >= end) return { phase: 'post', days: 0 };
+  if (now >= start) return { phase: 'live', days: 0 };
+  return { phase: 'pre', days: Math.max(0, Math.ceil((start - now) / 86400000)) };
+}

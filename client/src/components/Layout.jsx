@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import BrandLogo from './BrandLogo.jsx';
 import { SUMMIT } from '../lib/constants.js';
 
-// Public navigation per design.md §3.1, in this order.
+// Public navigation (design(1).md §6.1) — registration lives in the CTA, not
+// the nav, so the page never shows two equal registration entry points.
 const NAV = [
   { to: '/', label: 'Home', end: true },
   { to: '/about', label: 'About' },
@@ -10,76 +12,71 @@ const NAV = [
   { to: '/speakers', label: 'Speakers' },
   { to: '/partners', label: 'Partners' },
   { to: '/media', label: 'Media' },
-  { to: '/register', label: 'Registration' },
   { to: '/contact', label: 'Contact' },
 ];
 
-/** Three concentric-ring rosettes, echoing the mandala mark. */
-function LogoMark({ light = false }) {
-  return (
-    <span className="flex items-center" aria-hidden="true">
-      <svg width="34" height="34" viewBox="0 0 24 24" className={light ? 'text-brand-400' : 'text-brand-600'}>
-        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="2 1.6" />
-        <circle cx="12" cy="12" r="2.4" fill="currentColor" />
-      </svg>
-    </span>
-  );
-}
-
-function Wordmark() {
-  return (
-    <span className="leading-tight">
-      <span className="block text-sm font-bold uppercase tracking-wide text-white">
-        Indus Water Treaty
-      </span>
-      <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-400">
-        Dialogue 2026 · New Delhi
-      </span>
-    </span>
-  );
-}
-
 const desktopNavClass = ({ isActive }) =>
-  `relative px-1 py-2 text-[13px] font-semibold uppercase tracking-wide transition ${
+  `relative py-2 text-[14px] font-semibold transition ${
     isActive
-      ? 'text-white after:absolute after:inset-x-0 after:-bottom-[21px] after:h-[3px] after:bg-brand-500'
+      ? 'text-white after:absolute after:inset-x-0 after:-bottom-[9px] after:h-[2px] after:bg-brand-500'
       : 'text-white/70 hover:text-white'
   }`;
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // The mobile sheet closes on navigation; body scroll locks while it is open.
   useEffect(() => setMenuOpen(false), [location.pathname]);
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="no-print sticky top-0 z-30 border-b border-white/10 bg-navy-950">
-        <div className="shell flex h-16 items-center justify-between gap-4 lg:h-[72px]">
-          <Link to="/" className="flex items-center gap-3">
-            <LogoMark light />
-            <Wordmark />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink-900"
+      >
+        Skip to content
+      </a>
+
+      <header
+        className={`no-print sticky top-0 z-30 border-b border-white/[0.08] transition-colors ${
+          scrolled ? 'bg-navy-950' : 'bg-navy-950/[0.96] backdrop-blur-sm'
+        }`}
+      >
+        <div className="shell flex h-16 items-center justify-between gap-4 lg:h-[82px]">
+          <Link to="/" aria-label="Indus Water Treaty Dialogue 2026 — home">
+            <BrandLogo light />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-5 lg:flex" aria-label="Main">
+          <nav className="hidden items-center gap-6 lg:flex" aria-label="Main">
             {NAV.map((n) => (
               <NavLink key={n.to} to={n.to} end={n.end} className={desktopNavClass}>
                 {n.label}
               </NavLink>
             ))}
-            <Link to="/register" className="btn-primary !min-h-[40px] !px-4 !py-2 !text-xs uppercase tracking-wide">
-              Register now
+            <Link to="/status" className="py-2 text-[14px] font-semibold text-white/70 hover:text-white">
+              Check status
+            </Link>
+            <Link
+              to="/register"
+              className="inline-flex h-[44px] items-center rounded bg-brand-600 px-[18px] text-[13px] font-bold uppercase tracking-wide text-white transition hover:bg-brand-500"
+            >
+              Register / Apply
             </Link>
           </nav>
 
-          {/* Mobile: hamburger opens a full-height sheet (§5.2), never a tiny dropdown. */}
+          {/* Mobile: hamburger opens a full-height navy sheet. */}
           <button
             type="button"
             className="flex h-11 w-11 items-center justify-center rounded text-white lg:hidden"
@@ -115,7 +112,7 @@ export default function Layout() {
               </NavLink>
             ))}
             <div className="mt-6 grid gap-3">
-              <Link to="/register" className="btn-primary w-full">Register now</Link>
+              <Link to="/register" className="btn-primary w-full uppercase tracking-wide">Register / Apply</Link>
               <Link to="/status" className="btn-ghost w-full !border-white/30 !bg-transparent !text-white">
                 Check application status
               </Link>
@@ -124,53 +121,55 @@ export default function Layout() {
         )}
       </header>
 
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Outlet />
       </main>
 
       <footer className="no-print bg-navy-950 text-white/70">
-        <div className="shell grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="shell grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-5">
           <div>
-            <div className="flex items-center gap-3">
-              <LogoMark light />
-              <Wordmark />
-            </div>
-            <p className="mt-4 text-xs leading-relaxed">
-              {SUMMIT.dates} · {SUMMIT.venue}
-            </p>
-            <p className="mt-2 max-w-xs text-xs leading-relaxed text-white/50">
-              A policy dialogue on law, water security and regional cooperation in South Asia.
+            <BrandLogo light />
+            <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-white/55">
+              A two-day international policy dialogue on water, law and regional
+              security in the Indus basin. {SUMMIT.dates} · {SUMMIT.venue}.
             </p>
           </div>
 
           <div className="text-sm">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">Quick links</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">Dialogue</p>
             <ul className="space-y-2">
-              <li><Link to="/about" className="hover:text-white">About the Dialogue</Link></li>
+              <li><Link to="/about" className="hover:text-white">About</Link></li>
               <li><Link to="/agenda" className="hover:text-white">Agenda</Link></li>
               <li><Link to="/speakers" className="hover:text-white">Speakers</Link></li>
               <li><Link to="/partners" className="hover:text-white">Partners</Link></li>
-              <li><Link to="/media" className="hover:text-white">Media centre</Link></li>
             </ul>
           </div>
 
           <div className="text-sm">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">Participate</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">Participate</p>
             <ul className="space-y-2">
-              <li><Link to="/register" className="hover:text-white">Delegate registration</Link></li>
+              <li><Link to="/register" className="hover:text-white">Registration</Link></li>
               <li><Link to="/register/media" className="hover:text-white">Media accreditation</Link></li>
-              <li><Link to="/partners#become-a-partner" className="hover:text-white">Become a partner</Link></li>
-              <li><Link to="/register/volunteer" className="hover:text-white">Volunteer</Link></li>
-              <li><Link to="/status" className="hover:text-white">Application status</Link></li>
+              <li><Link to="/partners#become-a-partner" className="hover:text-white">Partner enquiry</Link></li>
+              <li><Link to="/status" className="hover:text-white">Delegate status</Link></li>
             </ul>
           </div>
 
           <div className="text-sm">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">Contact</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">Resources</p>
+            <ul className="space-y-2">
+              <li><Link to="/media" className="hover:text-white">Media centre</Link></li>
+              <li><Link to="/about#code-of-conduct" className="hover:text-white">Code of conduct</Link></li>
+              <li><Link to="/#faq" className="hover:text-white">FAQ</Link></li>
+              <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+            </ul>
+          </div>
+
+          <div className="text-sm">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">Contact</p>
             <p>Indus Water Treaty Dialogue Secretariat</p>
             <p>New Delhi, India</p>
-            <p className="mt-2">{SUMMIT.phone}</p>
-            <a href={`mailto:${SUMMIT.email}`} className="hover:text-white">{SUMMIT.email}</a>
+            <a href={`mailto:${SUMMIT.email}`} className="mt-2 block hover:text-white">{SUMMIT.email}</a>
           </div>
         </div>
         <div className="border-t border-white/10">
