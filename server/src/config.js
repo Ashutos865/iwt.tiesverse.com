@@ -39,4 +39,13 @@ export const config = {
     // origins the key was issued for.
     origin: process.env.DATA_API_ORIGIN || '',
   },
+
+  // AWS SES for transactional mail (approval emails). Same account as the
+  // admin backend; unset keys simply disable outgoing mail.
+  ses: {
+    accessKeyId: process.env.AWS_SES_ACCESS_KEY_ID || '',
+    secretAccessKey: process.env.AWS_SES_SECRET_ACCESS_KEY || '',
+    region: process.env.AWS_SES_REGION || 'ap-south-1',
+    fromEmail: process.env.SES_FROM_EMAIL || 'noreply@tiesverse.com',
+  },
 };

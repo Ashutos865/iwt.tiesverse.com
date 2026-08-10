@@ -108,7 +108,19 @@ export async function approve(registrationId) {
     timestamps: { decidedAt: new Date().toISOString() },
     decision: { by: 'admin', rejectionReason: null },
   });
-  return publicView(updated);
+
+  // Tell the participant: pass approved, QR attached, what to bring. A mail
+  // failure must never roll back an approval — log it and move on; the pass
+  // is always retrievable from the status page regardless.
+  let approvalEmailSent = false;
+  try {
+    const { sendApprovalEmail } = await import('./mailService.js');
+    approvalEmailSent = await sendApprovalEmail(updated);
+  } catch (err) {
+    console.error('[mail] approval email failed for', updated.email, '-', err.message);
+  }
+
+  return { ...publicView(updated), approvalEmailSent };
 }
 
 export async function reject(registrationId, reason) {
