@@ -27,6 +27,13 @@ function LogoMark({ light = false }) {
   );
 }
 
+/**
+ * Text wordmark — footer only.
+ *
+ * The header uses the supplied logo artwork, but that artwork sets "Waters
+ * Treaty Dialogue" in black, which disappears against the navy footer. Rather
+ * than tint it, the footer keeps this legible text lockup.
+ */
 function Wordmark() {
   return (
     <span className="leading-tight">
@@ -40,11 +47,14 @@ function Wordmark() {
   );
 }
 
+// White header: links carry their own contrast rather than relying on a dark
+// ground. Active state pairs weight with the underline so it does not read by
+// colour alone.
 const desktopNavClass = ({ isActive }) =>
   `relative px-1 py-2 text-[13px] font-semibold uppercase tracking-wide transition ${
     isActive
-      ? 'text-white after:absolute after:inset-x-0 after:-bottom-[21px] after:h-[3px] after:bg-brand-500'
-      : 'text-white/70 hover:text-white'
+      ? 'text-ink-900 after:absolute after:inset-x-0 after:-bottom-[21px] after:h-[3px] after:bg-brand-600'
+      : 'text-ink-600 hover:text-ink-900'
   }`;
 
 export default function Layout() {
@@ -60,11 +70,18 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="no-print sticky top-0 z-30 border-b border-white/10 bg-navy-950">
+      <header className="no-print sticky top-0 z-30 border-b border-ink-200 bg-white">
         <div className="shell flex h-16 items-center justify-between gap-4 lg:h-[72px]">
-          <Link to="/" className="flex items-center gap-3">
-            <LogoMark light />
-            <Wordmark />
+          <Link to="/" className="flex items-center" aria-label={`${SUMMIT.name} — home`}>
+            {/* Intrinsic size set so the row reserves space before the image
+                decodes and the nav does not jump on load. */}
+            <img
+              src="/brand/iwt-logo.png"
+              width="526"
+              height="200"
+              alt={SUMMIT.name}
+              className="h-10 w-auto lg:h-12"
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -82,7 +99,7 @@ export default function Layout() {
           {/* Mobile: hamburger opens a full-height sheet (§5.2), never a tiny dropdown. */}
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded text-white lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded text-ink-900 lg:hidden"
             aria-expanded={menuOpen}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             onClick={() => setMenuOpen((v) => !v)}
@@ -97,7 +114,7 @@ export default function Layout() {
 
         {menuOpen && (
           <nav
-            className="fixed inset-x-0 bottom-0 top-16 z-30 flex flex-col overflow-y-auto bg-navy-950 px-6 pb-8 pt-4 lg:hidden"
+            className="fixed inset-x-0 bottom-0 top-16 z-30 flex flex-col overflow-y-auto bg-white px-6 pb-8 pt-4 lg:hidden"
             aria-label="Main menu"
           >
             {NAV.map((n) => (
@@ -106,8 +123,8 @@ export default function Layout() {
                 to={n.to}
                 end={n.end}
                 className={({ isActive }) =>
-                  `border-b border-white/10 py-4 text-base font-semibold ${
-                    isActive ? 'text-brand-400' : 'text-white'
+                  `border-b border-ink-100 py-4 text-base font-semibold ${
+                    isActive ? 'text-brand-700' : 'text-ink-900'
                   }`
                 }
               >
@@ -116,7 +133,7 @@ export default function Layout() {
             ))}
             <div className="mt-6 grid gap-3">
               <Link to="/register" className="btn-primary w-full">Register now</Link>
-              <Link to="/status" className="btn-ghost w-full !border-white/30 !bg-transparent !text-white">
+              <Link to="/status" className="btn-ghost w-full">
                 Check application status
               </Link>
             </div>
