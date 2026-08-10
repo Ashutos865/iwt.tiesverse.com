@@ -84,7 +84,7 @@
   /* The floating nav card under the centred logo. The border is load-bearing:
      the page ground is white, so fill alone gives the card no edge. */
   .navcard {
-    @apply rounded-card border border-ink-200 bg-white shadow-nav;
+    @apply rounded-card border border-black bg-white shadow-nav;
   }
   .navlink {
     @apply inline-flex min-h-[44px] items-center gap-1 rounded-pill px-4 text-sm
