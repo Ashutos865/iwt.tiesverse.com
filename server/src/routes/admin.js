@@ -35,6 +35,31 @@ router.get('/registrations', async (req, res, next) => {
   }
 });
 
+// The check-in register: everyone who has entered, newest first, with the
+// approved total alongside so the gate count is meaningful. checkedInAt lives
+// inside the record payload (not a queryable column), so approved records are
+// paged through here and filtered in process.
+router.get('/checkins', async (req, res, next) => {
+  try {
+    const all = [];
+    let page = 1;
+    let total = Infinity;
+    while (all.length < total && page <= 40) {           // 40×100 = 4,000 cap
+      const out = await repo.list({ status: 'approved', page, limit: 100 });
+      all.push(...out.items);
+      total = out.total;
+      if (out.items.length === 0) break;
+      page += 1;
+    }
+    const checkedIn = all
+      .filter((r) => r.checkedInAt)
+      .sort((a, b) => String(b.checkedInAt).localeCompare(String(a.checkedInAt)));
+    res.json({ items: checkedIn, checkedIn: checkedIn.length, approved: all.length });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/registrations/:registrationId', async (req, res, next) => {
   try {
     res.json(await service.adminDetail(req.params.registrationId));

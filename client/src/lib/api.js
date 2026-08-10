@@ -67,6 +67,8 @@ export const api = {
     return request(`/api/admin/registrations?${qs}`, { admin: true });
   },
 
+  adminCheckins: () => request('/api/admin/checkins', { admin: true }),
+
   adminDetail: (id) => request(`/api/admin/registrations/${encodeURIComponent(id)}`, { admin: true }),
 
   adminReview: (id) =>

@@ -82,7 +82,10 @@ export default function AdminCheckin() {
           <p className="text-xs uppercase tracking-[0.2em] text-brand-600">Check-in</p>
           <h1 className="font-display text-2xl text-ink-900">Scan a badge</h1>
         </div>
-        <Link to="/admin/applications" className="btn-text text-xs">Applications →</Link>
+        <div className="flex gap-3">
+          <Link to="/admin/checkins" className="btn-text text-xs">Check-ins →</Link>
+          <Link to="/admin/applications" className="btn-text text-xs">Applications →</Link>
+        </div>
       </div>
 
       <div className="relative overflow-hidden rounded-card border border-ink-200 bg-ink-950">

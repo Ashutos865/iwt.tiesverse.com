@@ -184,6 +184,7 @@ export async function list({ status, category, q, page = 1, limit = 25 } = {}) {
     category: r.category,
     status: r.status,
     submittedAt: r.timestamps.submittedAt,
+    checkedInAt: r.checkedInAt || null,
   }));
   return { items, total: res?.count ?? items.length, page, limit };
 }
