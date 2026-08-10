@@ -5,7 +5,21 @@
  */
 export default function StepIndicator({ steps, current, onJump }) {
   return (
-    <ol className="mb-8 flex items-start">
+    <>
+      {/* Mobile: the circle rail collapses into a compact counter (design.md §14.2). */}
+      <div className="mb-5 sm:hidden" aria-live="polite">
+        <p className="text-sm font-bold text-ink-900">
+          Step {current + 1} of {steps.length} — {steps[current].title}
+        </p>
+        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ink-100">
+          <div
+            className="h-full rounded-full bg-brand-600 transition-all"
+            style={{ width: `${((current + 1) / steps.length) * 100}%` }}
+          />
+        </div>
+      </div>
+
+      <ol className="mb-8 hidden items-start sm:flex">
       {steps.map((step, i) => {
         const done = i < current;
         const active = i === current;
@@ -47,6 +61,7 @@ export default function StepIndicator({ steps, current, onJump }) {
           </li>
         );
       })}
-    </ol>
+      </ol>
+    </>
   );
 }

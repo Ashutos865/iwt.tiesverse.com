@@ -99,12 +99,13 @@ export default function FormWizard({ config, onSubmit, submitting, serverError }
           </p>
         )}
 
-        <div className="mt-8 flex items-center justify-between border-t border-ink-100 pt-6">
+        {/* Sticky on mobile so Back/Continue never scroll away (§14.2). */}
+        <div className="sticky bottom-0 -mx-6 mt-8 flex items-center justify-between gap-3 border-t border-ink-100 bg-white px-6 py-4 sm:static sm:mx-0 sm:px-0 sm:pb-0 sm:pt-6">
           <button type="button" onClick={back} disabled={stepIndex === 0} className="btn-ghost">
             Back
           </button>
 
-          <p className="hidden text-xs text-ink-600/60 sm:block">
+          <p className="hidden text-xs text-ink-500 sm:block">
             Step {stepIndex + 1} of {config.steps.length}
           </p>
 

@@ -28,41 +28,48 @@ function buildFormData(config, values) {
   return formData;
 }
 
-/** Right rail from the mockup: switch category + get help. */
+/**
+ * Context rail (design.md §14.1): the selected role is a fixed label, not a
+ * switcher — changing category mid-form is an explicit, warned action so a
+ * half-filled application is never silently invalidated.
+ */
 function Sidebar({ activeSlug }) {
+  const navigate = useNavigate();
+  const active = CATEGORIES.find((c) => c.slug === activeSlug);
+
+  const changeCategory = () => {
+    const ok = window.confirm(
+      'Change category? Anything you have entered in this application will be discarded.',
+    );
+    if (ok) navigate('/register');
+  };
+
   return (
     <aside className="no-print hidden w-64 shrink-0 space-y-6 lg:block">
       <div className="card !p-5">
         <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-800">
-          Registration Categories
+          Your application
         </h2>
-        <ul className="mt-4 space-y-1">
-          {CATEGORIES.map((category) => {
-            const active = category.slug === activeSlug;
-            return (
-              <li key={category.slug}>
-                <Link
-                  to={`/register/${category.slug}`}
-                  className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition ${
-                    active
-                      ? 'bg-brand-50 font-semibold text-brand-700'
-                      : 'text-ink-700 hover:bg-ink-50'
-                  }`}
-                >
-                  <span
-                    className={`h-3.5 w-3.5 shrink-0 rounded-full border-2 ${
-                      active ? 'border-brand-600 bg-brand-600 ring-2 ring-inset ring-white' : 'border-ink-200'
-                    }`}
-                  />
-                  {category.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <dl className="mt-4 space-y-3 text-sm">
+          <div>
+            <dt className="text-xs font-semibold text-ink-500">Category</dt>
+            <dd className="mt-0.5 flex items-center gap-2 font-bold text-ink-900">{active?.label}</dd>
+          </div>
+          <div>
+            <dt className="text-xs font-semibold text-ink-500">Access</dt>
+            <dd className="mt-0.5 text-ink-700">{active?.access}</dd>
+          </div>
+          <div>
+            <dt className="text-xs font-semibold text-ink-500">Have ready</dt>
+            <dd className="mt-0.5 text-ink-700">{active?.docs}</dd>
+          </div>
+        </dl>
+        <button type="button" onClick={changeCategory} className="btn-text !min-h-0 mt-4 text-xs">
+          Change category
+        </button>
       </div>
 
-      <div className="rounded-xl border border-brand-100 bg-brand-50 p-5 text-sm">
+      <div className="rounded-card border border-brand-100 bg-brand-50 p-5 text-sm">
         <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-700">
           Need help?
         </h2>

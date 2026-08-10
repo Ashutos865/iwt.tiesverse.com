@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import StatusBadge from '../components/StatusBadge.jsx';
 import QRPassCard from '../components/QRPassCard.jsx';
+import ApplicationTimeline from '../components/ApplicationTimeline.jsx';
 import { api } from '../lib/api.js';
+import { SUMMIT } from '../lib/constants.js';
 
 const NEXT_STEP = {
   received: 'Your application is queued for verification by the secretariat.',
@@ -97,6 +99,10 @@ export default function StatusCheck() {
               <StatusBadge status={result.status} />
             </div>
 
+            <div className="mt-4">
+              <ApplicationTimeline status={result.status} submittedAt={result.submittedAt} />
+            </div>
+
             <p className="mt-4 text-sm text-ink-600/80">{NEXT_STEP[result.status]}</p>
 
             {result.status === 'rejected' && result.rejectionReason && (
@@ -110,7 +116,20 @@ export default function StatusCheck() {
             </p>
           </div>
 
-          {result.qr && <QRPassCard registration={result} />}
+          {result.qr && (
+            <>
+              <QRPassCard registration={result} />
+              {/* Badge collection (§24.3): exact steps, in words. */}
+              <div className="card no-print">
+                <h2 className="eyebrow">Collecting your badge</h2>
+                <ul className="mt-3 space-y-1.5 text-sm text-ink-700">
+                  <li>· Badge collection is at the registration desk, {SUMMIT.venue}, from 08:00 on both days.</li>
+                  <li>· Bring this QR pass <strong>and the photo ID used in your application</strong> — the QR alone is not sufficient.</li>
+                  <li>· Lost badge? Report to the registration desk with your ID; a replacement voids the old badge.</li>
+                </ul>
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

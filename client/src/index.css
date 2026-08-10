@@ -6,61 +6,97 @@
   body {
     @apply bg-paper font-sans text-ink-900 antialiased;
   }
+  /* Visible keyboard focus everywhere (design.md §37). */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2;
+  }
 }
 
 @layer components {
+  /* ── Buttons — min 44px targets (§4.6) ─────────────────────────── */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded px-5 py-2.5
+           text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
   }
-  /* Primary action — deep river teal, as on the mockup's REGISTER NOW. */
   .btn-primary {
-    @apply btn bg-brand-600 text-white hover:bg-brand-700;
+    @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-700;
   }
-  /* Dark alternative — petrol ink surface. */
   .btn-dark {
-    @apply btn bg-ink-900 text-white hover:bg-ink-700;
+    @apply btn bg-ink-950 text-white hover:bg-navy-900;
   }
-  /* Outlined secondary — like the mockup's REQUEST INVITATION. */
-  /* Sits where the Verify button was, so the row does not reflow on success. */
-  .ev-badge {
-    @apply inline-flex items-center whitespace-nowrap rounded-lg border border-emerald-600/30
-           bg-emerald-50 px-3 text-sm font-semibold text-emerald-700;
-  }
-
   .btn-ghost {
-    @apply btn border border-brand-600/40 bg-white text-brand-700 hover:border-brand-600 hover:bg-brand-50;
+    @apply btn border border-ink-200 bg-white text-ink-900 hover:border-brand-600 hover:text-brand-700;
   }
   .btn-danger {
-    @apply btn bg-red-600 text-white hover:bg-red-700;
+    @apply btn bg-bad text-white hover:opacity-90;
+  }
+  .btn-text {
+    @apply inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700;
   }
 
+  /* ── Surfaces ──────────────────────────────────────────────────── */
   .card {
-    @apply rounded-xl border border-ink-100 bg-white p-6 shadow-sm;
+    @apply rounded-card border border-ink-200 bg-white p-6;
   }
 
+  /* ── Forms — 44px controls, label above (§4.7) ─────────────────── */
   .label {
     @apply mb-1.5 block text-sm font-medium text-ink-800;
   }
   .input {
-    @apply w-full rounded-md border border-ink-200 bg-white px-3 py-2 text-sm text-ink-900 outline-none transition placeholder:text-ink-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20;
+    @apply min-h-[44px] w-full rounded border border-ink-200 bg-white px-3 py-2 text-[15px]
+           text-ink-900 outline-none transition placeholder:text-ink-500/60
+           focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20;
   }
   .input-error {
-    @apply border-red-400 focus:border-red-500 focus:ring-red-500/20;
+    @apply border-bad focus:border-bad focus:ring-bad/20;
   }
   .hint {
-    @apply mt-1 text-xs text-ink-600/70;
+    @apply mt-1 text-xs text-ink-500;
   }
   .error-text {
-    @apply mt-1 text-xs font-medium text-red-600;
+    @apply mt-1 text-xs font-medium text-bad;
   }
 
-  /* Thin rule with a centred diamond — the mockup's hero divider. */
-  .hero-divider {
-    @apply relative my-5 h-px w-40 bg-brand-500/50;
+  /* ── Status pills — text + tone, never color alone (§4.1) ─────── */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
   }
-  .hero-divider::after {
-    content: '◆';
-    @apply absolute -top-2 left-1/2 -translate-x-1/2 bg-transparent text-[10px] text-brand-500;
+  .pill-ok    { @apply pill bg-ok-bg text-ok; }
+  .pill-warn  { @apply pill bg-warn-bg text-warn; }
+  .pill-bad   { @apply pill bg-bad-bg text-bad; }
+  .pill-info  { @apply pill bg-brand-50 text-brand-700; }
+  .pill-muted { @apply pill bg-ink-100 text-ink-700; }
+
+  /* Sits where the Verify button was, so the row does not reflow on success. */
+  .ev-badge {
+    @apply inline-flex items-center whitespace-nowrap rounded border border-ok/30
+           bg-ok-bg px-3 text-sm font-semibold text-ok;
+  }
+
+  /* ── Page hero band (§5.3): navy overlay, H1 + one support line ── */
+  .page-hero {
+    @apply relative bg-navy-950 text-white;
+  }
+  .page-hero-inner {
+    @apply mx-auto flex min-h-[160px] max-w-shell flex-col justify-center px-4 py-10
+           sm:min-h-[200px] sm:px-8;
+  }
+  .page-hero h1 {
+    @apply font-display text-3xl font-semibold tracking-tight sm:text-4xl;
+  }
+  .page-hero p {
+    @apply mt-2 max-w-2xl text-sm text-white/80 sm:text-base;
+  }
+
+  /* Section eyebrow label */
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.12em] text-brand-600;
+  }
+
+  /* Container */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-4 sm:px-8;
   }
 }
 

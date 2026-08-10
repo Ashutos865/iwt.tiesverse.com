@@ -1,6 +1,12 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import Home from './pages/Home.jsx';
+import About from './pages/About.jsx';
+import Agenda from './pages/Agenda.jsx';
+import Speakers from './pages/Speakers.jsx';
+import Partners from './pages/Partners.jsx';
+import Media from './pages/Media.jsx';
+import Contact from './pages/Contact.jsx';
 import CategoryPicker from './pages/CategoryPicker.jsx';
 import RegisterWizard from './pages/RegisterWizard.jsx';
 import Success from './pages/Success.jsx';
@@ -21,6 +27,12 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/agenda" element={<Agenda />} />
+        <Route path="/speakers" element={<Speakers />} />
+        <Route path="/partners" element={<Partners />} />
+        <Route path="/media" element={<Media />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/register" element={<CategoryPicker />} />
         <Route path="/register/success" element={<Success />} />
         <Route path="/register/:category" element={<RegisterWizard />} />
