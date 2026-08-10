@@ -41,6 +41,9 @@ export default {
         bad: { DEFAULT: '#B42318', bg: '#FDECEA' },
       },
       fontFamily: {
+        // The event title only. Falls back to the display serif when the
+        // Larken binary is absent — see client/public/fonts/README.md.
+        title: ['Larken', '"Source Serif 4"', 'Georgia', 'serif'],
         display: ['"Source Serif 4"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
       },

@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Larken — the event title face (Ellen Luff Type Foundry).
+ *
+ * The binary is deliberately NOT in the repository; see
+ * client/public/fonts/README.md. If the file is absent this declaration simply
+ * fails to resolve and titles fall back to Source Serif 4 — the page renders
+ * correctly either way, which is what keeps an unlicensed file out of a build.
+ *
+ * The family ships one 400 roman, so there is exactly one face here. Adding a
+ * weight or an italic means another block with matching descriptors rather
+ * than letting the browser synthesise one.
+ */
+@font-face {
+  font-family: 'Larken';
+  src: url('/fonts/larken.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   body {
     @apply bg-paper font-sans text-ink-900 antialiased;

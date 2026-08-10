@@ -67,7 +67,8 @@ export default function Home() {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-400">
             {SUMMIT.kicker}
           </p>
-          <h1 className="mt-4 max-w-2xl font-display text-5xl font-semibold leading-[1.05] sm:text-7xl">
+          {/* The event title — the one place the Larken face is used. */}
+          <h1 className="mt-4 max-w-2xl font-title text-5xl font-normal leading-[1.05] sm:text-7xl">
             {SUMMIT.displayTitle}
             <br />
             {SUMMIT.displaySubtitle}
