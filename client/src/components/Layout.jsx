@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import BasinBand from './BasinBand.jsx';
 import { ORGANISER, SUMMIT } from '../lib/constants.js';
 
 /**
@@ -214,6 +215,8 @@ export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openId, setOpenId] = useState(null);
   const location = useLocation();
+  const isUtilityScreen = location.pathname.startsWith('/admin')
+    || location.pathname.startsWith('/verify');
 
   useEffect(() => { setMenuOpen(false); setOpenId(null); }, [location.pathname, location.hash]);
 
@@ -336,7 +339,11 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="no-print mt-16 border-t border-ink-200 bg-white">
+      {/* Relief band above the footer. Skipped on the secretariat and gate-scan
+          screens — those are working tools, not brochure pages. */}
+      {!isUtilityScreen && <BasinBand />}
+
+      <footer className="no-print border-t border-ink-200 bg-white">
         <div className="shell grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <img src="/brand/iwt-logo.png" width="526" height="200" alt={SUMMIT.name} className="h-12 w-auto" />

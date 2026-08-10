@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MandalaDivider from '../components/MandalaDivider.jsx';
-import { ORGANISER, SUMMIT } from '../lib/constants.js';
-import { FAQ } from '../content/summit.js';
+import { SUMMIT } from '../lib/constants.js';
 
 /**
  * Portal tiles — the reference site's primary navigation device. Each is a
@@ -28,21 +26,7 @@ const TILES = [
   { to: '/register', title: 'Register', sub: 'Seven participation tracks', bg: 'bg-tile-bluegreen', text: 'text-white', span: 'sm:col-span-2' },
 ];
 
-function SectionHead({ eyebrow, title, action }) {
-  return (
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-      <div>
-        <p className="eyebrow">{eyebrow}</p>
-        <h2 className="section-title mt-1.5">{title}</h2>
-      </div>
-      {action}
-    </div>
-  );
-}
-
 export default function Home() {
-  const [openFaq, setOpenFaq] = useState(null);
-
   return (
     <>
       {/*
@@ -71,65 +55,7 @@ export default function Home() {
         </div>
       </section>
 
-      <MandalaDivider className="shell py-2" />
-
-      {/* Organiser */}
-      <section className="shell pb-16 pt-10">
-        <div className="card">
-          <p className="eyebrow">The organisation</p>
-          <h2 className="section-title mt-1.5">
-            {ORGANISER.name} ({ORGANISER.abbr})
-          </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink-700">
-            {ORGANISER.description}
-          </p>
-          <a href={ORGANISER.website} target="_blank" rel="noreferrer noopener" className="btn-text mt-2">
-            {ORGANISER.websiteLabel} →
-          </a>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="shell max-w-3xl pb-16">
-        <SectionHead eyebrow="Questions" title="Before you apply" />
-        <div className="divide-y divide-ink-200 overflow-hidden rounded-card border border-ink-200 bg-white">
-          {FAQ.map((f, i) => (
-            <div key={f.q}>
-              <button
-                type="button"
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-ink-900 hover:bg-brand-50"
-                aria-expanded={openFaq === i}
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-              >
-                {f.q}
-                <span className="text-lg text-brand-700">{openFaq === i ? '−' : '+'}</span>
-              </button>
-              {openFaq === i && <p className="px-5 pb-4 text-sm leading-relaxed text-ink-700">{f.a}</p>}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="shell pb-16">
-        <div className="rounded-card bg-tile-bluegreen p-8 text-white sm:flex sm:items-center sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold">Registration is open</h2>
-            <p className="mt-1 text-sm text-white/75">
-              Seven participation tracks, from delegates to media accreditation.
-            </p>
-          </div>
-          <div className="mt-5 flex flex-wrap gap-3 sm:mt-0">
-            <Link to="/register" className="btn-primary uppercase tracking-wide">Apply to attend</Link>
-            <Link
-              to="/status"
-              className="btn-ghost !border-white/40 !text-white hover:!bg-white/10 uppercase tracking-wide"
-            >
-              Check status
-            </Link>
-          </div>
-        </div>
-      </section>
+      <MandalaDivider className="shell pb-6 pt-2" />
     </>
   );
 }
