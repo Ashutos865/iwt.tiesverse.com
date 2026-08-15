@@ -380,6 +380,16 @@ export const BACKGROUND = [
   + 'its failure to meet obligations on the mandatory exchange of hydrological data under '
   + 'Article VI and the avoidance of cross-border material damage under Article IV.',
 
+  'Beyond strict legal mechanisms, the dialogue dismantles the narrative warfare deployed '
+  + 'at the June seminar, specifically the invocation of the indigenous, pre-Islamic '
+  + "Sindhu-Sarasvati heritage. It reasserts India's place as custodian of the Harappan "
+  + 'and Indus civilisational legacy, and examines the historical dissonance of a state '
+  + 'whose foundational identity is rooted in an Arab-Islamic genesis yet seeks to '
+  + 'manufacture civilisational depth by claiming the Indus legacy. Situating this '
+  + 'civilisational discussion is essential to understanding how historical revisionism '
+  + 'and the co-opting of ancient cultural symbols are used to legitimise modern '
+  + 'geopolitical posturing.',
+
   'To ensure the proceedings remain anchored in historical accuracy, international law and '
   + 'verifiable fact, the IWT itself is the focal point of the technical panels. Experts '
   + 'draw arguments directly from the Treaty text — the Preamble, key Articles and '
