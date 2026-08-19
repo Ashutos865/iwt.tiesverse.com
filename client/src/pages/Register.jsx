@@ -179,7 +179,7 @@ export default function Register() {
 
   const inputClass = (name) =>
     `mt-1 w-full rounded-btn border bg-white px-3.5 py-2 text-sm text-ink-900 outline-none transition
-     placeholder:text-ink-500/70 focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20
+     placeholder:text-ink-500/70 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20
      ${errors[name] ? 'border-rose-400' : 'border-ink-200'}`;
 
   return (
@@ -315,13 +315,13 @@ export default function Register() {
                                   inputMode="numeric"
                                   placeholder="Enter code"
                                   aria-label="Verification code"
-                                  className="w-32 rounded-btn border border-ink-200 bg-white px-3 py-1.5 text-sm tracking-[0.2em] outline-none focus:border-brand-600"
+                                  className="w-32 rounded-btn border border-ink-200 bg-white px-3 py-1.5 text-sm tracking-[0.2em] outline-none focus:border-teal-700"
                                 />
                                 <button
                                   type="button"
                                   onClick={checkCode}
                                   disabled={otpBusy || !otpCode.trim()}
-                                  className="rounded-btn bg-brand-600 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
+                                  className="rounded-btn bg-teal-700 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
                                 >
                                   {otpBusy ? 'Checking…' : 'Verify'}
                                 </button>
@@ -378,13 +378,13 @@ export default function Register() {
                     setAgree(e.target.checked);
                     setErrors((x) => ({ ...x, agreeTerms: undefined }));
                   }}
-                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-ink-300 text-brand-600 focus:ring-brand-600/30"
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-ink-300 text-teal-700 focus:ring-teal-700/30"
                 />
                 <label htmlFor="agree" className="text-sm text-ink-700">
                   I agree to the{' '}
-                  <a href="/terms" className="text-brand-700 underline underline-offset-2">terms and conditions</a>
+                  <a href="/terms" className="text-teal-700 underline underline-offset-2">terms and conditions</a>
                   {' '}and{' '}
-                  <a href="/privacy" className="text-brand-700 underline underline-offset-2">privacy policy</a>.
+                  <a href="/privacy" className="text-teal-700 underline underline-offset-2">privacy policy</a>.
                 </label>
               </div>
               {errors.agreeTerms && <p className="mt-1 text-xs text-rose-600">{errors.agreeTerms}</p>}
@@ -398,7 +398,7 @@ export default function Register() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-btn bg-brand-600 px-5 py-2.5 text-sm font-bold uppercase tracking-[0.06em] text-white transition hover:bg-brand-700 disabled:opacity-60"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-btn bg-teal-700 px-5 py-2.5 text-sm font-bold uppercase tracking-[0.06em] text-white transition hover:bg-teal-800 disabled:opacity-60"
               >
                 {submitting ? 'Submitting…' : 'Submit registration'}
                 {!submitting && (

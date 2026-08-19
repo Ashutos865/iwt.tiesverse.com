@@ -35,6 +35,30 @@ export default {
           900: '#16305C',  // primary body / headlines — 11.99:1 on cream
           950: '#0E1F3D',
         },
+        // Teal, from the Indus mark in the logo. Actions are teal, reading is
+        // blue: what you click is the logo's colour, what you read stays the
+        // artwork's ink.
+        //
+        // The brand teals are #159B98 and #1FB3AA, kept here exactly at 500 and
+        // 600. Neither can carry white text — they measure 3.40:1 and 2.60:1
+        // against white where 4.5:1 is the minimum — so filled buttons and link
+        // text use 700 (#117E7B, 4.89:1), which is the same hue two steps
+        // darker rather than a different colour that happens to pass. The whole
+        // scale is generated from the brand hue (178.7deg), so every step is
+        // recognisably the same teal.
+        teal: {
+          50: '#EDFDFC',
+          100: '#D2F9F8',
+          200: '#A5F3F1',
+          300: '#66EAE7',
+          400: '#1FB3AA',  // brand teal, light — decorative only, 2.60:1
+          500: '#159B98',  // brand teal — decorative and large text, 3.40:1
+          600: '#139391',  // hover step between the brand teal and 700
+          700: '#117E7B',  // button fill and link text — 4.89:1, white text OK
+          800: '#0D6361',  // hover on filled buttons — 7.06:1
+          900: '#0A4A49',
+          950: '#073130',
+        },
         // Indus blue, sampled from the river and ridge lines of the artwork.
         // 600 is the primary button fill; 700 is the darkest link colour that
         // still reads as blue rather than black on cream.

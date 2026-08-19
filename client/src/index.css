@@ -23,7 +23,7 @@
     @apply bg-paper font-sans text-ink-900 antialiased;
   }
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-600 ring-offset-2 ring-offset-paper;
+    @apply outline-none ring-2 ring-teal-700 ring-offset-2 ring-offset-paper;
   }
   /* Headings are sans throughout, following the reference site. */
   h1, h2, h3, h4 {
@@ -45,22 +45,22 @@
            text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
-    @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800;
+    @apply btn bg-teal-700 text-white hover:bg-teal-800 active:bg-teal-900;
   }
   .btn-dark {
     @apply btn bg-brand-900 text-white hover:bg-brand-800;
   }
   /* Outlined — the default secondary action. */
   .btn-ghost {
-    @apply btn border border-brand-700/40 bg-transparent text-brand-800
-           hover:border-brand-700 hover:bg-brand-50;
+    @apply btn border border-teal-700/40 bg-transparent text-teal-800
+           hover:border-teal-700 hover:bg-teal-50;
   }
   .btn-danger {
     @apply btn bg-bad text-white hover:opacity-90;
   }
   .btn-text {
     @apply inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold
-           text-brand-700 hover:text-brand-800 hover:underline;
+           text-teal-700 hover:text-teal-800 hover:underline;
   }
 
   /* ── Hero ──────────────────────────────────────────────────────── */
@@ -228,10 +228,10 @@
      different systems. */
   .navlink {
     @apply inline-flex min-h-[44px] items-center gap-1 rounded-btn px-4 text-sm
-           font-semibold text-ink-800 transition hover:bg-brand-50 hover:text-brand-800;
+           font-semibold text-ink-800 transition hover:bg-teal-50 hover:text-teal-800;
   }
   .navlink-active {
-    @apply bg-brand-600 text-white hover:bg-brand-700 hover:text-white;
+    @apply bg-teal-700 text-white hover:bg-teal-800 hover:text-white;
   }
 
   /* ── Page furniture ────────────────────────────────────────────── */

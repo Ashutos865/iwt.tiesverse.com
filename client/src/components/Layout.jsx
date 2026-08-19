@@ -165,7 +165,7 @@ function DesktopItem({ item, openId, setOpenId }) {
             <Link
               key={c.to + c.label}
               to={c.to}
-              className="block rounded px-3 py-2.5 text-sm font-medium text-ink-800 hover:bg-brand-50 hover:text-brand-800"
+              className="block rounded px-3 py-2.5 text-sm font-medium text-ink-800 hover:bg-teal-50 hover:text-teal-800"
               onClick={() => setOpenId(null)}
             >
               {c.label}
@@ -213,7 +213,7 @@ function MobileItem({ item, onNavigate }) {
               key={c.to + c.label}
               to={c.to}
               onClick={onNavigate}
-              className="block py-2.5 pl-4 text-sm font-medium text-ink-700 hover:text-brand-700"
+              className="block py-2.5 pl-4 text-sm font-medium text-ink-700 hover:text-teal-700"
             >
               {c.label}
             </Link>
@@ -365,7 +365,7 @@ export default function Layout() {
                 */}
                 <Link
                   to="/contact"
-                  className="hidden !min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-btn border border-ink-200 px-4 py-2 text-xs font-semibold text-ink-900 transition hover:border-brand-700 hover:text-brand-700 lg:inline-flex"
+                  className="hidden !min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-btn border border-ink-200 px-4 py-2 text-xs font-semibold text-ink-900 transition hover:border-brand-700 hover:text-teal-700 lg:inline-flex"
                 >
                   Request invitation
                 </Link>
@@ -470,7 +470,7 @@ export default function Layout() {
               <ul className="space-y-2">
                 {col.links.map((l) => (
                   <li key={l.to + l.label}>
-                    <Link to={l.to} className="text-ink-700 hover:text-brand-700 hover:underline">
+                    <Link to={l.to} className="text-ink-700 hover:text-teal-700 hover:underline">
                       {l.label}
                     </Link>
                   </li>
@@ -486,7 +486,7 @@ export default function Layout() {
             <p className="text-ink-700">Indus Waters Treaty Dialogue Secretariat</p>
             <p className="text-ink-700">New Delhi, India</p>
             {SUMMIT.phone && <p className="mt-2 text-ink-700">{SUMMIT.phone}</p>}
-            <a href={`mailto:${SUMMIT.email}`} className="mt-2 block text-brand-700 hover:underline">
+            <a href={`mailto:${SUMMIT.email}`} className="mt-2 block text-teal-700 hover:underline">
               {SUMMIT.email}
             </a>
             <p className="mt-4 text-[11px] uppercase tracking-[0.15em] text-ink-500">Organised by</p>
@@ -494,7 +494,7 @@ export default function Layout() {
               href={ORGANISER.website}
               target="_blank"
               rel="noreferrer noopener"
-              className="text-ink-700 hover:text-brand-700 hover:underline"
+              className="text-ink-700 hover:text-teal-700 hover:underline"
             >
               {ORGANISER.name}
             </a>
@@ -505,8 +505,8 @@ export default function Layout() {
           <div className="shell flex flex-col items-center gap-2 py-4 text-xs text-ink-500 sm:flex-row sm:justify-between">
             <span>© 2026 {ORGANISER.name}. All rights reserved.</span>
             <span className="flex gap-4">
-              <Link to="/about#code-of-conduct" className="hover:text-brand-700">Code of Conduct</Link>
-              <Link to="/contact" className="hover:text-brand-700">Support</Link>
+              <Link to="/about#code-of-conduct" className="hover:text-teal-700">Code of Conduct</Link>
+              <Link to="/contact" className="hover:text-teal-700">Support</Link>
             </span>
           </div>
         </div>

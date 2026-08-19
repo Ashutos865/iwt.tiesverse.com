@@ -42,7 +42,7 @@ export default function Contact() {
               href={ORGANISER.website}
               target="_blank"
               rel="noreferrer noopener"
-              className="font-semibold text-brand-700 underline"
+              className="font-semibold text-teal-700 underline"
             >
               {ORGANISER.name}
             </a>{' '}
@@ -60,7 +60,7 @@ export default function Contact() {
 
         <div className="mt-6 rounded-card border border-brand-100 bg-brand-50 p-5 text-sm text-ink-700">
           Already applied? Track your application any time from{' '}
-          <Link to="/status" className="font-semibold text-brand-700 underline">Check Status</Link>
+          <Link to="/status" className="font-semibold text-teal-700 underline">Check Status</Link>
           {' '}— you only need the email you applied with.
         </div>
 
