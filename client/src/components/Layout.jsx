@@ -292,7 +292,7 @@ export default function Layout() {
               href={ORGANISER.website}
               target="_blank"
               rel="noreferrer noopener"
-              className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+              className="focus-on-dark rounded-sm font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
             >
               Explore our other work at tiesverse.com
             </a>
@@ -315,7 +315,14 @@ export default function Layout() {
         <nav> landmark either way.
       */}
       <div ref={navBarRef} className="no-print sticky top-0 z-40 border-b border-ink-200 bg-white">
-        <div className="shell">
+        {/*
+          The bar spans the window rather than the 1180px text column. `.shell`
+          centres its contents, so on a wide monitor the logo floated a long way
+          in from the left while the page beneath it kept its own margins. A
+          header is furniture, not prose — it reads better anchored to the
+          screen edges, with a wider gutter so nothing touches the glass.
+        */}
+        <div className="w-full px-6 lg:px-10 2xl:px-14">
           <nav className="flex items-center justify-between gap-4 py-3" aria-label="Main">
               {/*
                 Logo slot. The mark is decided separately, so this reserves a
