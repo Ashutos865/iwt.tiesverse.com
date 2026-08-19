@@ -329,10 +329,14 @@ export default function Layout() {
               >
                 <img
                   src="/brand/iwt-logo.png"
-                  width="474"
+                  width="503"
                   height="120"
                   alt={SUMMIT.name}
-                  className="h-10 w-auto sm:h-12"
+                  /* Smaller on the narrowest phones. At 320px the logo, the
+                     Apply button and the menu button together are wider than
+                     the screen, and all three were shrink-0, so the row
+                     overflowed instead of adapting. */
+                  className="h-8 w-auto min-[360px]:h-10 sm:h-12"
                 />
               </Link>
 
@@ -393,7 +397,7 @@ export default function Layout() {
       {menuOpen && (
           <div className="fixed inset-0 z-50 overflow-y-auto bg-paper lg:hidden" role="dialog" aria-modal="true" aria-label="Main menu">
             <div className="shell flex items-center justify-between py-4">
-              <img src="/brand/iwt-logo.png" width="474" height="120" alt="" className="h-11 w-auto" />
+              <img src="/brand/iwt-logo.png" width="503" height="120" alt="" className="h-11 w-auto" />
               <button
                 type="button"
                 className="flex h-11 w-11 items-center justify-center rounded-pill text-ink-900"
@@ -448,7 +452,7 @@ export default function Layout() {
           {/* Full width on a phone: this block is prose, and half a 402px
               screen is too narrow for it to set without ragging badly. */}
           <div className="col-span-2 lg:col-span-1">
-            <img src="/brand/iwt-logo.png" width="474" height="120" alt={SUMMIT.name} className="h-10 w-auto sm:h-12" />
+            <img src="/brand/iwt-logo.png" width="503" height="120" alt={SUMMIT.name} className="h-10 w-auto sm:h-12" />
             <p className="mt-4 text-xs leading-relaxed text-ink-700">
               {SUMMIT.date} · {SUMMIT.venue}
             </p>
