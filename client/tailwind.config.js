@@ -24,16 +24,27 @@ export default {
       colors: {
         // Text scale: navy rather than neutral grey, so type belongs to the
         // same family as the drawing instead of reading as a separate layer.
+        // Text is neutral, structure stays blue. The reading steps are anchored
+        // on the brand's #272727 and derived from it by lightness alone, so
+        // every weight of type is the same colour rather than a family of
+        // near-greys. Contrast on white: 14.94, 11.90, 8.72, 6.29, 4.67 — the
+        // three used for body and headings clear AAA, and the lightest still
+        // clears AA for meta text.
+        //
+        // 50/100/200 are deliberately NOT neutral. They are hairlines, card
+        // borders and tinted panels rather than text, and the faint blue keeps
+        // those surfaces related to the artwork instead of turning the page
+        // into grey boxes.
         ink: {
           50: '#F7F9FC',
           100: '#EDF1F7',
           200: '#D8E0EC',  // hairlines, borders
-          500: '#5C6F92',  // meta text — 4.66:1 on cream
-          600: '#445980',
-          700: '#33507F',  // secondary body — 7.44:1 on cream
-          800: '#22406B',
-          900: '#16305C',  // primary body / headlines — 11.99:1 on cream
-          950: '#0E1F3D',
+          500: '#747474',  // meta text — 4.67:1
+          600: '#606060',
+          700: '#4B4B4B',  // secondary body — 8.72:1
+          800: '#373737',
+          900: '#272727',  // primary body / headings — 14.94:1
+          950: '#171717',
         },
         // Teal, from the Indus mark in the logo. Actions are teal, reading is
         // blue: what you click is the logo's colour, what you read stays the

@@ -88,7 +88,7 @@ export default function AdminCheckin() {
         </div>
       </div>
 
-      <div className="relative overflow-hidden rounded-card border border-ink-200 bg-ink-950">
+      <div className="relative overflow-hidden rounded-card border border-ink-200 bg-brand-950">
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video ref={videoRef} playsInline muted className="block aspect-[3/4] w-full object-cover" />
         {/* aiming frame */}

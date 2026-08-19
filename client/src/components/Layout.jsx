@@ -285,7 +285,7 @@ export default function Layout() {
           rather than being decorative — a visitor who arrived here from a
           shared invitation has no other route to the rest of Tiesverse.
         */}
-        <div className="bg-ink-950 text-center text-[13px] text-white/90">
+        <div className="bg-brand-950 text-center text-[13px] text-white/90">
           <div className="shell py-2.5">
             Inspired by the upcoming event?{' '}
             <a
