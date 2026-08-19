@@ -118,21 +118,36 @@
   .hero-indus::before {
     content: '';
     @apply pointer-events-none absolute inset-0 -z-10;
-    background-image: url('/brand/hero-indus.webp');
+    background-image: url('/brand/hero-valley.webp');
     background-repeat: no-repeat;
+    /*
+       Anchored to the bottom: the drawing is composed with its valley floor at
+       the base and an open sky above, so pinning the bottom keeps the river and
+       villages on the floor of the hero and lets the empty sky rise behind the
+       text exactly as drawn.
+    */
     background-position: bottom center;
     background-size: cover;
-    opacity: 0.16;
     /*
-       Fade the drawing out toward the top so the hero opens on white and the
-       mountains rise into it, as in the approved design. Without this the art
-       runs edge to edge and the date line sits on hatching — legible, but it
-       loses the sense of the valley emerging from the page.
+       Full strength, no fade and no mask. The previous artwork was dense cobalt
+       and had to be dropped to 16% with a gradient mask or it swamped the
+       headline; this one is drawn in the brand teal on white and carries its
+       own sky, so the composition already leaves the text room. Fading it here
+       would only wash out linework the drawing intends to show.
     */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 34%, black 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 34%, black 100%);
   }
-
+  /*
+     On a narrow screen the drawing is far wider than the viewport, so `cover`
+     crops hard to the sides and the mountains climb into the middle of the
+     hero — the stats line ended up sitting on the peaks. Sizing to a little
+     over the width instead keeps the whole composition intact, with the ridges
+     low and the sky where the text is.
+  */
+  @media (max-width: 767px) {
+    .hero-indus::before {
+      background-size: 135% auto;
+    }
+  }
   /*
      The agenda's split layout. The valley drawing sits behind the standing
      header on the left, fading out before it reaches the timeline — session

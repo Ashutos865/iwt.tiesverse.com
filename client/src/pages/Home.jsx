@@ -33,7 +33,7 @@ export default function Home() {
       screen-reader-only heading and no visible title at all.
     */
     <section className="hero-indus">
-      <div className="shell relative z-10 flex flex-col items-center py-16 text-center sm:py-24 lg:py-28">
+      <div className="shell relative z-10 flex flex-col items-center py-12 text-center sm:py-16 lg:py-20">
         <p className="text-sm font-semibold tracking-wide text-brand-700">
           {SUMMIT.date} · {SUMMIT.venue}
         </p>
