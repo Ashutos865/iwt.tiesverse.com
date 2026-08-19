@@ -65,9 +65,9 @@ function AreaBadge({ area }) {
   return (
     <span
       aria-hidden="true"
-      className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full border border-ink-200 bg-white text-brand-600"
+      className="absolute right-2.5 top-2.5 grid h-7 w-7 place-items-center rounded-full border border-ink-200 bg-white text-brand-600"
     >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         {paths}
       </svg>
@@ -89,15 +89,15 @@ function initials(name = '') {
 function SpeakerCard({ sp }) {
   const area = sp.category;
   return (
-    <article className="card relative flex flex-col items-center !p-5 text-center transition hover:border-brand-300 hover:shadow-nav">
+    <article className="card relative flex flex-col items-center !px-4 !py-4 text-center transition hover:border-brand-300 hover:shadow-nav">
       <AreaBadge area={area} />
 
-      <div className="grid h-[104px] w-[104px] shrink-0 place-items-center overflow-hidden rounded-full bg-brand-50 ring-1 ring-ink-200">
+      <div className="grid h-[76px] w-[76px] shrink-0 place-items-center overflow-hidden rounded-full bg-brand-50 ring-1 ring-ink-200">
         {sp.photo_url || sp.photo ? (
           <img
             src={sp.photo_url || sp.photo}
             alt=""
-            width="208" height="208" loading="lazy" decoding="async"
+            width="152" height="152" loading="lazy" decoding="async"
             className="h-full w-full object-cover"
           />
         ) : (
@@ -107,17 +107,20 @@ function SpeakerCard({ sp }) {
         )}
       </div>
 
-      <h3 className="mt-4 text-sm font-bold leading-snug text-ink-900">{sp.name}</h3>
+      {/* Name and role are set a step down from the old 14/12 and the leading
+          is tightened: at three cards across the extra width, not a larger
+          face, is what keeps a full name on one or two lines. */}
+      <h3 className="mt-2.5 text-[13px] font-bold leading-[1.25] text-ink-900">{sp.name}</h3>
 
       {sp.designation && (
-        <p className="mt-1.5 text-xs leading-relaxed text-ink-700">{sp.designation}</p>
+        <p className="mt-1 text-[11px] leading-[1.35] text-ink-700">{sp.designation}</p>
       )}
       {sp.organization && (
-        <p className="text-xs leading-relaxed text-ink-700">{sp.organization}</p>
+        <p className="text-[11px] leading-[1.35] text-ink-700">{sp.organization}</p>
       )}
 
       {area && (
-        <p className="mt-3 text-xs font-semibold text-brand-700">
+        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.06em] text-brand-700">
           {AREA_SHORT[area] || area}
         </p>
       )}
@@ -141,7 +144,11 @@ export default function Speakers() {
 
   return (
     <div className="agenda-split">
-      <div className="shell grid gap-8 py-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14 lg:py-10">
+      {/* The card pane takes the larger share: at 0.8/1.2 each of four cards
+          came out 149px wide, which wrapped "Justice (Retd.) Aarti Deshmukh"
+          onto three lines. The header column only needs room for the title
+          block, so the split favours the grid. */}
+      <div className="shell grid gap-8 py-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.6fr)] lg:gap-10 lg:py-10">
         {/* ── Standing event header ── */}
         <header className="lg:sticky lg:top-24 lg:self-start">
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500">
@@ -236,7 +243,10 @@ export default function Speakers() {
                 </div>
               )}
 
-              <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
+              {/* Three across, not four: a wider card fits a full name and a
+                  two-line role without hyphenating, which is what these cards
+                  actually have to carry. */}
+              <div className="mt-6 grid grid-cols-2 gap-3.5 sm:grid-cols-3">
                 {shown.map((sp) => <SpeakerCard key={sp.id || sp.name} sp={sp} />)}
               </div>
 
