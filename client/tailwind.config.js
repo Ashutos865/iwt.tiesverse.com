@@ -142,6 +142,12 @@ export default {
         // webfont is ever installed at /fonts/larken.woff2 the @font-face in
         // index.css resolves and the title switches to it with no code change.
         title: ['Larken', 'Fraunces', 'Georgia', 'serif'],
+        // The event tagline, set in Times New Roman as specified. Times is a
+        // system font on Windows and macOS, so nothing is downloaded; Liberation
+        // Serif and Tinos are the metric-compatible substitutes shipped on most
+        // Linux distributions, which keeps the line breaking identically for
+        // the minority of visitors without Times itself.
+        tagline: ['"Times New Roman"', 'Times', 'Liberation Serif', 'Tinos', 'serif'],
         display: ['Poppins', 'system-ui', '-apple-system', 'sans-serif'],
         sans: ['"Open Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
       },

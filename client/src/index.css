@@ -44,8 +44,17 @@
     @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-btn px-6 py-2.5
            text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
   }
+  /*
+     The brand teal #1FB3AA, with the brand near-black as its label rather than
+     white: white on this teal measures 2.60:1 and fails AA, while #272727
+     measures 5.75:1 and clears it.
+     Hover LIGHTENS rather than darkens. With a dark label the usual
+     darken-on-hover works against legibility — teal-500 and teal-600 drop the
+     label to 4.39:1 and 3.99:1, below the bar. Lightening moves the state in
+     the safe direction (10.31:1 and 11.87:1) and still reads as a change.
+  */
   .btn-primary {
-    @apply btn bg-teal-700 text-white hover:bg-teal-800 active:bg-teal-900;
+    @apply btn bg-teal-400 text-ink-900 hover:bg-teal-300 active:bg-teal-200;
   }
   .btn-dark {
     @apply btn bg-brand-900 text-white hover:bg-brand-800;

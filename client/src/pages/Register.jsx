@@ -321,7 +321,7 @@ export default function Register() {
                                   type="button"
                                   onClick={checkCode}
                                   disabled={otpBusy || !otpCode.trim()}
-                                  className="rounded-btn bg-teal-700 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
+                                  className="rounded-btn bg-teal-400 px-3 py-1.5 text-xs font-semibold text-ink-900 transition hover:bg-teal-300 disabled:opacity-50"
                                 >
                                   {otpBusy ? 'Checking…' : 'Verify'}
                                 </button>
@@ -398,7 +398,7 @@ export default function Register() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-btn bg-teal-700 px-5 py-2.5 text-sm font-bold uppercase tracking-[0.06em] text-white transition hover:bg-teal-800 disabled:opacity-60"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-btn bg-teal-400 px-5 py-2.5 text-sm font-bold uppercase tracking-[0.06em] text-ink-900 transition hover:bg-teal-300 active:bg-teal-200 disabled:opacity-60"
               >
                 {submitting ? 'Submitting…' : 'Submit registration'}
                 {!submitting && (
