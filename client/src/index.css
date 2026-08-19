@@ -127,7 +127,14 @@
        text exactly as drawn.
     */
     background-position: bottom center;
-    background-size: cover;
+    /*
+       100% width, not `cover`. The drawing is a wide panorama; `cover` scales
+       it until it fills the hero's height too, which enlarges the ridges until
+       the peaks climb into the stats line. Sizing to the width alone keeps the
+       valley at its drawn proportions along the bottom edge and leaves the sky
+       above it open, which is where every line of text sits.
+    */
+    background-size: 100% auto;
     /*
        Full strength, no fade and no mask. The previous artwork was dense cobalt
        and had to be dropped to 16% with a gradient mask or it swamped the
