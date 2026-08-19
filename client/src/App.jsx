@@ -7,8 +7,7 @@ import Speakers from './pages/Speakers.jsx';
 import Partners from './pages/Partners.jsx';
 import Media from './pages/Media.jsx';
 import Contact from './pages/Contact.jsx';
-import CategoryPicker from './pages/CategoryPicker.jsx';
-import RegisterWizard from './pages/RegisterWizard.jsx';
+import Register from './pages/Register.jsx';
 import Success from './pages/Success.jsx';
 import StatusCheck from './pages/StatusCheck.jsx';
 import Verify from './pages/Verify.jsx';
@@ -36,9 +35,8 @@ export default function App() {
         <Route path="/partners" element={<Partners />} />
         <Route path="/media" element={<Media />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/register" element={<CategoryPicker />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/register/success" element={<Success />} />
-        <Route path="/register/:category" element={<RegisterWizard />} />
         <Route path="/status" element={<StatusCheck />} />
         <Route path="/verify/:token" element={<Verify />} />
 

@@ -92,12 +92,16 @@ export async function findByEmailAndId(email, registrationId) {
 }
 
 /** Any application from this email in this category that wasn't rejected. */
+/** `category` is optional — see the Data API repository for why. */
 export async function findExisting(email, category) {
   const store = await load();
   const wanted = String(email || '').trim().toLowerCase();
   return clone(
     store.registrations.find(
-      (r) => r.email.toLowerCase() === wanted && r.category === category && r.status !== 'rejected',
+      (r) =>
+        r.email.toLowerCase() === wanted &&
+        (!category || r.category === category) &&
+        r.status !== 'rejected',
     ),
   );
 }

@@ -82,9 +82,15 @@ async function call(pathSuffix, { method = 'GET', body, timeoutMs = 15000 } = {}
    and which nothing above the repository should care about. */
 function fromRow(row) {
   if (!row) return null;
+  // A row flagged at either level is gone. The Data API has no DELETE, so
+  // removal is a flag filtered on read — the same mechanism the content store
+  // uses. Checked on the row as well as inside the payload because a record
+  // retired by hand through the API sets it on the row.
+  if (row.deleted === true || row.data?.deleted === true) return null;
   const payload = row.data?.payload;
   const record = typeof payload === 'string' ? JSON.parse(payload) : payload;
   if (!record) return null;
+  if (record.deleted === true) return null;
   return { ...record, _recordId: row.id };
 }
 
@@ -161,10 +167,16 @@ export async function findByEmailAndId(email, registrationId) {
 }
 
 /** Any application from this email in this category that wasn't rejected. */
+/**
+ * Find a live registration for an address. `category` is optional: with a
+ * single registration form one address may register once overall, so the
+ * caller omits it and any category counts as a duplicate.
+ */
 export async function findExisting(email, category) {
   const wanted = String(email || '').trim().toLowerCase();
+  const scope = category ? `&where.category=${encodeURIComponent(category)}` : '';
   const res = await call(
-    `/records/?where.email=${encodeURIComponent(wanted)}&where.category=${encodeURIComponent(category)}&page_size=50`,
+    `/records/?where.email=${encodeURIComponent(wanted)}${scope}&page_size=50`,
   );
   const rows = (res?.results || []).map(fromRow).filter(Boolean);
   return rows.find((r) => r.status !== 'rejected') || null;

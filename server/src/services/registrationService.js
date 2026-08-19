@@ -32,22 +32,25 @@ export async function submit({ category, data, files }) {
   }
 
   const email = String(data.email).trim().toLowerCase();
-  const existing = await repo.findExisting(email, category);
+  // One registration per person, not one per category. With a single form the
+  // category is a description of the applicant rather than a separate track,
+  // so the same address registering twice is a duplicate whichever category
+  // it picks the second time.
+  const existing = await repo.findExisting(email);
   if (existing) {
     throw new AppError(
       409,
       'DUPLICATE',
-      `This email already has a ${schema.label} application (${existing.registrationId}).`,
+      `This email is already registered (${existing.registrationId}).`,
       { registrationId: existing.registrationId },
     );
   }
 
-  // Keep only files this category actually declares, so a stray upload can't
-  // attach itself to a record.
+  // Registration collects no documents: photo, ID and press card are requested
+  // after approval, from people actually attending. The field is kept on the
+  // record so approved registrants can have documents attached later without a
+  // schema migration, and so existing records stay the same shape.
   const storedFiles = {};
-  for (const field of schema.fileFields) {
-    storedFiles[field] = files[field] ? fileMeta(files[field]) : null;
-  }
 
   const { email: _e, fullName: _n, ...rest } = data;
 

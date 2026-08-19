@@ -63,7 +63,7 @@ const NAV = [
     label: 'Speakers',
     children: [
       { to: '/speakers', label: 'Confirmed speakers' },
-      { to: '/register/speaker', label: 'Speaker registration' },
+      { to: '/register', label: 'Register to attend' },
     ],
   },
   {
@@ -72,8 +72,6 @@ const NAV = [
     children: [
       { to: '/partners', label: 'Our partners' },
       { to: '/partners#become-a-partner', label: 'Become a partner' },
-      { to: '/register/sponsor', label: 'Sponsorship enquiry' },
-      { to: '/register/partner', label: 'Partner organisation' },
     ],
   },
   {
@@ -81,7 +79,7 @@ const NAV = [
     label: 'Media',
     children: [
       { to: '/media', label: 'Media centre' },
-      { to: '/register/media', label: 'Media accreditation' },
+      { to: '/register', label: 'Media accreditation' },
     ],
   },
 ];
@@ -100,10 +98,9 @@ const FOOTER_LINKS = [
   {
     heading: 'Participate',
     links: [
-      { to: '/register', label: 'Delegate registration' },
-      { to: '/register/media', label: 'Media accreditation' },
+      { to: '/register', label: 'Register to attend' },
       { to: '/partners#become-a-partner', label: 'Become a partner' },
-      { to: '/register/volunteer', label: 'Volunteer' },
+      { to: '/contact', label: 'Contact the secretariat' },
       { to: '/status', label: 'Application status' },
     ],
   },

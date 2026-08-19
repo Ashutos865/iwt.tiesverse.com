@@ -88,7 +88,7 @@ export default function Partners() {
           </ul>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link to="/register/sponsor" className="btn-primary">Request a partnership meeting</Link>
+            <Link to="/register" className="btn-primary">Request a partnership meeting</Link>
             <a
               href={`mailto:${SUMMIT.email}?subject=Partnership%20enquiry`}
               className="btn-ghost !border-white/30 !bg-transparent !text-white"

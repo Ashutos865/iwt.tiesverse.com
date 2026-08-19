@@ -16,7 +16,7 @@ function ActionRail() {
           Journalists and media professionals can apply for accreditation with a valid press card or an
           assignment letter. Accreditation is reviewed separately from delegate registration.
         </p>
-        <Link to="/register/media" className="btn-primary mt-4 w-full">Apply now</Link>
+        <Link to="/register" className="btn-primary mt-4 w-full">Apply now</Link>
       </div>
       <div className="card">
         <h2 className="eyebrow">Media contact</h2>

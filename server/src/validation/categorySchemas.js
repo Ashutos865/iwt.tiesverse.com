@@ -1,104 +1,104 @@
 /**
- * Server-side truth about what each category requires. The client form configs
- * mirror this, but the client is never trusted — every submission is re-checked
- * here.
+ * Server-side truth about what a registration requires. The client form mirrors
+ * this, but the client is never trusted — every submission is re-checked here.
  *
- * `prefix` feeds the registration id (IWT26-<prefix>-00001).
- * `fileFields` is the union of file inputs multer must accept for a category;
- * `requiredFiles` is the subset that must actually arrive.
+ * One form, one field set. The seven multi-step category flows this replaced
+ * each asked for personal details, documents and a category-specific essay,
+ * which is a lot to demand before anyone has been accepted. Registration now
+ * collects only what the secretariat needs to make that decision; documents
+ * (photo, government ID, press card) are requested after approval, from people
+ * who are actually coming, rather than from everyone who expresses interest.
+ *
+ * `prefix` feeds the registration id (IWT26-<prefix>-00001), so the id still
+ * says at a glance which kind of participant a pass belongs to.
  */
 
-const PERSONAL = ['fullName', 'gender', 'nationality', 'dob', 'email', 'phone'];
-
+/** The six categories, in the order they appear in the form's dropdown. */
 export const CATEGORY_SCHEMAS = {
-  delegate: {
-    label: 'Delegate',
-    prefix: 'DEL',
-    requiredFields: [...PERSONAL, 'organisation', 'designation', 'sector', 'bio'],
-    fileFields: ['photo', 'govId', 'orgId', 'passportScan'],
-    requiredFiles: ['photo', 'govId'],
+  diplomat: {
+    label: 'Diplomat',
+    prefix: 'DIP',
   },
-  student: {
-    label: 'Student',
-    prefix: 'STU',
-    requiredFields: [...PERSONAL, 'institution', 'course', 'yearOfStudy', 'motivation'],
-    fileFields: ['photo', 'govId', 'studentIdCard'],
-    requiredFiles: ['photo', 'studentIdCard'],
+  policy: {
+    label: 'Policy & Government',
+    prefix: 'POL',
   },
-  speaker: {
-    label: 'Speaker',
-    prefix: 'SPK',
-    requiredFields: [...PERSONAL, 'organisation', 'designation', 'speakerBio', 'sessionPreferences'],
-    fileFields: ['headshot', 'govId', 'passportScan'],
-    requiredFiles: ['headshot'],
+  academic: {
+    label: 'Academic / Researcher',
+    prefix: 'ACA',
   },
   media: {
     label: 'Media',
     prefix: 'MED',
-    requiredFields: [
-      ...PERSONAL,
-      'mediaHouse',
-      'designation',
-      'coverageType',
-      'editorName',
-      'editorEmail',
-    ],
-    fileFields: ['photo', 'pressCard', 'govId'],
-    requiredFiles: ['photo', 'pressCard'],
   },
-  sponsor: {
-    label: 'Sponsor',
-    prefix: 'SPN',
-    requiredFields: [...PERSONAL, 'companyName', 'designation', 'sponsorshipTier', 'message'],
-    fileFields: ['photo', 'companyProfile'],
-    requiredFiles: [],
+  industry: {
+    label: 'Industry / Corporate',
+    prefix: 'IND',
   },
-  partner: {
-    label: 'Partner Organisation',
-    prefix: 'PTR',
-    requiredFields: [...PERSONAL, 'orgName', 'orgType', 'designation', 'partnershipInterest'],
-    fileFields: ['photo', 'proposal'],
-    requiredFiles: [],
-  },
-  volunteer: {
-    label: 'Volunteer',
-    prefix: 'VOL',
-    requiredFields: [...PERSONAL, 'availability', 'skills', 'motivation'],
-    fileFields: ['photo', 'govId'],
-    requiredFiles: ['photo'],
+  other: {
+    label: 'Other (Invited Participant)',
+    prefix: 'INV',
   },
 };
 
-/** Every file field name across all categories — multer must declare the union. */
-export const ALL_FILE_FIELDS = [
-  ...new Set(Object.values(CATEGORY_SCHEMAS).flatMap((s) => s.fileFields)),
+/**
+ * Required of every registrant, whatever their category. Kept deliberately
+ * short: name, who they are, where they are from, how to reach them.
+ */
+export const REQUIRED_FIELDS = [
+  'fullName',
+  'designation',
+  'organisation',
+  'country',
+  'email',
+  'phone',
 ];
+
+/**
+ * No file is collected at registration. Retained as empty exports because the
+ * upload middleware and admin still import them; multer declaring an empty
+ * field list simply accepts no files, which is the intent.
+ */
+export const ALL_FILE_FIELDS = [];
 
 export const CATEGORIES = Object.keys(CATEGORY_SCHEMAS);
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+// Digits, spaces and the usual separators; 8–15 digits covers international
+// numbers with or without a country code.
+const PHONE_RE = /^[+()\-.\s\d]{8,24}$/;
 
 /**
- * Checks a submission against its category schema.
- * Returns `{ field: message }` — empty object means valid.
+ * Checks a submission. Returns `{ field: message }` — empty object means valid.
+ *
+ * `files` is accepted and ignored so existing callers need no change.
  */
-export function validateSubmission(category, data, files) {
-  const schema = CATEGORY_SCHEMAS[category];
+export function validateSubmission(category, data, _files) {
   const errors = {};
 
-  for (const field of schema.requiredFields) {
+  if (!CATEGORY_SCHEMAS[category]) {
+    errors.category = 'Choose a registration category.';
+  }
+
+  for (const field of REQUIRED_FIELDS) {
     const value = data[field];
     const empty =
-      value === undefined || value === null || value === '' || (Array.isArray(value) && !value.length);
+      value === undefined || value === null || String(value).trim() === '';
     if (empty) errors[field] = 'This field is required.';
   }
 
-  if (data.email && !EMAIL_RE.test(String(data.email))) {
+  if (data.email && !EMAIL_RE.test(String(data.email).trim())) {
     errors.email = 'Enter a valid email address.';
   }
 
-  for (const field of schema.requiredFiles) {
-    if (!files[field]) errors[field] = 'This document is required.';
+  if (data.phone && !PHONE_RE.test(String(data.phone).trim())) {
+    errors.phone = 'Enter a valid phone number.';
+  }
+
+  // The consent box is a legal record of agreement, so it is checked here and
+  // not only in the browser where it can be bypassed.
+  if (data.agreeTerms !== true && String(data.agreeTerms) !== 'true') {
+    errors.agreeTerms = 'Please accept the terms and privacy policy.';
   }
 
   return errors;
