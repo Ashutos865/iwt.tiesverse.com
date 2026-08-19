@@ -69,6 +69,10 @@ export const api = {
 
   // Site content — public read, admin writes.
   contentAll: () => request('/api/content'),
+  // The admin's own read: includes unpublished rows, which the public feed
+  // withholds. Without this the content manager could create a draft speaker
+  // and then never see it again.
+  contentAllAdmin: () => request('/api/content/all', { admin: true }),
   contentCreate: (kind, body) =>
     request(`/api/content/${kind}`, { method: 'POST', body, admin: true }),
   contentUpdate: (kind, id, body) =>

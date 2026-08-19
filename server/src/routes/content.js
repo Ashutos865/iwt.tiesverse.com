@@ -30,8 +30,40 @@ const byOrder = (a, b) =>
   (Number(a.order) || 0) - (Number(b.order) || 0)
   || String(a.createdAt || '').localeCompare(String(b.createdAt || ''));
 
+/*
+ * Unpublished rows are withheld from the public feed.
+ *
+ * The concept note is explicit that everyone named in it is a proposed
+ * invitee — "their inclusion reflects suitability, not confirmed
+ * participation" — and the Speakers page repeats that promise. So a speaker
+ * can be prepared in full in the admin (photo, bio, ordering) and only appears
+ * on the site once somebody sets published, which is the moment the
+ * secretariat has their confirmation.
+ *
+ * Absent means published: every row that existed before this flag was added
+ * was already public, and treating a missing value as unpublished would have
+ * emptied the site on deploy.
+ */
+const isPublished = (item) => item?.published !== false && item?.published !== 'false';
+
 // Public: everything the site renders, grouped by kind.
 router.get('/', async (req, res, next) => {
+  try {
+    const all = (await repo.list()).filter(isPublished).sort(byOrder);
+    const grouped = Object.fromEntries(KINDS.map((k) => [k, all.filter((i) => i.kind === k)]));
+    res.json(grouped);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/*
+ * Admin read: everything, published or not.
+ *
+ * Declared before the adminAuth mount below would otherwise be unreachable —
+ * the public GET '/' above already matched, so this needs its own path.
+ */
+router.get('/all', adminAuth, async (req, res, next) => {
   try {
     const all = (await repo.list()).sort(byOrder);
     const grouped = Object.fromEntries(KINDS.map((k) => [k, all.filter((i) => i.kind === k)]));

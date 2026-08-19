@@ -32,9 +32,16 @@
 }
 
 @layer components {
-  /* ── Buttons — pill-shaped, 44px minimum ───────────────────────── */
+  /* ── Buttons — softly squared, 44px minimum ────────────────────── */
+  /*
+     rounded-btn (8px), not rounded-pill: squared corners with a small radius,
+     as requested. The token is separate from `pill` on purpose — pill is still
+     what the 44x44 icon buttons and the small status chips use, and squaring
+     those off would turn the menu trigger into a rounded square rather than
+     the round target it is meant to be.
+  */
   .btn {
-    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill px-6 py-2.5
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-btn px-6 py-2.5
            text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
@@ -43,7 +50,7 @@
   .btn-dark {
     @apply btn bg-brand-900 text-white hover:bg-brand-800;
   }
-  /* Outlined pill — the reference site's default secondary action. */
+  /* Outlined — the default secondary action. */
   .btn-ghost {
     @apply btn border border-brand-700/40 bg-transparent text-brand-800
            hover:border-brand-700 hover:bg-brand-50;
@@ -54,6 +61,136 @@
   .btn-text {
     @apply inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold
            text-brand-700 hover:text-brand-800 hover:underline;
+  }
+
+  /* ── Hero ──────────────────────────────────────────────────────── */
+  /*
+     The valley drawing, as in the approved design.
+
+     Three decisions, each visible in the mockup:
+
+     1. The artwork is faded rather than laid in at full strength. At full
+        opacity its cobalt hatching runs close to the headline's navy and the
+        type sits on a busy field; at ~22% the mountains still frame the
+        composition and the words stay the darkest thing on the page. The fade
+        is `opacity` on a pseudo-element, not a wash over the top — a wash
+        would tint the drawing's cream toward whatever colour it used, and the
+        mockup keeps the paper white.
+
+     2. `background-position: bottom center` — the subject is the river mouth
+        and the villages along the lower third. Centring vertically crops
+        exactly that and leaves empty sky behind the text.
+
+     3. min-height, not a fixed height, so on a short laptop window the text
+        still sets the floor and nothing is ever clipped.
+  */
+  .hero-indus {
+    @apply relative isolate overflow-hidden bg-paper;
+    /*
+       The hero owns the first screen: nothing below it should be visible
+       until the visitor scrolls. That means filling the viewport minus what
+       the header already occupies, not a fixed fraction of it — at 72svh a
+       819px phone still showed 54px of footer under the fold.
+
+       --header-h is the strip plus the nav bar, measured at runtime in
+       Layout.jsx and written onto :root. It is measured rather than hard-coded
+       because both change height across breakpoints and the strip wraps to two
+       lines on a narrow phone — any literal would be wrong for some viewport.
+       The 120px fallback only applies before the first measurement lands.
+
+       svh, not vh: on a phone `vh` measures the viewport with the browser
+       chrome retracted, which is taller than what is actually on screen —
+       so a vh-based hero comes up short exactly when the toolbars are
+       showing. The vh line is the fallback for browsers without svh.
+    */
+    min-height: calc(100vh - var(--header-h, 120px));
+    min-height: calc(100svh - var(--header-h, 120px));
+  }
+  .hero-indus::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0 -z-10;
+    background-image: url('/brand/hero-indus.webp');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+    opacity: 0.16;
+    /*
+       Fade the drawing out toward the top so the hero opens on white and the
+       mountains rise into it, as in the approved design. Without this the art
+       runs edge to edge and the date line sits on hatching — legible, but it
+       loses the sense of the valley emerging from the page.
+    */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 34%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 34%, black 100%);
+  }
+
+  /*
+     The agenda's split layout. The valley drawing sits behind the standing
+     header on the left, fading out before it reaches the timeline — session
+     cards need a plain ground to stay readable, and hatching behind them
+     would fight the text.
+
+     Same 16% opacity as the home hero so the two pages read as one treatment
+     rather than two different uses of the same picture.
+  */
+  .agenda-split {
+    @apply relative isolate overflow-hidden bg-paper;
+  }
+  .agenda-split::before {
+    content: '';
+    @apply pointer-events-none absolute inset-y-0 left-0 -z-10 hidden w-[46%] lg:block;
+    background-image: url('/brand/hero-indus.webp');
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: cover;
+    opacity: 0.16;
+    -webkit-mask-image: linear-gradient(to right, black 0%, black 55%, transparent 100%);
+    mask-image: linear-gradient(to right, black 0%, black 55%, transparent 100%);
+  }
+
+  /*
+     Fraunces is variable, and its default axis positions are wrong here:
+
+     - opsz 72 — left alone the face renders at text proportions, which at
+       58px looks like body copy scaled up. Pushed to the top of the axis
+       (120) the hairlines thin so far that the headline reads lighter than
+       the sub-line beneath it, inverting the hierarchy over the artwork. 72
+       keeps display proportions while the strokes still carry.
+     - WONK 0 — the axis swaps in Fraunces' playful alternates, a curled 'g'
+       leg and a slanted 'r'. Charming on a magazine, wrong on the masthead of
+       a treaty summit.
+  */
+  .title-display {
+    font-variation-settings: 'opsz' 72, 'SOFT' 0, 'WONK' 0;
+  }
+
+  /*
+     The event title's gradient: 180°, #027eff to #747474, as supplied.
+
+     Guarded by @supports because making the clip visible means making the
+     text itself transparent — in a browser without background-clip:text that
+     would render the headline invisible rather than merely unstyled. Inside
+     the guard it is safe; outside it the title keeps its solid ink colour.
+
+     Both stops clear 3:1 on white (3.87 and 4.67), the AA bar for text this
+     size, and still clear it over the artwork's darker patches.
+  */
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .title-gradient {
+      background-image: linear-gradient(180deg, #027eff, #747474);
+      -webkit-background-clip: text;
+      background-clip: text;
+      /*
+         -webkit-text-fill-color, not just `color`. Where both are set the
+         fill colour wins, and the Tailwind text-ink-800 utility on the same
+         element sets it — so `color: transparent` alone left an opaque navy
+         fill painted straight over the gradient. !important is needed for the
+         same reason: the utility is a class of equal specificity that would
+         otherwise be applied in whichever order the layers cascade.
+      */
+      color: transparent;
+      -webkit-text-fill-color: transparent !important;
+    }
   }
 
   /* ── Surfaces ──────────────────────────────────────────────────── */
@@ -81,13 +218,16 @@
   }
 
   /* ── Navigation ────────────────────────────────────────────────── */
-  /* The floating nav card under the centred logo. The border is load-bearing:
-     the page ground is white, so fill alone gives the card no edge. */
+  /* Kept for inner pages that still render a bounded nav surface. The border
+     is load-bearing: the page ground is white, so fill alone gives it no edge. */
   .navcard {
-    @apply rounded-card border border-black bg-white shadow-nav;
+    @apply rounded-card border border-ink-200 bg-white shadow-nav;
   }
+  /* Matches the buttons — the active link is a filled shape sitting in the
+     same bar, so a pill here beside a squared Apply button reads as two
+     different systems. */
   .navlink {
-    @apply inline-flex min-h-[44px] items-center gap-1 rounded-pill px-4 text-sm
+    @apply inline-flex min-h-[44px] items-center gap-1 rounded-btn px-4 text-sm
            font-semibold text-ink-800 transition hover:bg-brand-50 hover:text-brand-800;
   }
   .navlink-active {

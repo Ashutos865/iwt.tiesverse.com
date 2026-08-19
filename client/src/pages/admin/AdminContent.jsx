@@ -3,10 +3,22 @@ import { Link } from 'react-router-dom';
 import { api } from '../../lib/api.js';
 import { SESSION_GROUPS } from '../../content/summit.js';
 
-// Kept here, not in the content file: these are choices the FORM offers, and
-// the public pages no longer define them.
-const SPEAKER_CATEGORIES = [
-  'Government', 'Diplomats', 'Military', 'Academia', 'Think Tanks', 'Industry', 'Legal',
+/*
+ * The four expertise areas of the approved design. These are not internal
+ * labels — each one is a filter tab on the public Speakers page and the tag
+ * printed on the card, so the list here and the tabs there are the same
+ * vocabulary by construction.
+ *
+ * This replaced a seven-item list (Government, Diplomats, Military, Academia,
+ * Think Tanks, Industry, Legal) that described *who someone is*. These
+ * describe *what they speak to*, which is what a visitor filtering the grid
+ * is actually looking for.
+ */
+export const SPEAKER_CATEGORIES = [
+  'Law & International Legal Experts',
+  'Water & Environment Experts',
+  'Security & Strategic Affairs',
+  'Economics & Policy Experts',
 ];
 
 /**
@@ -30,11 +42,22 @@ const TYPES = [
       { name: 'organization', label: 'Organisation', placeholder: 'e.g. Jindal School of International Affairs' },
       { name: 'country', label: 'Country', placeholder: 'e.g. India' },
       { name: 'category', label: 'Category', type: 'select', options: SPEAKER_CATEGORIES },
-      { name: 'photo_url', label: 'Photo URL', placeholder: 'https://…', hint: 'Portrait, ideally 4:5. Leave blank for a monogram.' },
+      { name: 'photo_url', label: 'Photo URL', placeholder: 'https://…', hint: 'Portrait, ideally 1:1. Leave blank for a monogram.' },
       { name: 'bio', label: 'Short bio', type: 'textarea', hint: '80–180 words, as it should appear publicly.' },
       { name: 'order', label: 'Display order', type: 'number', hint: 'Lower shows first.' },
+      {
+        name: 'published',
+        label: 'Confirmed — show on the public site',
+        type: 'checkbox',
+        hint: 'Leave OFF while a speaker is still under invitation. The site '
+          + 'promises that names appear only once they have confirmed, so an '
+          + 'unticked speaker is fully editable here but invisible publicly.',
+      },
     ],
-    summary: (i) => [i.name, i.designation, i.organization].filter(Boolean).join(' · '),
+    summary: (i) => [
+      i.published === false ? '◦ Draft' : null,
+      i.name, i.designation, i.organization,
+    ].filter(Boolean).join(' · '),
   },
   {
     kind: 'session',
@@ -97,10 +120,41 @@ const TYPES = [
 ];
 
 const emptyDraft = (type) =>
-  Object.fromEntries(type.fields.map((f) => [f.name, f.type === 'number' ? 0 : '']));
+  Object.fromEntries(type.fields.map((f) => {
+    if (f.type === 'number') return [f.name, 0];
+    // A new speaker starts unpublished: the safe default is that nobody
+    // reaches the public site until somebody deliberately says so.
+    if (f.type === 'checkbox') return [f.name, false];
+    return [f.name, ''];
+  }));
 
 function Field({ field, value, onChange }) {
   const id = `f-${field.name}`;
+
+  /*
+    Checkbox is its own branch, not a variant of the text input: it reads
+    e.target.checked rather than e.target.value, and the label sits beside the
+    control instead of above it. Rendering it through the shared path gave a
+    text box containing "false".
+  */
+  if (field.type === 'checkbox') {
+    return (
+      <label className="flex cursor-pointer items-start gap-3" htmlFor={id}>
+        <input
+          id={id}
+          type="checkbox"
+          checked={value === true || value === 'true'}
+          onChange={(e) => onChange(field.name, e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-brand-600"
+        />
+        <span>
+          <span className="label !mb-0">{field.label}</span>
+          {field.hint && <span className="hint">{field.hint}</span>}
+        </span>
+      </label>
+    );
+  }
+
   const common = {
     id,
     value: value ?? '',
@@ -141,7 +195,8 @@ export default function AdminContent() {
 
   const load = useCallback(async () => {
     try {
-      setData(await api.contentAll());
+      // The admin endpoint, so drafts stay visible to whoever is editing them.
+      setData(await api.contentAllAdmin());
       setError('');
     } catch (err) {
       setError(err.message);

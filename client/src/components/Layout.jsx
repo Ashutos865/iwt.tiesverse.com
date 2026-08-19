@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import BasinBand from './BasinBand.jsx';
 import { ORGANISER, SUMMIT } from '../lib/constants.js';
 
 /**
@@ -20,9 +19,32 @@ import { ORGANISER, SUMMIT } from '../lib/constants.js';
  * dropdowns add depth rather than replacing the flat links.
  */
 
-// Sub-items are additive: the parent is always a real, navigable page.
+/*
+ * The six top-level items of the approved design: Dialogue, About, Agenda,
+ * Speakers, Partners, Media.
+ *
+ * Sub-items are additive — the parent is always a real, navigable page.
+ *
+ * Three routes the design does not name in the bar are folded into the
+ * dropdowns rather than dropped: Registration and its seven category forms,
+ * the application-status check, and Contact. All three are live routes people
+ * are sent to from emails and the footer, and removing their only in-page
+ * signposts to match a mockup would strand them. Registration also remains the
+ * "Apply" button to the right of this list, which is where the design puts the
+ * primary path.
+ */
 const NAV = [
-  { to: '/', label: 'Home', end: true },
+  {
+    to: '/',
+    label: 'Dialogue',
+    end: true,
+    children: [
+      { to: '/', label: 'Overview' },
+      { to: '/register', label: 'Registration — all categories' },
+      { to: '/status', label: 'Check application status' },
+      { to: '/contact', label: 'Contact the secretariat' },
+    ],
+  },
   {
     to: '/about',
     label: 'About',
@@ -36,7 +58,14 @@ const NAV = [
     ],
   },
   { to: '/agenda', label: 'Agenda' },
-  { to: '/speakers', label: 'Speakers' },
+  {
+    to: '/speakers',
+    label: 'Speakers',
+    children: [
+      { to: '/speakers', label: 'Confirmed speakers' },
+      { to: '/register/speaker', label: 'Speaker registration' },
+    ],
+  },
   {
     to: '/partners',
     label: 'Partners',
@@ -55,19 +84,6 @@ const NAV = [
       { to: '/register/media', label: 'Media accreditation' },
     ],
   },
-  {
-    to: '/register',
-    label: 'Registration',
-    children: [
-      { to: '/register', label: 'All categories' },
-      { to: '/register/delegate', label: 'Delegate' },
-      { to: '/register/student', label: 'Student' },
-      { to: '/register/speaker', label: 'Speaker' },
-      { to: '/register/volunteer', label: 'Volunteer' },
-      { to: '/status', label: 'Check application status' },
-    ],
-  },
-  { to: '/contact', label: 'Contact' },
 ];
 
 const FOOTER_LINKS = [
@@ -215,8 +231,6 @@ export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openId, setOpenId] = useState(null);
   const location = useLocation();
-  const isUtilityScreen = location.pathname.startsWith('/admin')
-    || location.pathname.startsWith('/verify');
 
   useEffect(() => { setMenuOpen(false); setOpenId(null); }, [location.pathname, location.hash]);
 
@@ -232,6 +246,31 @@ export default function Layout() {
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
+  /*
+    Publish the header's real height so the hero can fill exactly the rest of
+    the first screen (see .hero-indus). Measured rather than assumed: the
+    promotional strip wraps to two lines on a narrow phone and the nav bar
+    changes height at sm, so any hard-coded figure would leave a strip of the
+    next section showing on some viewport — which is what it did.
+  */
+  const headerRef = useRef(null);
+  const navBarRef = useRef(null);
+  useEffect(() => {
+    const measure = () => {
+      const h = (headerRef.current?.offsetHeight || 0) + (navBarRef.current?.offsetHeight || 0);
+      if (h) document.documentElement.style.setProperty('--header-h', `${h}px`);
+    };
+    measure();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', measure);
+      return () => window.removeEventListener('resize', measure);
+    }
+    const ro = new ResizeObserver(measure);
+    if (headerRef.current) ro.observe(headerRef.current);
+    if (navBarRef.current) ro.observe(navBarRef.current);
+    return () => ro.disconnect();
+  }, []);
+
   // Anchor links in the nav and footer (/about#themes) need explicit handling:
   // the router changes the hash without the browser re-running its own jump.
   useEffect(() => {
@@ -242,49 +281,99 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="no-print">
-        {/* Centred logo, as on the reference site. */}
-        <div className="shell flex justify-center pb-4 pt-6 sm:pt-8">
-          <Link to="/" aria-label={`${SUMMIT.name} — home`}>
-            <img
-              src="/brand/iwt-logo.png"
-              width="526"
-              height="200"
-              alt={SUMMIT.name}
-              className="h-14 w-auto sm:h-[72px]"
-            />
-          </Link>
+      <header ref={headerRef} className="no-print">
+        {/*
+          Promotional strip. This is the only link from the Dialogue back to
+          the parent organisation's site, so it carries a real destination
+          rather than being decorative — a visitor who arrived here from a
+          shared invitation has no other route to the rest of Tiesverse.
+        */}
+        <div className="bg-ink-950 text-center text-[13px] text-white/90">
+          <div className="shell py-2.5">
+            Inspired by the upcoming event?{' '}
+            <a
+              href={ORGANISER.website}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+            >
+              Explore our other work at tiesverse.com
+            </a>
+          </div>
         </div>
 
       </header>
 
       {/*
-        Floating nav card. Sticky, unlike the reference — our pages run long.
+        One white bar carrying the logo and the navigation together, as in the
+        approved design. The previous build split them across two bands — a
+        centred logo above a floating pill card — which cost roughly 90px of
+        vertical space before the headline and pushed the artwork below the
+        fold.
 
-        This sits OUTSIDE <header> on purpose: a sticky element can only stick
-        within its containing block, and <header> is only as tall as the logo
-        band, so nesting it there made the card scroll away immediately. As a
-        direct child of the page column its containing block is the whole
-        document. It stays a <nav> landmark either way.
+        Sticky, so navigation survives the long inner pages. It sits outside
+        <header> on purpose: a sticky element can only stick within its
+        containing block, and <header> is only as tall as the strip, so
+        nesting it there made the bar scroll away immediately. It remains a
+        <nav> landmark either way.
       */}
-      <div className="no-print sticky top-0 z-40 bg-paper/85 pb-3 pt-2 backdrop-blur-sm">
+      <div ref={navBarRef} className="no-print sticky top-0 z-40 border-b border-ink-200 bg-white">
         <div className="shell">
-          <nav className="navcard flex items-center justify-between gap-2 px-2 py-2" aria-label="Main">
-              <div className="hidden items-center gap-0.5 lg:flex">
+          <nav className="flex items-center justify-between gap-4 py-3" aria-label="Main">
+              {/*
+                Logo slot. The mark is decided separately, so this reserves a
+                fixed height and lets the width follow the artwork — swapping
+                the file in cannot disturb the bar's geometry.
+              */}
+              <Link
+                to="/"
+                aria-label={`${SUMMIT.name} — home`}
+                className="shrink-0"
+              >
+                <img
+                  src="/brand/iwt-logo.png"
+                  width="526"
+                  height="200"
+                  alt={SUMMIT.name}
+                  className="h-10 w-auto sm:h-12"
+                />
+              </Link>
+
+              {/* min-w-0 lets this column shrink before the actions do — the
+                  links are the flexible middle, the buttons are fixed. */}
+              <div className="hidden min-w-0 items-center gap-0.5 lg:flex">
                 {NAV.map((item) => (
                   <DesktopItem key={item.to} item={item} openId={openId} setOpenId={setOpenId} />
                 ))}
               </div>
 
-              {/* Mobile: the card collapses to a label + trigger. */}
-              <span className="px-3 text-sm font-semibold text-ink-800 lg:hidden">Menu</span>
-
-              <div className="flex items-center gap-2">
+              <div className="flex shrink-0 items-center gap-2">
+                {/*
+                  Two actions, as in the approved design. They are not
+                  synonyms: "Request invitation" is the low-commitment route
+                  for someone still deciding, "Apply" goes straight to the
+                  registration wizard. Both existed as routes already; the
+                  nav previously surfaced only the second.
+                */}
+                {/*
+                  whitespace-nowrap is load-bearing: without it "Request
+                  invitation" wraps to two lines and shoves the Apply button
+                  off the right edge. It appears from lg — with six top-level
+                  items rather than the previous eight there is room for it at
+                  1024px, verified rather than assumed.
+                */}
+                <Link
+                  to="/contact"
+                  className="hidden !min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-btn border border-ink-200 px-4 py-2 text-xs font-semibold text-ink-900 transition hover:border-brand-700 hover:text-brand-700 lg:inline-flex"
+                >
+                  Request invitation
+                </Link>
                 <Link
                   to="/register"
-                  className="btn-primary !min-h-[40px] !px-5 !py-2 !text-xs uppercase tracking-wide"
+                  className="btn-primary !min-h-[40px] !px-5 !py-2 !text-xs tracking-wide"
                 >
-                  Register
+                  Apply
+                  <span aria-hidden="true" className="ml-1">↗</span>
                 </Link>
                 <button
                   type="button"
@@ -339,14 +428,30 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      {/* Relief band above the footer. Skipped on the secretariat and gate-scan
-          screens — those are working tools, not brochure pages. */}
-      {!isUtilityScreen && <BasinBand />}
+      {/*
+        The satellite relief band that used to sit here was removed with the
+        redesign: it is a photographic delta map, and next to the commissioned
+        line drawing in the hero it read as a second, unrelated illustration
+        style on the same page. components/BasinBand.jsx is left intact in case
+        a line-art equivalent is drawn for this slot later.
+      */}
 
       <footer className="no-print border-t border-ink-200 bg-white">
-        <div className="shell grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <img src="/brand/iwt-logo.png" width="526" height="200" alt={SUMMIT.name} className="h-12 w-auto" />
+        {/*
+          Two columns from the smallest width, not one.
+
+          Stacked in a single column with a 40px gap, the four blocks came to
+          905px — taller than the hero above them, so on a 819px phone the
+          footer filled the screen the moment you scrolled past the fold and
+          the page read as if it were all footer. Two columns of link lists
+          halves that, and the gaps tighten on small screens where the
+          generous desktop rhythm is not doing any work.
+        */}
+        <div className="shell grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:gap-10 sm:py-12 lg:grid-cols-4">
+          {/* Full width on a phone: this block is prose, and half a 402px
+              screen is too narrow for it to set without ragging badly. */}
+          <div className="col-span-2 lg:col-span-1">
+            <img src="/brand/iwt-logo.png" width="526" height="200" alt={SUMMIT.name} className="h-10 w-auto sm:h-12" />
             <p className="mt-4 text-xs leading-relaxed text-ink-700">
               {SUMMIT.date} · {SUMMIT.venue}
             </p>
@@ -373,7 +478,9 @@ export default function Layout() {
             </div>
           ))}
 
-          <div className="text-sm">
+          {/* Also full width on a phone — "Indus Waters Treaty Dialogue
+              Secretariat" cannot set in a half-width column at 402px. */}
+          <div className="col-span-2 text-sm lg:col-span-1">
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.15em] text-ink-500">Contact</p>
             <p className="text-ink-700">Indus Waters Treaty Dialogue Secretariat</p>
             <p className="text-ink-700">New Delhi, India</p>
