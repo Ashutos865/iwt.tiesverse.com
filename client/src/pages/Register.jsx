@@ -178,13 +178,13 @@ export default function Register() {
   }
 
   const inputClass = (name) =>
-    `mt-1.5 w-full rounded-btn border bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition
+    `mt-1 w-full rounded-btn border bg-white px-3.5 py-2 text-sm text-ink-900 outline-none transition
      placeholder:text-ink-500/70 focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20
      ${errors[name] ? 'border-rose-400' : 'border-ink-200'}`;
 
   return (
     <div className="agenda-split">
-      <div className="shell grid gap-8 py-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.15fr)] lg:gap-12 lg:py-10">
+      <div className="shell grid gap-8 py-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.15fr)] lg:gap-12 lg:py-7">
         {/* ── Standing event header, matching the other pages ── */}
         <header className="lg:sticky lg:top-24 lg:self-start">
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500">
@@ -236,9 +236,9 @@ export default function Register() {
 
         {/* ── The form ── */}
         <section>
-          <div className="card !p-6 sm:!p-8">
-            <div className="flex items-start gap-4">
-              <span aria-hidden="true" className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+          <div className="card !p-5 sm:!p-6">
+            <div className="flex items-start gap-3.5">
+              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
                   <circle cx="12" cy="8.5" r="3.6" /><path d="M4.5 20c1.4-3.7 4.2-5.6 7.5-5.6s6.1 1.9 7.5 5.6" />
                 </svg>
@@ -251,8 +251,8 @@ export default function Register() {
               </div>
             </div>
 
-            <form onSubmit={onSubmit} noValidate className="mt-7">
-              <div className="grid gap-x-5 gap-y-4 sm:grid-cols-2">
+            <form onSubmit={onSubmit} noValidate className="mt-5">
+              <div className="grid gap-x-5 gap-y-3 sm:grid-cols-2">
                 {FIELDS.map((f) => (
                   <div key={f.name} data-invalid={errors[f.name] ? 'true' : undefined}>
                     <label htmlFor={f.name} className="text-[11px] font-bold uppercase tracking-[0.09em] text-ink-700">
@@ -345,7 +345,7 @@ export default function Register() {
               </div>
 
               {/* Category */}
-              <div className="mt-4" data-invalid={errors.category ? 'true' : undefined}>
+              <div className="mt-3" data-invalid={errors.category ? 'true' : undefined}>
                 <label htmlFor="category" className="text-[11px] font-bold uppercase tracking-[0.09em] text-ink-700">
                   Registration category <span className="text-rose-500">*</span>
                 </label>
@@ -361,23 +361,15 @@ export default function Register() {
                 {errors.category && <p className="mt-1 text-xs text-rose-600">{errors.category}</p>}
               </div>
 
-              {/* The same six, spelled out — the mockup lists them so an
-                  applicant can see where they fit before opening the menu. */}
-              <div className="mt-4 rounded-card bg-brand-50 p-4">
-                <p className="text-[11px] font-bold uppercase tracking-[0.09em] text-ink-700">
-                  Registration categories
-                </p>
-                <ul className="mt-2.5 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
-                  {CATEGORIES.map((c) => (
-                    <li key={c.slug} className="flex items-start gap-2 text-sm text-ink-700">
-                      <span aria-hidden="true" className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" />
-                      {c.label}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {/* The six categories as a hint line rather than a boxed list.
+                  Spelling them out cost ~120px of height and repeated what the
+                  menu directly above already contains, which pushed the submit
+                  button off every laptop screen. */}
+              <p className="mt-1.5 text-xs leading-relaxed text-ink-500">
+                {CATEGORIES.map((c) => c.label).join(' · ')}
+              </p>
 
-              <div className="mt-5 flex items-start gap-2.5" data-invalid={errors.agreeTerms ? 'true' : undefined}>
+              <div className="mt-4 flex items-start gap-2.5" data-invalid={errors.agreeTerms ? 'true' : undefined}>
                 <input
                   id="agree"
                   type="checkbox"
@@ -406,7 +398,7 @@ export default function Register() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-5 flex w-full items-center justify-center gap-2 rounded-btn bg-brand-600 px-5 py-3 text-sm font-bold uppercase tracking-[0.06em] text-white transition hover:bg-brand-700 disabled:opacity-60"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-btn bg-brand-600 px-5 py-2.5 text-sm font-bold uppercase tracking-[0.06em] text-white transition hover:bg-brand-700 disabled:opacity-60"
               >
                 {submitting ? 'Submitting…' : 'Submit registration'}
                 {!submitting && (
