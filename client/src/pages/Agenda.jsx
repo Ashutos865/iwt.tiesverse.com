@@ -270,8 +270,6 @@ export default function Agenda() {
         </p>
         <span aria-hidden="true" className="mx-auto mt-4 block h-0.5 w-16 bg-teal-700" />
 
-        <AgendaActions />
-
         {/* ── The running order ── */}
         <div className="mt-6 text-left">
           {/* Rounded frame with the border on the wrapper, not the table, so
@@ -306,6 +304,12 @@ export default function Agenda() {
                 )}
               </tbody>
             </table>
+          </div>
+
+          {/* Below the table, not above it: taking a copy or passing it on is
+              what somebody does once they have read the running order. */}
+          <div className="text-center">
+            <AgendaActions />
           </div>
 
           {/* The concept note is explicit that named speakers are proposed, not confirmed. */}

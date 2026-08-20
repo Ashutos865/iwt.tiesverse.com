@@ -62,9 +62,9 @@ export default function Partners() {
         )}
 
         {/* Become a partner — the offer, stated in terms of the actual outputs. */}
-        <section id="become-a-partner" className="rounded-card bg-tile-deep p-8 text-white">
+        <section id="become-a-partner" className="rounded-card bg-teal-400 p-8 text-ink-900">
           <h2 className="font-display text-2xl font-semibold">Become a partner</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/75">
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-900/80">
             Partnership associates your institution with a single-day policy dialogue at Bharat
             Mandapam convened on the sixty-sixth anniversary of the Treaty&rsquo;s signing, and
             with the durable record it produces — a legal-policy white paper, a sourced evidence
@@ -73,14 +73,14 @@ export default function Partners() {
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {DELIVERABLES.slice(0, 3).map((d) => (
-              <div key={d.n} className="rounded-card bg-white/5 p-4">
-                <p className="font-display text-sm font-semibold text-white/40">{d.n}</p>
-                <p className="mt-1 text-sm font-semibold text-teal-500">{d.title}</p>
+              <div key={d.n} className="rounded-card bg-white/25 p-4">
+                <p className="font-display text-sm font-semibold text-ink-900/45">{d.n}</p>
+                <p className="mt-1 text-sm font-semibold text-ink-900">{d.title}</p>
               </div>
             ))}
           </div>
 
-          <ul className="mt-6 grid gap-2 text-sm text-white/80 sm:grid-cols-2">
+          <ul className="mt-6 grid gap-2 text-sm text-ink-900/85 sm:grid-cols-2">
             <li>· Programme association across tiers, from dialogue to supporting partner</li>
             <li>· Branding at the venue and in official publications</li>
             <li>· Delegate passes within the agreed allocation</li>
@@ -88,16 +88,16 @@ export default function Partners() {
           </ul>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link to="/register" className="btn-primary">Request a partnership meeting</Link>
+            <Link to="/register" className="btn bg-ink-900 text-white hover:bg-ink-800">Request a partnership meeting</Link>
             <a
               href={`mailto:${SUMMIT.email}?subject=Partnership%20enquiry`}
-              className="btn-ghost !border-white/30 !bg-transparent !text-white"
+              className="btn-ghost !border-ink-900/35 !bg-transparent !text-ink-900 hover:!bg-white/25"
             >
               Write to the secretariat
             </a>
           </div>
 
-          <p className="mt-4 text-xs text-white/50">
+          <p className="mt-4 text-xs text-ink-900/60">
             Partnership is a separate track from participant registration — submitting an enquiry
             does not create an event badge.
           </p>
