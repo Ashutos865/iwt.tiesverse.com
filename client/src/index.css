@@ -218,24 +218,39 @@
        a treaty summit.
   */
   /*
-     The agenda title, held to a single line at every width.
-     28 uppercase characters at roughly 0.615em average advance need about
-     17.2em of measure, so the size has to follow the column rather than step
-     between fixed breakpoints — any literal is either too big at one width or
-     needlessly small at the next. 100vw minus the gutters divided by that
-     measure gives the largest size that still fits, and `white-space: nowrap`
-     guarantees it: if a future edit lengthens the string the line will overrun
-     visibly rather than silently wrapping.
-     Capped at 44px so it stops growing on a very wide monitor, where filling
-     the whole measure would look like a banner rather than a heading.
+     The event title, held to a single line wherever it appears.
+
+     Sized against its CONTAINER, not the viewport. The Agenda page gives it the
+     full page; Registration and Speakers give it a 445px sidebar. A viewport
+     formula that is correct on one is wrong on the other — on Registration it
+     set 52px for a column that fits 34px, and the words ran out across the
+     form beside them.
+
+     The divisor is measured, not estimated. Rendering the title and reading
+     its width back gives a consistent 13.3em for these 28 characters — an
+     assumed 0.615em/char had put it at 17.2em, which left roughly a third of
+     every column unused. 13.8 keeps a small margin so a hinting difference
+     between platforms cannot tip it into an overflow.
+
+     Capped at 52px so it stops growing on a very wide page, where filling the
+     whole measure would read as a banner rather than a heading.
+
+     `container-type: inline-size` on the wrapper is what makes cqw mean "this
+     column" rather than "the window".
   */
+  .agenda-title-wrap {
+    container-type: inline-size;
+  }
   .agenda-title {
     white-space: nowrap;
-    font-size: min(52px, calc((min(100vw, 1180px) - 2.5rem) / 17.2));
+    font-size: min(52px, calc(100cqw / 13.8));
   }
-  @media (min-width: 640px) {
+  /* Fallback for browsers without container queries: the viewport formula,
+     which is right on the full-width Agenda page and merely small elsewhere —
+     small is recoverable, overflowing across the form is not. */
+  @supports not (container-type: inline-size) {
     .agenda-title {
-      font-size: min(52px, calc((min(100vw, 1180px) - 3rem) / 17.2));
+      font-size: min(52px, calc((min(100vw, 1180px) - 3rem) / 26.5));
     }
   }
 

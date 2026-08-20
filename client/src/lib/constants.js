@@ -71,23 +71,58 @@ export const ORGANISER = {
   website: 'https://www.tiesverse.com',
   websiteLabel: 'www.tiesverse.com',
   description:
-    "Tiesverse Foundation (TIES) is Bharat's leading youth-led Research, Media and "
-    + 'Technology organisation aimed at building innovative digital products and '
-    + 'solutions. We combine rigorous research, influential digital media and '
-    + 'cutting-edge technology to identify opportunities, engage large audiences and '
-    + 'deliver impactful outcomes that matter to India, that is Bharat.',
-  // Keep the object of the recognition attached to it. "Recognised by AICTE",
-  // standing alone, reads as AICTE approval of a technical institution — the
-  // regulatory status granted to engineering colleges and their programmes.
-  // TIES is not that. The recognition is for its AI-awareness work with young
-  // people, so the sentence must always say what it is for.
-  credentials:
-    'AICTE, under the Ministry of Education, Government of India, has recognised our '
-    + 'work to spread AI awareness among students and the next generation. TIES is also '
-    + 'known as the youngest organisation to host key sessions at the IndiaAI Summit. We '
-    + 'bring together a dynamic community of passionate students, scholars, policymakers '
-    + 'and industry leaders from top institutions worldwide, working collaboratively on '
-    + 'our operating philosophy of India-First.',
+    "Tiesverse Foundation (TIES) is one of India's leading youth-led Research, Media and "
+    + 'Technology organisations, building knowledge, media platforms and technology products '
+    + 'for issues of national and global importance.',
+
+  /*
+   * The organisation's own profile, supplied by Tiesverse.
+   *
+   * An array of paragraphs rather than one long string: at this length a single
+   * block is a wall of text, and joining paragraphs with "\n\n" only works if
+   * every consumer remembers to split on it. The About page maps over these.
+   */
+  profile: [
+    'TIESVERSE FOUNDATION, operating under the name TIES, is one of India\u2019s leading '
+    + 'youth-led Research, Media and Technology organisations, powered by a diverse young '
+    + 'workforce that is more than 50% women. It builds knowledge, media platforms and '
+    + 'technology products for issues of national and global importance, combining rigorous '
+    + 'research, influential digital media and cutting-edge technology to identify '
+    + 'opportunities, engage large audiences and deliver impactful outcomes across '
+    + 'geopolitics, international relations, foreign policy, public policy, national '
+    + 'security, defence, economics, technology, artificial intelligence and information '
+    + 'ecosystems.',
+
+    'Through its research programmes, TIES undertakes structured analysis of contemporary '
+    + 'and strategic issues, drawing on publicly available information, datasets, expert '
+    + 'interactions and multidisciplinary approaches. Its media ecosystem translates that '
+    + 'work into accessible knowledge and public discourse through a growing network of '
+    + 'thematic platforms. Alongside research and media, TIES is developing technology, AI '
+    + 'products and digital systems for self-reliant and sovereign applications across the '
+    + 'national security domain.',
+
+    'This integrated Research, Media and Technology model lets TIES work across the whole '
+    + 'knowledge cycle \u2014 from understanding complex issues and generating original '
+    + 'analysis, to communicating their significance, to developing sovereign technological '
+    + 'and AI capabilities for the nation.',
+
+    'TIES has built a network of more than 120 young researchers, analysts, engineers, '
+    + 'designers and media professionals from prestigious institutions in India and abroad, '
+    + 'most of them Gen-Z, alongside a digital community of over 200,000 followers and '
+    + '50,000 subscribers generating millions of monthly impressions. Its institutional and '
+    + 'expert engagement extends across academics, researchers, public representatives, '
+    + 'policymakers, technology professionals and practitioners through dialogues, webinars, '
+    + 'workshops and knowledge initiatives.',
+
+    'TIES has received the Anuvadhini Fellow Award from the All India Council for Technical '
+    + 'Education (AICTE), Ministry of Education, Government of India, and was associated '
+    + 'with the India AI Impact Summit 2026, where it hosted a key session on disinformation '
+    + 'warfare and building resilient societies in the era of artificial intelligence. '
+    + 'Founded and directed by Pruthavirajsingh Dulat and Hardik Pathak, TIES operates with '
+    + 'an India-first philosophy: research creates knowledge, media amplifies it, and '
+    + 'technology turns it into solutions that advance India\u2019s self-reliance in domains '
+    + 'of national importance.',
+  ],
 };
 
 /**

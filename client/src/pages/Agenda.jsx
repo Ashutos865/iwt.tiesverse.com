@@ -216,12 +216,14 @@ export default function Agenda() {
           characters and holds one line at a size that still reads as a title,
           and "Tiesverse Foundation" keeps its place without competing.
         */}
+        <div className="agenda-title-wrap">
         <h1 className="agenda-title font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
           Indus Waters Treaty Dialogue
         </h1>
         <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500 sm:text-xs">
           by Tiesverse Foundation
         </p>
+          </div>
 
         {/* One horizontal row at every width. The icons shrink and the gap
             tightens on a phone rather than the pair stacking, so the two

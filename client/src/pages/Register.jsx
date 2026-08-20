@@ -190,12 +190,14 @@ export default function Register() {
           {/* One line, as on the Agenda and Speakers pages. Split across
               "INDUS / WATERS TREATY / DIALOGUE" the event's name read as three
               separate headings stacked on top of each other. */}
+          <div className="agenda-title-wrap">
           <h1 className="agenda-title mt-3 font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
             Indus Waters Treaty Dialogue
           </h1>
           <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500 sm:text-xs">
             by Tiesverse Foundation
           </p>
+          </div>
           <p className="mt-5 font-title text-lg italic text-ink-700">
             &ldquo;Blood and Water cannot flow together&rdquo;
           </p>

@@ -103,8 +103,16 @@ export default function About() {
           <p className="mt-3 font-display text-2xl leading-snug text-ink-900">
             {ORGANISER.name} ({ORGANISER.abbr})
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-ink-700">{ORGANISER.description}</p>
-          <p className="mt-3 text-sm leading-relaxed text-ink-700">{ORGANISER.credentials}</p>
+          {/* Five paragraphs at 13px rather than 14: the profile runs long,
+              and a full-measure block of body copy is easier to read set a
+              step down with generous leading than at reading size. */}
+          <div className="mt-3 max-w-3xl space-y-3">
+            {ORGANISER.profile.map((para) => (
+              <p key={para.slice(0, 40)} className="text-[13px] leading-relaxed text-ink-700">
+                {para}
+              </p>
+            ))}
+          </div>
           <a
             href={ORGANISER.website}
             target="_blank"

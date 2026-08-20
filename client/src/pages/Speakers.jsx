@@ -155,12 +155,14 @@ export default function Speakers() {
           {/* One line, sized to the column, matching the Agenda page. The
               stacked "INDUS / WATERS TREATY / DIALOGUE" split one name across
               three lines and read as three separate things. */}
+          <div className="agenda-title-wrap">
           <h1 className="agenda-title mt-4 font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
             Indus Waters Treaty Dialogue
           </h1>
           <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500 sm:text-xs">
             by Tiesverse Foundation
           </p>
+          </div>
 
           <p className="mt-5 font-title text-lg italic text-teal-700">
             “{SUMMIT.theme}”
