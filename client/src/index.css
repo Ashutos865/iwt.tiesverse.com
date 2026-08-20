@@ -2,22 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * Larken — the event title face (Ellen Luff Type Foundry).
- *
- * The binary is deliberately NOT in the repository; see
- * client/public/fonts/README.md. If the file is absent this declaration simply
- * fails to resolve and the title falls back to Georgia — the page renders
- * correctly either way, which is what keeps an unlicensed file out of a build.
- */
-@font-face {
-  font-family: 'Larken';
-  src: url('/fonts/larken.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @layer base {
   body {
     @apply bg-paper font-sans text-ink-900 antialiased;
@@ -256,18 +240,16 @@
      assumed 0.615em/char had put it at 17.2em, which left roughly a third of
      every column unused.
 
-     17.4, measured on the element itself with a Range over its text node.
+     15.7, measured on the element itself with a Range over its text node.
 
-     Earlier values came from canvas measureText, which silently fell back to
-     a different face and reported 13.2em; the page actually renders Larken,
-     which needs 16.6em for these 28 characters. Every divisor derived from
-     the canvas figure was therefore too small, and the title ran into the
-     column beside it — the difference is a quarter of the width, not a
-     rounding error.
+     Google Sans needs 14.92em for these 28 characters; 15.7 adds about 5% for
+     hinting differences and for the system fallback when Google Fonts is
+     blocked. The previous 17.4 was measured against Larken, which is wider,
+     and left the title smaller than its column allowed.
 
-     17.4 is 16.6 plus about 5% for hinting differences and for the fallback
-     face when Larken is unavailable. Measure with a Range, never canvas, if
-     this is ever retuned.
+     Measure with a Range, never canvas: canvas measureText silently falls
+     back to a different face and under-reports by a quarter, which is what
+     put the title into the next column the first time this was tuned.
 
      Capped at 52px so it stops growing on a very wide page, where filling the
      whole measure would read as a banner rather than a heading.
@@ -287,7 +269,7 @@
   }
   .agenda-title {
     white-space: nowrap;
-    font-size: min(52px, calc(100cqw / 17.4));
+    font-size: min(52px, calc(100cqw / 15.7));
   }
   /* Fallback for browsers without container queries: the viewport formula,
      which is right on the full-width Agenda page and merely small elsewhere —
@@ -298,9 +280,6 @@
     }
   }
 
-  .title-display {
-    font-variation-settings: 'opsz' 72, 'SOFT' 0, 'WONK' 0;
-  }
 
   /*
      The event title's gradient: 180°, #027eff to #747474, as supplied.

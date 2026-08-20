@@ -119,38 +119,26 @@ export default {
         bad: { DEFAULT: '#A8321F', bg: '#FBEAE7' },
       },
       fontFamily: {
-        // Google Sans is not on Google Fonts — it is Google's proprietary UI
-        // face and cannot be served from fonts.googleapis.com. Product Sans /
-        // Google Sans are licensed for Google's own products only.
-        //
-        // Google Sans Text's public sibling is Open Sans, and the closest
-        // freely-licensable match to Google Sans Display's geometry is Poppins
-        // (already used elsewhere in the estate). Both load from Google Fonts,
-        // so this is the honest substitution rather than a broken font-family
-        // that silently falls back to Arial.
-        // Fraunces — the event title face.
-        //
-        // Larken (Ellen Luff Type Foundry) was specified originally, but it is
-        // a paid typeface and the only copy available was a "Demo for Personal
-        // Use" build, which no licence permits deploying; see
-        // client/public/fonts/README.md. Fraunces is the closest freely
-        // licensed match — the same soft flared serifs and warm, slightly
-        // idiosyncratic letterforms — under the SIL Open Font Licence, and it
-        // is already the display face on tiesverse.com, so the two sites read
-        // as one family.
-        //
-        // 'Larken' is kept first in the stack deliberately: if a licensed
-        // webfont is ever installed at /fonts/larken.woff2 the @font-face in
-        // index.css resolves and the title switches to it with no code change.
-        title: ['Larken', 'Fraunces', 'Georgia', 'serif'],
-        // The event tagline, set in Times New Roman as specified. Times is a
-        // system font on Windows and macOS, so nothing is downloaded; Liberation
-        // Serif and Tinos are the metric-compatible substitutes shipped on most
-        // Linux distributions, which keeps the line breaking identically for
-        // the minority of visitors without Times itself.
+        /*
+         * Google Sans throughout, as requested.
+         *
+         * It is a public Google Fonts family now: the stylesheet returns 75
+         * real @font-face blocks and its woff2 files fetch, both checked
+         * before this was changed. An earlier note here said it could not be
+         * served, which was true once and is not any more.
+         *
+         * The stack behind it is the system UI face on each platform, so a
+         * blocked or slow Google Fonts request degrades to something close
+         * rather than to Times.
+         */
+        sans: ['"Google Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        display: ['"Google Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        title: ['"Google Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        /*
+         * The event tagline keeps Times New Roman, which was specified
+         * separately for that one line. It is the only exception.
+         */
         tagline: ['"Times New Roman"', 'Times', 'Liberation Serif', 'Tinos', 'serif'],
-        display: ['Poppins', 'system-ui', '-apple-system', 'sans-serif'],
-        sans: ['"Open Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
       },
       maxWidth: {
         shell: '1180px',
