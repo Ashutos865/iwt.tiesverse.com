@@ -4,12 +4,21 @@ import PageHero from '../components/PageHero.jsx';
 import { FAQ } from '../content/summit.js';
 import { ORGANISER, SUMMIT } from '../lib/constants.js';
 
+/*
+ * One mailbox, four subjects.
+ *
+ * These four cards used to show two different addresses; both belonged to a
+ * domain the organisation does not own, so all of them bounced. There is one
+ * real mailbox, and printing it four times would read as a mistake, so each
+ * card carries a subject line instead: the reader still gets a route for their
+ * kind of enquiry, and the secretariat can filter on arrival.
+ */
 const CHANNELS = [
-  { title: 'General & registration', desc: 'Questions about attending, applications and approvals.', email: SUMMIT.email },
-  { title: 'Application support', desc: 'Stuck mid-application, or asked to provide more information? Include your application ID.', email: SUMMIT.supportEmail },
-  { title: 'Media', desc: 'Accreditation, interviews and press material.', email: SUMMIT.email },
-  { title: 'Partnerships', desc: 'Partnership tiers, visibility inventory and meetings.', email: SUMMIT.email },
-];
+  { title: 'General & registration', desc: 'Questions about attending, applications and approvals.', subject: 'Registration enquiry' },
+  { title: 'Application support', desc: 'Stuck mid-application, or asked to provide more information? Include your application ID.', subject: 'Application support' },
+  { title: 'Media', desc: 'Accreditation, interviews and press material.', subject: 'Media enquiry' },
+  { title: 'Partnerships', desc: 'Partnership tiers, visibility inventory and meetings.', subject: 'Partnership enquiry' },
+].map((c) => ({ ...c, email: SUMMIT.email }));
 
 export default function Contact() {
   const [openFaq, setOpenFaq] = useState(null);
@@ -24,7 +33,12 @@ export default function Contact() {
             <div key={c.title} className="card">
               <h2 className="font-display text-lg font-semibold text-ink-900">{c.title}</h2>
               <p className="mt-1.5 text-sm text-ink-700">{c.desc}</p>
-              <a className="btn-text" href={`mailto:${c.email}`}>{c.email}</a>
+              <a
+                className="btn-text"
+                href={`mailto:${c.email}?subject=${encodeURIComponent(`IWT Dialogue: ${c.subject}`)}`}
+              >
+                {c.email}
+              </a>
             </div>
           ))}
         </div>

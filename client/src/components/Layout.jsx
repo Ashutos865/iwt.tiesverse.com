@@ -25,13 +25,12 @@ import { ORGANISER, SOCIALS, SUMMIT } from '../lib/constants.js';
  *
  * Sub-items are additive — the parent is always a real, navigable page.
  *
- * Three routes the design does not name in the bar are folded into the
- * dropdowns rather than dropped: Registration and its seven category forms,
- * the application-status check, and Contact. All three are live routes people
- * are sent to from emails and the footer, and removing their only in-page
- * signposts to match a mockup would strand them. Registration also remains the
- * "Apply" button to the right of this list, which is where the design puts the
- * primary path.
+ * Three routes the bar does not name are folded into the dropdowns rather
+ * than dropped: registration, the application-status check, and Contact. All
+ * three are live routes people are sent to from emails and the footer, and
+ * removing their only in-page signposts would strand them. Registration is
+ * also the single "Attend the Dialogue" button to the right of this list,
+ * which is the one action the bar exists to offer.
  */
 const NAV = [
   {
@@ -412,30 +411,30 @@ export default function Layout() {
 
               <div className="flex shrink-0 items-center gap-2">
                 {/*
-                  Two actions, as in the approved design. They are not
-                  synonyms: "Request invitation" is the low-commitment route
-                  for someone still deciding, "Apply" goes straight to the
-                  registration wizard. Both existed as routes already; the
-                  nav previously surfaced only the second.
+                  One action in the bar, not two.
+
+                  "Request invitation" pointed at /contact and sat beside
+                  "Apply" pointing at /register, which asked a visitor to
+                  choose between two routes to the same event before knowing
+                  the difference. Contact is still reachable from the Dialogue
+                  dropdown and the footer, so nothing is lost by leaving the
+                  bar to state the one thing it wants people to do.
+
+                  whitespace-nowrap is load-bearing: the label is longer than
+                  "Apply" was, and without it the button wraps to two lines and
+                  grows the header.
+
+                  It is hidden below sm. At 390px the full label plus the logo
+                  and the menu button came to 50px more than the screen, and at
+                  320px 87px more. The mobile menu carries the same action with
+                  the same words, one tap away, so the bar keeps the logo and
+                  the menu rather than overflowing.
                 */}
-                {/*
-                  whitespace-nowrap is load-bearing: without it "Request
-                  invitation" wraps to two lines and shoves the Apply button
-                  off the right edge. It appears from lg — with six top-level
-                  items rather than the previous eight there is room for it at
-                  1024px, verified rather than assumed.
-                */}
-                <Link
-                  to="/contact"
-                  className="hidden !min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-btn border border-ink-200 px-4 py-2 text-xs font-semibold text-ink-900 transition hover:border-teal-700 hover:text-teal-700 lg:inline-flex"
-                >
-                  Request invitation
-                </Link>
                 <Link
                   to="/register"
-                  className="btn-primary !min-h-[40px] !px-5 !py-2 !text-xs tracking-wide"
+                  className="btn-primary hidden !min-h-[40px] whitespace-nowrap !px-5 !py-2 !text-xs tracking-wide sm:inline-flex"
                 >
-                  Apply
+                  Attend the Dialogue
                   <span aria-hidden="true" className="ml-1">↗</span>
                 </Link>
                 <button
@@ -477,7 +476,7 @@ export default function Layout() {
               ))}
               <div className="mt-6 grid gap-3">
                 <Link to="/register" className="btn-primary w-full" onClick={() => setMenuOpen(false)}>
-                  Register now
+                  Attend the Dialogue
                 </Link>
                 <Link to="/status" className="btn-ghost w-full" onClick={() => setMenuOpen(false)}>
                   Check application status

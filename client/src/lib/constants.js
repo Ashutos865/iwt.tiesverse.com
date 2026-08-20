@@ -38,11 +38,18 @@ export const SUMMIT = {
     + "India's decision is a lawful, measured response to treaty bad faith and "
     + 'state-sponsored violence.',
 
-  // TODO(secretariat): these addresses were placeholders in the original build and
-  // are NOT in the concept note. Replace with the real secretariat contacts before
-  // launch. The concept note gives only the organisation's site, tiesverse.com.
-  email: 'info@induswatertreaty.org',
-  supportEmail: 'support@induswatertreaty.org',
+  /*
+   * The organisation's real mailbox.
+   *
+   * Both of these were @induswatertreaty.org, a domain Tiesverse does not own,
+   * so every address published in the footer, on Contact, on Media and on
+   * Partners was unreachable: anyone writing in would have had their mail
+   * bounce. One address for both because there is one mailbox; if the
+   * secretariat later runs a separate support queue, splitting this back out
+   * is the only change needed.
+   */
+  email: 'hello@tiesverse.com',
+  supportEmail: 'hello@tiesverse.com',
   // Deliberately null: the previous build rendered a literal "+91 11 XXXX XXXX"
   // on live pages. Every consumer guards on this, so setting a real number here
   // is all that is needed to bring it back.
