@@ -124,23 +124,30 @@ export default function Agenda() {
 
   return (
     <div className="agenda-split">
+      {/*
+        The title spans the page rather than sitting in the left column. It is
+        43 characters and must hold on one line at every width; inside the
+        457px sidebar that meant setting it at 22px, which is smaller than the
+        body text beside it. Across the full measure the same line sets at
+        about 40px and still reads as the page's title.
+      */}
+      <div className="shell pt-8 lg:pt-10">
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-700">
+          Agenda
+        </p>
+        <h1 className="agenda-title mt-3 font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
+          Indus Waters Treaty by Tiesverse Foundation
+        </h1>
+        <span aria-hidden="true" className="mt-5 block h-0.5 w-16 bg-teal-700" />
+      </div>
+
       <div className="shell grid gap-8 py-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14 lg:py-10">
         {/*
-          Standing header. Sticky on wide screens so the day's title and
-          particulars stay with the timeline as it scrolls — on a narrow screen
-          it simply sits above, because a stuck panel would eat the viewport.
+          Standing header. Sticky on wide screens so the particulars stay with
+          the table as it scrolls — on a narrow screen it simply sits above,
+          because a stuck panel would eat the viewport.
         */}
         <header className="lg:sticky lg:top-24 lg:self-start">
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-700">
-            Agenda
-          </p>
-          {/* One line, no forced break: the title wraps to the column it is
-              given rather than to a hard-coded shape. */}
-          <h1 className="mt-3 font-title text-4xl font-normal uppercase leading-[1.08] tracking-tight text-ink-900 sm:text-5xl">
-            Indus Waters Treaty by Tiesverse Foundation
-          </h1>
-
-          <span aria-hidden="true" className="mt-5 block h-0.5 w-16 bg-teal-700" />
 
           <dl className="mt-6 space-y-4">
             <div className="flex items-center gap-4">
@@ -230,16 +237,16 @@ export default function Agenda() {
             {SPEAKER_DISCLAIMER}
           </p>
 
-          <div className="mt-8 rounded-card bg-tile-deep p-6 text-white sm:flex sm:items-center sm:justify-between">
-            <div>
-              <p className="font-display text-lg font-semibold">Attend the dialogue</p>
-              <p className="mt-1 text-sm text-white/70">
-                Applications are reviewed by the secretariat before attendance is confirmed.
-              </p>
-            </div>
+          {/* Centred: the block is the page's closing invitation, so it reads
+              as an address to the reader rather than a row of settings. */}
+          <div className="mt-8 rounded-card bg-tile-deep px-6 py-7 text-center text-white">
+            <p className="font-display text-lg font-semibold">Attend the dialogue</p>
+            <p className="mx-auto mt-1 max-w-md text-sm text-white/70">
+              Applications are reviewed by the secretariat before attendance is confirmed.
+            </p>
             <Link
               to="/register"
-              className="btn mt-4 min-h-[44px] shrink-0 bg-white text-ink-900 hover:bg-teal-50 sm:mt-0"
+              className="btn mt-5 min-h-[44px] bg-white text-ink-900 hover:bg-teal-50"
             >
               Register now
             </Link>
