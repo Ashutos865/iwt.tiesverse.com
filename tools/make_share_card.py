@@ -38,7 +38,10 @@ def load_font(names, size):
     return ImageFont.load_default()
 
 
-SERIF_BOLD = ['times.ttf', 'DejaVuSerif-Bold.ttf']
+# One sans across the card, matching the site. Google Sans is a webfont with
+# no local file to load here, so these are the closest system faces; the card
+# is an image, so what matters is that it reads as the same family, not that
+# the bytes match.
 SANS_BOLD = ['segoeuib.ttf', 'arialbd.ttf', 'DejaVuSans-Bold.ttf']
 SANS = ['segoeui.ttf', 'arial.ttf', 'DejaVuSans.ttf']
 
@@ -69,7 +72,7 @@ def main():
 
     # Title. Two lines, set large — this is the only text most people will read
     # at preview size, where the card renders about 350px wide in a chat list.
-    title_font = load_font(SERIF_BOLD, 82)
+    title_font = load_font(SANS_BOLD, 74)
     draw.text((64, 196), 'INDUS WATERS TREATY', font=title_font, fill=INK)
     draw.text((64, 288), 'DIALOGUE', font=title_font, fill=TEAL_700)
 

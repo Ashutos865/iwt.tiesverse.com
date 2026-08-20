@@ -65,7 +65,7 @@ export async function sendApprovalEmail(record) {
     : null;
 
   const html = `
-  <div style="margin:0 auto;max-width:560px;font-family:Arial,Helvetica,sans-serif;color:${INK}">
+  <div style="margin:0 auto;max-width:560px;font-family:'Google Sans',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:${INK}">
     <div style="background:${TEAL};border-radius:8px 8px 0 0;padding:22px 28px">
       <p style="margin:0;color:#BFF0EE;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:bold">${EVENT.name}</p>
       <h1 style="margin:6px 0 0;color:#ffffff;font-size:22px">Your pass is approved</h1>

@@ -135,10 +135,11 @@ export default {
         display: ['"Google Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
         title: ['"Google Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
         /*
-         * The event tagline keeps Times New Roman, which was specified
-         * separately for that one line. It is the only exception.
+         * Kept as a name so `font-tagline` in the markup keeps working, but it
+         * resolves to the same face as everything else: one typeface across
+         * the whole site, with no exception.
          */
-        tagline: ['"Times New Roman"', 'Times', 'Liberation Serif', 'Tinos', 'serif'],
+        tagline: ['"Google Sans"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', 'sans-serif'],
       },
       maxWidth: {
         shell: '1180px',

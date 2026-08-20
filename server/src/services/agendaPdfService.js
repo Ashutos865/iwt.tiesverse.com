@@ -28,8 +28,27 @@ const RULE = '#D8E0EC';
 
 const MARGIN = 48;
 
-/** Only fonts that ship with PDFKit, so there is nothing to license or bundle. */
-const F = { bold: 'Helvetica-Bold', body: 'Helvetica', italic: 'Helvetica-Oblique' };
+/*
+ * Google Sans, embedded so the PDF matches the site.
+ *
+ * PDFKit cannot use a webfont by name — it embeds a font file — so the woff2
+ * Google Fonts serves was converted to TTF and committed alongside the
+ * service. If either file is missing the built-in Helvetica is used instead,
+ * because a PDF that renders in the wrong face is better than one that fails
+ * to generate at all.
+ *
+ * There is no italic: Google Sans is not served in one, so the theme line
+ * falls back to the regular weight rather than a synthesised slant.
+ */
+const FONT_DIR = path.resolve(HERE, '../assets');
+const FILES = {
+  body: path.join(FONT_DIR, 'GoogleSans-Regular.ttf'),
+  bold: path.join(FONT_DIR, 'GoogleSans-Bold.ttf'),
+};
+const HAS_FONTS = fs.existsSync(FILES.body) && fs.existsSync(FILES.bold);
+const F = HAS_FONTS
+  ? { bold: 'GS-Bold', body: 'GS', italic: 'GS' }
+  : { bold: 'Helvetica-Bold', body: 'Helvetica', italic: 'Helvetica-Oblique' };
 
 /**
  * Writes the agenda into `res` as a PDF stream.
@@ -37,6 +56,10 @@ const F = { bold: 'Helvetica-Bold', body: 'Helvetica', italic: 'Helvetica-Obliqu
  */
 export function streamAgendaPdf(res, { sessions = [], summit = {} } = {}) {
   const doc = new PDFDocument({ size: 'A4', margin: MARGIN, bufferPages: true });
+  if (HAS_FONTS) {
+    doc.registerFont('GS', FILES.body);
+    doc.registerFont('GS-Bold', FILES.bold);
+  }
   doc.pipe(res);
 
   const pageW = doc.page.width;

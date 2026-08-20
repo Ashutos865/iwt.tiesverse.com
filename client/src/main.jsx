@@ -22,7 +22,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (!this.state.error) return this.props.children;
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, background: '#F7F9FB', fontFamily: 'Inter, system-ui, sans-serif' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, background: '#F7F9FB', fontFamily: '"Google Sans", system-ui, sans-serif' }}>
         <div style={{ maxWidth: 420, textAlign: 'center' }}>
           <h1 style={{ fontSize: 22, color: '#172433', marginBottom: 8 }}>Something went wrong</h1>
           <p style={{ fontSize: 14, color: '#445466', marginBottom: 6 }}>
