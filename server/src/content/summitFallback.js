@@ -8,8 +8,18 @@
  */
 export const SUMMIT_FALLBACK = {
   summit: {
+    // The one place the server states these. The approval email drifted from
+    // the site once already — it was still promising "19-20 September" and
+    // "badge collection on both days" long after this became a single-day
+    // dialogue — so anything that emails a delegate reads them from here.
+    name: 'Indus Waters Treaty Dialogue',
     date: '19 September 2026',
+    day: 'Saturday',
     venue: 'Bharat Mandapam, New Delhi',
+    // The programme opens with registration at 09:00; the doors are earlier.
+    doorsOpen: '08:30',
+    programmeStart: '09:00',
+    organiser: 'Tiesverse Foundation',
   },
   sessions: [
   {
