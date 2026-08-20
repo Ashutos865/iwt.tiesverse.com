@@ -200,10 +200,6 @@ export default function Speakers() {
             </div>
           </dl>
 
-          <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink-700">
-            Eminent voices from law, water-resource engineering, security studies,
-            diplomacy, economics and policy.
-          </p>
         </header>
 
         {/* ── The grid ── */}

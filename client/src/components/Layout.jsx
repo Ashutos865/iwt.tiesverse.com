@@ -435,7 +435,6 @@ export default function Layout() {
                   className="btn-primary hidden !min-h-[40px] whitespace-nowrap !px-5 !py-2 !text-xs tracking-wide sm:inline-flex"
                 >
                   Attend the Dialogue
-                  <span aria-hidden="true" className="ml-1">↗</span>
                 </Link>
                 <button
                   type="button"
@@ -540,14 +539,19 @@ export default function Layout() {
             </div>
           ))}
 
-          {/* Also full width on a phone — "Indus Waters Treaty Dialogue
-              Secretariat" cannot set in a half-width column at 402px. */}
+          {/* Full width on a phone: the contact lines do not set in a
+              half-width column at 402px. */}
           <div className="col-span-2 text-sm lg:col-span-1">
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.15em] text-ink-500">Contact</p>
-            <p className="text-ink-700">Indus Waters Treaty Dialogue Secretariat</p>
-            <p className="text-ink-700">New Delhi, India</p>
-            {SUMMIT.phone && <p className="mt-2 text-ink-700">{SUMMIT.phone}</p>}
-            <a href={`mailto:${SUMMIT.email}`} className="mt-2 block text-teal-700 hover:underline">
+            {/* No postal address: the venue is stated on every page that needs
+                it, and a secretariat address nobody posts to is furniture. A
+                phone number and an email are what somebody actually uses. */}
+            {SUMMIT.phone && (
+              <a href={`tel:${SUMMIT.phone.replace(/\s/g, '')}`} className="block text-ink-700 hover:text-teal-700">
+                {SUMMIT.phone}
+              </a>
+            )}
+            <a href={`mailto:${SUMMIT.email}`} className="mt-1 block text-teal-700 hover:underline">
               {SUMMIT.email}
             </a>
             <p className="mt-4 text-[11px] uppercase tracking-[0.15em] text-ink-500">Organised by</p>

@@ -48,7 +48,14 @@ export default function Contact() {
           <p className="mt-2 text-sm leading-relaxed text-ink-700">
             Indus Waters Treaty Dialogue Secretariat<br />
             New Delhi, India
-            {SUMMIT.phone && <><br />{SUMMIT.phone}</>}
+            {SUMMIT.phone && (
+              <>
+                <br />
+                <a href={`tel:${SUMMIT.phone.replace(/\s/g, '')}`} className="hover:text-teal-700">
+                  {SUMMIT.phone}
+                </a>
+              </>
+            )}
           </p>
           <p className="mt-3 text-sm text-ink-700">
             Organised by{' '}

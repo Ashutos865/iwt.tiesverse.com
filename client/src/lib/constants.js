@@ -50,10 +50,9 @@ export const SUMMIT = {
    */
   email: 'hello@tiesverse.com',
   supportEmail: 'hello@tiesverse.com',
-  // Deliberately null: the previous build rendered a literal "+91 11 XXXX XXXX"
-  // on live pages. Every consumer guards on this, so setting a real number here
-  // is all that is needed to bring it back.
-  phone: null,
+  // Every consumer guards on this being set, which is why it was null while
+  // the previous build's literal "+91 11 XXXX XXXX" placeholder was removed.
+  phone: '+91 98312 89459',
 };
 
 /*
