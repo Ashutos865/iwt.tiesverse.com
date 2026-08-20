@@ -265,7 +265,7 @@ export default function Speakers() {
                 The dialogue convenes jurists, water-resource engineers, security
                 scholars and diplomats across its four analytical sessions.
                 Invitations and confirmations are handled by the secretariat, and
-                names are published here only once a participant has confirmed —
+                names are published here only once a participant has confirmed,
                 not while they are still under invitation.
               </p>
               <p className="mt-3 text-xs leading-relaxed text-ink-500">{SPEAKER_DISCLAIMER}</p>

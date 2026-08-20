@@ -123,8 +123,8 @@ export default function StatusCheck() {
               <div className="card no-print">
                 <h2 className="eyebrow">Collecting your badge</h2>
                 <ul className="mt-3 space-y-1.5 text-sm text-ink-700">
-                  <li>· Badge collection is at the registration desk, {SUMMIT.venue}, from 08:00 on {SUMMIT.date}.</li>
-                  <li>· Bring this QR pass <strong>and the photo ID used in your application</strong> — the QR alone is not sufficient.</li>
+                  <li>· Badge collection is at the registration desk, {SUMMIT.venue}, from 08:30 on {SUMMIT.date}.</li>
+                  <li>· Bring this QR pass <strong>and a photo ID in your own name</strong>. The QR alone is not sufficient.</li>
                   <li>· Lost badge? Report to the registration desk with your ID; a replacement voids the old badge.</li>
                 </ul>
               </div>

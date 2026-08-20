@@ -40,7 +40,7 @@ const NAV = [
     end: true,
     children: [
       { to: '/', label: 'Overview' },
-      { to: '/register', label: 'Registration — all categories' },
+      { to: '/register', label: 'Registration: all categories' },
       { to: '/status', label: 'Check application status' },
       { to: '/contact', label: 'Contact the secretariat' },
     ],
@@ -386,7 +386,7 @@ export default function Layout() {
               */}
               <Link
                 to="/"
-                aria-label={`${SUMMIT.name} — home`}
+                aria-label={`${SUMMIT.name} home`}
                 className="shrink-0"
               >
                 <img

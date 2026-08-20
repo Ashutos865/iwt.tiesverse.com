@@ -76,7 +76,7 @@ server.on('error', (err) => {
 
   console.error('');
   console.error(`[iwt] Port ${config.port} is still in use after ${(RETRY_LIMIT * RETRY_MS) / 1000}s.`);
-  console.error('[iwt] Something else is holding it — an earlier instance of this');
+  console.error('[iwt] Something else is holding it. An earlier instance of this');
   console.error('[iwt] server, or another program. Free it, or set PORT in server/.env.');
   console.error('');
   console.error(`[iwt]   npx kill-port ${config.port}`);

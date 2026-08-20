@@ -92,7 +92,7 @@ export default function Media() {
               <p className="font-semibold text-ink-900">Nothing published under {tab} yet.</p>
               <p className="mt-1 text-sm leading-relaxed text-ink-700">
                 Releases and advisories are posted here as the secretariat issues them, each with
-                its date. Accredited media are notified directly — apply for accreditation to be
+                its date. Accredited media are notified directly. Apply for accreditation to be
                 on that list.
               </p>
             </div>

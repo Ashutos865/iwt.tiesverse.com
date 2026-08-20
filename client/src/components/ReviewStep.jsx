@@ -1,9 +1,9 @@
 import { visibleFields } from '../forms/validation.js';
 
 function displayValue(field, value) {
-  if (value === undefined || value === null || value === '') return '—';
-  if (field.type === 'file') return value.name || '—';
-  if (Array.isArray(value)) return value.length ? value.join(', ') : '—';
+  if (value === undefined || value === null || value === '') return '-';
+  if (field.type === 'file') return value.name || '-';
+  if (Array.isArray(value)) return value.length ? value.join(', ') : '-';
   return String(value);
 }
 

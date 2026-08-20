@@ -47,7 +47,7 @@ const TYPES = [
       { name: 'order', label: 'Display order', type: 'number', hint: 'Lower shows first.' },
       {
         name: 'published',
-        label: 'Confirmed — show on the public site',
+        label: 'Confirmed, show on the public site',
         type: 'checkbox',
         hint: 'Leave OFF while a speaker is still under invitation. The site '
           + 'promises that names appear only once they have confirmed, so an '
@@ -90,7 +90,7 @@ const TYPES = [
       { name: 'website', label: 'Website', placeholder: 'https://…' },
       { name: 'order', label: 'Display order', type: 'number' },
     ],
-    summary: (i) => `${i.name} — ${i.tier}`,
+    summary: (i) => `${i.name}, ${i.tier}`,
   },
   {
     kind: 'press',
@@ -228,10 +228,10 @@ export default function AdminContent() {
     try {
       if (editingId) {
         await api.contentUpdate(active.kind, editingId, draft);
-        setMsg('Updated — live on the site.');
+        setMsg('Updated. Live on the site.');
       } else {
         await api.contentCreate(active.kind, draft);
-        setMsg('Added — live on the site.');
+        setMsg('Added. Live on the site.');
       }
       setDraft(emptyDraft(active));
       setEditingId(null);

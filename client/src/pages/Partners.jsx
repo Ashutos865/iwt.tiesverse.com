@@ -67,7 +67,7 @@ export default function Partners() {
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-900/80">
             Partnership associates your institution with a single-day policy dialogue at Bharat
             Mandapam convened on the sixty-sixth anniversary of the Treaty&rsquo;s signing, and
-            with the durable record it produces — a legal-policy white paper, a sourced evidence
+            with the durable record it produces: a legal-policy white paper, a sourced evidence
             and cartography exhibit, and the New Delhi Declaration on the Indus Waters Treaty.
           </p>
 
@@ -98,7 +98,7 @@ export default function Partners() {
           </div>
 
           <p className="mt-4 text-xs text-ink-900/60">
-            Partnership is a separate track from participant registration — submitting an enquiry
+            Partnership is a separate track from participant registration. Submitting an enquiry
             does not create an event badge.
           </p>
         </section>

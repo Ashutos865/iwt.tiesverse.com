@@ -102,7 +102,7 @@ export const ORGANISER = {
     + 'national security domain.',
 
     'This integrated Research, Media and Technology model lets TIES work across the whole '
-    + 'knowledge cycle \u2014 from understanding complex issues and generating original '
+    + 'knowledge cycle: from understanding complex issues and generating original '
     + 'analysis, to communicating their significance, to developing sovereign technological '
     + 'and AI capabilities for the nation.',
 
@@ -145,7 +145,7 @@ export const KEY_FACTS = [
 export const CATEGORIES = [
   {
     slug: 'delegate',
-    access: 'Open — reviewed',
+    access: 'Open, reviewed',
     docs: 'Photo, government ID',
     review: 'Reviewed by the secretariat before approval',
     label: 'Delegate',
@@ -153,7 +153,7 @@ export const CATEGORIES = [
   },
   {
     slug: 'student',
-    access: 'Open — limited seats',
+    access: 'Open, limited seats',
     docs: 'Student ID card, institution details',
     review: 'Institution verification may apply',
     label: 'Student',
@@ -169,7 +169,7 @@ export const CATEGORIES = [
   },
   {
     slug: 'media',
-    access: 'Accreditation — reviewed',
+    access: 'Accreditation, reviewed',
     docs: 'Press card or assignment letter',
     review: 'Reviewed separately from delegate registration',
     label: 'Media',
@@ -193,7 +193,7 @@ export const CATEGORIES = [
   },
   {
     slug: 'volunteer',
-    access: 'Open — reviewed',
+    access: 'Open, reviewed',
     docs: 'ID and availability',
     review: 'Shift assignment after approval',
     label: 'Volunteer',

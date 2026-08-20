@@ -31,7 +31,7 @@ export default function FileInput({ field, value, onChange, hasError }) {
           <img src={preview} alt="" className="h-16 w-16 rounded object-cover" />
         ) : (
           <div className="flex h-16 w-16 items-center justify-center rounded bg-white text-xs font-semibold text-ink-600/60">
-            {value ? 'PDF' : '—'}
+            {value ? 'PDF' : '-'}
           </div>
         )}
 

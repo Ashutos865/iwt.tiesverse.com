@@ -7,7 +7,7 @@ const labelise = (key) =>
   key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase());
 
 const formatValue = (value) => {
-  if (value === null || value === undefined || value === '') return '—';
+  if (value === null || value === undefined || value === '') return '-';
   if (Array.isArray(value)) return value.join(', ');
   return String(value);
 };
@@ -153,7 +153,7 @@ export default function AdminDetail() {
           </div>
         ) : record.status === 'rejected' ? (
           <p className="mt-3 text-sm text-ink-600/80">
-            Rejected{record.decision.rejectionReason ? ` — ${record.decision.rejectionReason}` : ''}.
+            Rejected{record.decision.rejectionReason ? `: ${record.decision.rejectionReason}` : ''}.
           </p>
         ) : (
           <>

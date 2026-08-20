@@ -61,7 +61,7 @@ export default function Contact() {
         <div className="mt-6 rounded-card border border-teal-100 bg-teal-50 p-5 text-sm text-ink-700">
           Already applied? Track your application any time from{' '}
           <Link to="/status" className="font-semibold text-teal-700 underline">Check Status</Link>
-          {' '}— you only need the email you applied with.
+          {' '}You only need the email you applied with.
         </div>
 
         {/* Moved here from the home page. A contact page's job is answering

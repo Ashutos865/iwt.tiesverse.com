@@ -62,7 +62,7 @@ export const SESSIONS = [
     end: '11:40',
     type: 'Curtain-Raiser Panel',
     group: 'Identity Crisis',
-    title: 'Reclaiming the Indus — Civilisation, Heritage and the Naming of a River',
+    title: 'Reclaiming the Indus: Civilisation, Heritage and the Naming of a River',
     description:
       'A short historical and archaeological session on the Indus Valley Civilisation, '
       + 'Mohenjo-daro, Harappa, and the shared linguistic root of Sindhu, Hindu, India '
@@ -76,7 +76,7 @@ export const SESSIONS = [
     end: '12:45',
     type: 'Session I',
     group: 'Introduction',
-    title: 'The Text Speaks — Abeyance as Lawful, Not Breach',
+    title: 'The Text Speaks: Abeyance as Lawful, Not Breach',
     description:
       "The legal core of the dialogue. It covers the IWT's Preamble, the Article IX "
       + 'dispute-resolution ladder, and Article XII on modification and termination, '
@@ -106,8 +106,8 @@ export const SESSIONS = [
     group: "Decoding Pakistan's Narrative",
     title: 'Terror as the Breach',
     description:
-      'Examines how sustained cross-border terrorism — Pahalgam (2025), Pulwama, 26/11 '
-      + '— has eroded the good-faith premise on which the IWT was built. Discussion on '
+      'Examines how sustained cross-border terrorism, Pahalgam (2025), Pulwama, 26/11, '
+      + 'has eroded the good-faith premise on which the IWT was built. Discussion on '
       + 'sourced, dated accounts linking specific attacks to the breakdown of treaty '
       + 'cooperation, drawing on investigation records, judicial findings, UN listings '
       + "and FATF documentation. The session also places on record Pakistan's public "
@@ -162,8 +162,8 @@ export const SESSIONS = [
       + 'agriculture, hydropower and water security, and what conditions would need to be '
       + "met for a return to normal treaty cooperation. Quantifies India's usage of its "
       + 'treaty-compliant projects (Salal, Baglihar, Dulhasti, Uri, Kishanganga) and sets '
-      + 'out realistic terms — verifiable cessation of cross-border terrorism and '
-      + "good-faith engagement — under which India's position could evolve.",
+      + 'out realistic terms, verifiable cessation of cross-border terrorism and '
+      + "good-faith engagement, under which India's position could evolve.",
   },
   {
     id: 'valedictory',
@@ -201,7 +201,7 @@ export const PILLARS = [
   {
     title: 'Law',
     text:
-      'The Treaty text itself — Preamble, the Article IX ladder, Article XII — read '
+      'The Treaty text itself, Preamble, the Article IX ladder and Article XII, read '
       + 'against the Vienna Convention and the law of state responsibility.',
   },
   {
@@ -245,7 +245,7 @@ export const THEMES = [
   },
   {
     n: '02',
-    title: 'Civilisational Heritage — Reclaiming the Indus',
+    title: 'Civilisational Heritage: Reclaiming the Indus',
     text:
       'Showcases the Harappan (Sindhu-Sarasvati) inheritance and the shared root of '
       + "Sindhu, Hindu, India and Indus, reasserting India's place as the custodian of "
@@ -254,11 +254,11 @@ export const THEMES = [
   },
   {
     n: '03',
-    title: "Decoding Pakistan's Narrative — Victimhood versus Reality",
+    title: "Decoding Pakistan's Narrative: Victimhood versus Reality",
     text:
-      "Counters Pakistan's victim card point by point — terrorism, the LBOD flooding of "
+      "Counters Pakistan's victim card point by point: terrorism, the LBOD flooding of "
       + 'the Rann of Kutch, its blocker role against treaty modernisation, and the "water '
-      + 'is survival" plea — weighed against the record in PoJK, Balochistan, the Afghan '
+      + 'is survival" plea, weighed against the record in PoJK, Balochistan, the Afghan '
       + "Taliban blowback, and decades of non-development on Pakistan's own Indus rivers. "
       + "Also interrogates Pakistan's record as the treaty's principal beneficiary for "
       + 'over six decades, arguing that its current water distress stems chiefly from '
@@ -269,30 +269,30 @@ export const THEMES = [
     title: 'Exposing Pakistan through Documented Record',
     text:
       'Places on the public record, before international audiences, a citation-backed '
-      + 'account of terrorism, treaty non-compliance and human-rights concerns — enforced '
-      + "disappearances, minority persecution — behind Pakistan's peacemaker image, "
+      + 'account of terrorism, treaty non-compliance and human-rights concerns, enforced '
+      + "disappearances and minority persecution, behind Pakistan's peacemaker image, "
       + 'anchored to FATF, UN and judicial sources rather than assertion, alongside '
       + 'repeated military and nuclear rhetoric analysed as posturing rather than credible '
       + 'deterrence.',
   },
   {
     n: '05',
-    title: 'Economics — Why Indus Matters to India',
+    title: 'Economics: Why Indus Matters to India',
     text:
       "Makes the material case for the western rivers to India's agriculture, energy and "
       + "long-term water security, quantifying India's own usage (Salal, Baglihar, "
       + "Dulhasti, Uri, Kishanganga) against Pakistan's stated 80% irrigation dependency, "
       + "and showing why Pakistan's obstruction made modernisation of the 1960 framework "
       + 'unavoidable. Outlines the tangible upside for India of unrestricted use of the '
-      + 'western rivers — expanded hydropower capacity, additional irrigation command '
-      + 'area, and improved flood and sediment management — alongside the responsibilities '
+      + 'western rivers: expanded hydropower capacity, additional irrigation command '
+      + 'area, and improved flood and sediment management, alongside the responsibilities '
       + 'that come with exercising full upper-riparian rights.',
   },
   {
     n: '06',
     title: 'The Red Line and Strategic Communication',
     text:
-      'Adopts a New Delhi Declaration — "Blood and Water Cannot Flow Together" — '
+      'Adopts a New Delhi Declaration, "Blood and Water Cannot Flow Together", '
       + 'connecting the technical water-sharing framework to the security reality '
       + 'Pakistan has long downplayed, backed by a fact-anchored evidentiary ecosystem '
       + '(legal-policy brief, data and cartography annex, sourced terror-water timeline, '
@@ -308,8 +308,8 @@ export const DELIVERABLES = [
     n: '01',
     title: 'Legal White Paper & Treaty Dossier',
     text:
-      "An article-by-article legal statement of India's position — the good-faith "
-      + 'Preamble, Article XII, the Article IX ladder and the Vienna Convention grounds — '
+      "An article-by-article legal statement of India's position: the good-faith "
+      + 'Preamble, Article XII, the Article IX ladder and the Vienna Convention grounds, '
       + 'each proposition anchored to the treaty text and to the binding record, including '
       + "the Neutral Expert's January 2025 competence ruling. Every legal claim is "
       + 'footnoted to a primary source.',
@@ -321,7 +321,7 @@ export const DELIVERABLES = [
       'A documentary and map-based exhibit presenting the physical proof: LBOD damage in '
       + 'the Rann of Kutch, Chenab telemetry at Marala and Baglihar, corrected basin-share '
       + 'maps (47% Pakistan / 39% India, FAO AQUASTAT), quantified Indian project usage '
-      + "and India's project-compliance data — each exhibit sourced to survey records, "
+      + "and India's project-compliance data, each exhibit sourced to survey records, "
       + 'telemetry logs or official datasets.',
   },
   {
@@ -329,7 +329,7 @@ export const DELIVERABLES = [
     title: 'Terror-Water Nexus Documentation',
     text:
       'A sourced, dated timeline linking Pahalgam (2025), Pulwama (2019) and 26/11 to the '
-      + "erosion of the Treaty's cooperative premise, with attributed references — attack "
+      + "erosion of the Treaty's cooperative premise, with attributed references: attack "
       + 'records, investigation findings and FATF documentation suitable for citation by '
       + 'international media and institutions.',
   },
@@ -347,7 +347,7 @@ export const DELIVERABLES = [
     text:
       'Structured, dossier-backed briefings for foreign correspondents, and engagement '
       + 'with Baloch, Sindhi and Pashtun diaspora voices whose first-hand testimony '
-      + "evidences Pakistan's rights record — widening the conversation beyond Indian "
+      + "evidences Pakistan's rights record, widening the conversation beyond Indian "
       + 'outlets.',
   },
   {
@@ -392,8 +392,8 @@ export const BACKGROUND = [
 
   'To ensure the proceedings remain anchored in historical accuracy, international law and '
   + 'verifiable fact, the IWT itself is the focal point of the technical panels. Experts '
-  + 'draw arguments directly from the Treaty text — the Preamble, key Articles and '
-  + 'Annexures — alongside the binding records of the Permanent Court of Arbitration and '
+  + 'draw arguments directly from the Treaty text: the Preamble, key Articles and '
+  + 'Annexures, alongside the binding records of the Permanent Court of Arbitration and '
   + 'the Neutral Expert. This legal, factual and civilisational analysis culminates in a '
   + 'legal-policy white paper, serving as a durable evidentiary record.',
 ];
@@ -450,7 +450,7 @@ export const PRESS_ITEMS = [];
 export const FAQ = [
   {
     q: 'When and where is the dialogue?',
-    a: 'One day — 19 September 2026 — at Bharat Mandapam, New Delhi. The date is the '
+    a: 'One day, 19 September 2026, at Bharat Mandapam, New Delhi. The date is the '
       + 'sixty-sixth anniversary of the signing of the Indus Waters Treaty in 1960. '
       + 'Proceedings run from registration at 09:00 to high tea at 18:00.',
   },

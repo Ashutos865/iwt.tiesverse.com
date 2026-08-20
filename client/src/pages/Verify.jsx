@@ -49,7 +49,7 @@ export default function Verify() {
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-ink-100 text-2xl">🔒</div>
           <h1 className="mt-4 font-display text-2xl text-ink-900">Staff verification only</h1>
           <p className="mt-2 text-sm text-ink-700">
-            Badge passes can only be verified by summit staff. If you are staff, sign in and scan again —
+            Badge passes can only be verified by summit staff. If you are staff, sign in and scan again.
             this page will then verify and check the holder in automatically.
           </p>
           <Link
@@ -99,7 +99,7 @@ export default function Verify() {
         </h1>
         {duplicate && r.checkedInAt && (
           <p className="mt-1 text-sm font-semibold text-warn">
-            First entry: {new Date(r.checkedInAt).toLocaleString()} — verify identity before admitting.
+            First entry: {new Date(r.checkedInAt).toLocaleString()}. Verify identity before admitting.
           </p>
         )}
 

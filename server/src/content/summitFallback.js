@@ -62,7 +62,7 @@ export const SUMMIT_FALLBACK = {
     end: '11:40',
     type: 'Curtain-Raiser Panel',
     group: 'Identity Crisis',
-    title: 'Reclaiming the Indus — Civilisation, Heritage and the Naming of a River',
+    title: 'Reclaiming the Indus: Civilisation, Heritage and the Naming of a River',
     description:
       'A short historical and archaeological session on the Indus Valley Civilisation, '
       + 'Mohenjo-daro, Harappa, and the shared linguistic root of Sindhu, Hindu, India '
@@ -76,7 +76,7 @@ export const SUMMIT_FALLBACK = {
     end: '12:45',
     type: 'Session I',
     group: 'Introduction',
-    title: 'The Text Speaks — Abeyance as Lawful, Not Breach',
+    title: 'The Text Speaks: Abeyance as Lawful, Not Breach',
     description:
       "The legal core of the dialogue. It covers the IWT's Preamble, the Article IX "
       + 'dispute-resolution ladder, and Article XII on modification and termination, '
@@ -106,8 +106,8 @@ export const SUMMIT_FALLBACK = {
     group: "Decoding Pakistan's Narrative",
     title: 'Terror as the Breach',
     description:
-      'Examines how sustained cross-border terrorism — Pahalgam (2025), Pulwama, 26/11 '
-      + '— has eroded the good-faith premise on which the IWT was built. Discussion on '
+      'Examines how sustained cross-border terrorism, Pahalgam (2025), Pulwama, 26/11, '
+      + 'has eroded the good-faith premise on which the IWT was built. Discussion on '
       + 'sourced, dated accounts linking specific attacks to the breakdown of treaty '
       + 'cooperation, drawing on investigation records, judicial findings, UN listings '
       + "and FATF documentation. The session also places on record Pakistan's public "
@@ -162,8 +162,8 @@ export const SUMMIT_FALLBACK = {
       + 'agriculture, hydropower and water security, and what conditions would need to be '
       + "met for a return to normal treaty cooperation. Quantifies India's usage of its "
       + 'treaty-compliant projects (Salal, Baglihar, Dulhasti, Uri, Kishanganga) and sets '
-      + 'out realistic terms — verifiable cessation of cross-border terrorism and '
-      + "good-faith engagement — under which India's position could evolve.",
+      + 'out realistic terms, verifiable cessation of cross-border terrorism and '
+      + "good-faith engagement, under which India's position could evolve.",
   },
   {
     id: 'valedictory',

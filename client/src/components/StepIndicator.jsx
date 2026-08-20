@@ -9,7 +9,7 @@ export default function StepIndicator({ steps, current, onJump }) {
       {/* Mobile: the circle rail collapses into a compact counter (design.md §14.2). */}
       <div className="mb-5 sm:hidden" aria-live="polite">
         <p className="text-sm font-bold text-ink-900">
-          Step {current + 1} of {steps.length} — {steps[current].title}
+          Step {current + 1} of {steps.length}: {steps[current].title}
         </p>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ink-100">
           <div

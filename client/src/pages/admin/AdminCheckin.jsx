@@ -99,7 +99,7 @@ export default function AdminCheckin() {
       </div>
 
       <p className="mt-3 text-center text-sm text-ink-700">
-        Point at the QR on the pass — verification and check-in happen automatically.
+        Point at the QR on the pass. Verification and check-in happen automatically.
       </p>
 
       {error && <p className="error-text mt-3 text-center">{error}</p>}

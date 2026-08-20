@@ -27,7 +27,7 @@ export async function init() {
   if (active === dataApiRepo) {
     try {
       await dataApiRepo.init();
-      console.log(`[storage] TiesVerse Data API — store "${config.dataApi.slug}"`);
+      console.log(`[storage] TiesVerse Data API, store "${config.dataApi.slug}"`);
       return;
     } catch (err) {
       if (!config.storageFallback) throw err;

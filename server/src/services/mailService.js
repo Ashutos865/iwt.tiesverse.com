@@ -53,7 +53,7 @@ const RULE = '#E3E7EE';
 export async function sendApprovalEmail(record) {
   const t = await transporter();
   if (!t) {
-    console.warn('[mail] SES not configured — approval email NOT sent to', record.email);
+    console.warn('[mail] SES not configured, approval email NOT sent to', record.email);
     return false;
   }
 
@@ -74,7 +74,7 @@ export async function sendApprovalEmail(record) {
       <p style="font-size:15px;line-height:1.6">Dear ${record.fullName},</p>
       <p style="font-size:15px;line-height:1.6">
         Your registration as ${/^[aeiou]/i.test(label) ? 'an' : 'a'} ${label.toLowerCase()} has been
-        approved. Your entry pass is below — it will be scanned at the venue.
+        approved. Your entry pass is below. It will be scanned at the venue.
       </p>
 
       <table style="width:100%;border-collapse:collapse;margin:18px 0;font-size:14px">
@@ -110,7 +110,7 @@ export async function sendApprovalEmail(record) {
       <p style="font-size:13px;color:${INK_MUTED};margin-top:22px">
         ${EVENT.name} Secretariat · New Delhi<br/>
         Convened by ${EVENT.organiser}<br/>
-        This mailbox is not monitored — for help, use the contact details on the website.
+        This mailbox is not monitored. For help, use the contact details on the website.
       </p>
     </div>
   </div>`;
@@ -139,7 +139,7 @@ export async function sendApprovalEmail(record) {
   await t.sendMail({
     from: `"${EVENT.name}" <${config.ses.fromEmail}>`,
     to: record.email,
-    subject: `Pass approved — ${EVENT.name} (${record.registrationId})`,
+    subject: `Pass approved: ${EVENT.name} (${record.registrationId})`,
     text,
     html,
     attachments: qrPng

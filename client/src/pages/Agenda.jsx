@@ -132,7 +132,7 @@ function AgendaActions() {
 
   const shareData = {
     title: 'Indus Waters Treaty Dialogue',
-    text: 'Indus Waters Treaty Dialogue — 19 September 2026, Bharat Mandapam, New Delhi.',
+    text: 'Indus Waters Treaty Dialogue, 19 September 2026, Bharat Mandapam, New Delhi.',
     url: typeof window === 'undefined' ? '' : window.location.origin + '/agenda',
   };
 
@@ -149,7 +149,7 @@ function AgendaActions() {
       // A cancelled share sheet rejects too; that is not a failure worth
       // reporting back to the reader.
       if (err && err.name === 'AbortError') return;
-      setNote('Could not share — copy the address from your browser instead.');
+      setNote('Could not share. Copy the address from your browser instead.');
     }
   }
 

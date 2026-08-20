@@ -26,7 +26,7 @@ class ErrorBoundary extends React.Component {
         <div style={{ maxWidth: 420, textAlign: 'center' }}>
           <h1 style={{ fontSize: 22, color: '#172433', marginBottom: 8 }}>Something went wrong</h1>
           <p style={{ fontSize: 14, color: '#445466', marginBottom: 6 }}>
-            The page hit an error. Reloading usually fixes it — your data is safe on the server.
+            The page hit an error. Reloading usually fixes it. Your data is safe on the server.
           </p>
           <p style={{ fontSize: 12, color: '#6D7B89', marginBottom: 20, wordBreak: 'break-word' }}>
             {String(this.state.error?.message || this.state.error)}

@@ -144,7 +144,7 @@ export async function init() {
       return;
     } catch (err) {
       if (!config.storageFallback) throw err;
-      console.warn('[content] Data API unavailable, using local JSON —', err.message);
+      console.warn('[content] Data API unavailable, using local JSON:', err.message);
     }
   }
   active = jsonBackend;
