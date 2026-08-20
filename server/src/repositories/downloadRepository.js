@@ -44,17 +44,19 @@ export async function record({ document = 'agenda', referrer = '' } = {}) {
     await call('/records/', {
       method: 'POST',
       body: {
-        data: {
+        // Flat columns, matching contentRepository's toApiRow. The API rejects
+        // a nested `data` object with 422.
+        itemId: `dl-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        kind: 'download',
+        order: '0',
+        payload: JSON.stringify({
           kind: 'download',
-          payload: JSON.stringify({
-            kind: 'download',
-            document,
-            // Host only, not the full URL — enough to tell a share from a
-            // direct visit without recording which page somebody was reading.
-            referrer: String(referrer || '').replace(/^https?:\/\//, '').split('/')[0].slice(0, 80),
-            at: new Date().toISOString(),
-          }),
-        },
+          document,
+          // Host only, not the full URL — enough to tell a share from a direct
+          // visit without recording which page somebody was reading.
+          referrer: String(referrer || '').replace(/^https?:\/\//, '').split('/')[0].slice(0, 80),
+          at: new Date().toISOString(),
+        }),
       },
     });
     return true;
@@ -66,10 +68,10 @@ export async function record({ document = 'agenda', referrer = '' } = {}) {
 
 /** Totals and a per-day series for the admin. */
 export async function stats() {
-  const res = await call('/records/?page_size=1000');
+  const res = await call('/records/?where.kind=download&page_size=1000');
   const rows = (res?.results || [])
     .map((row) => {
-      const raw = row?.data?.payload;
+      const raw = row?.payload ?? row?.data?.payload;
       try {
         const rec = typeof raw === 'string' ? JSON.parse(raw) : raw;
         return rec && rec.kind === 'download' ? rec : null;

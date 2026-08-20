@@ -114,6 +114,77 @@ function SessionRow({ item, open, onToggle }) {
   );
 }
 
+/*
+ * Share and download.
+ *
+ * Share uses the Web Share API where the browser has it — on a phone that opens
+ * the real system sheet, so WhatsApp is one tap away and the preview card comes
+ * from the site's own og:image rather than whatever the app scrapes. Desktop
+ * browsers largely do not implement it, so there the link is copied to the
+ * clipboard instead and the button says so.
+ *
+ * Download is a plain link to the PDF endpoint rather than a fetch: the browser
+ * handles the file, the server counts the hit, and nothing has to be held in
+ * memory on a phone.
+ */
+function AgendaActions() {
+  const [note, setNote] = useState('');
+
+  const shareData = {
+    title: 'Indus Waters Treaty Dialogue',
+    text: 'Indus Waters Treaty Dialogue — 19 September 2026, Bharat Mandapam, New Delhi.',
+    url: typeof window === 'undefined' ? '' : window.location.origin + '/agenda',
+  };
+
+  async function share() {
+    setNote('');
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return;
+      }
+      await navigator.clipboard.writeText(shareData.url);
+      setNote('Link copied.');
+    } catch (err) {
+      // A cancelled share sheet rejects too; that is not a failure worth
+      // reporting back to the reader.
+      if (err && err.name === 'AbortError') return;
+      setNote('Could not share — copy the address from your browser instead.');
+    }
+  }
+
+  return (
+    <>
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <button type="button" onClick={share} className="btn-ghost !min-h-[40px] !px-4 !text-xs">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+            <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" />
+          </svg>
+          Share
+        </button>
+
+        <a
+          href="/api/downloads/agenda.pdf"
+          className="btn-primary !min-h-[40px] !px-4 !text-xs"
+          // `download` asks the browser to save rather than navigate; the
+          // server sends the filename in Content-Disposition either way.
+          download
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M5 21h14" />
+          </svg>
+          Download agenda
+        </a>
+      </div>
+
+      {note && (
+        <p role="status" className="mt-2 text-xs font-semibold text-teal-700">{note}</p>
+      )}
+    </>
+  );
+}
+
 export default function Agenda() {
   const { sessions: SESSIONS } = useSiteContent();
   const [openId, setOpenId] = useState(null);
@@ -194,6 +265,8 @@ export default function Agenda() {
           09:00–18:00 · {sessionCount} sessions
         </p>
         <span aria-hidden="true" className="mx-auto mt-4 block h-0.5 w-16 bg-teal-700" />
+
+        <AgendaActions />
 
         {/* ── The running order ── */}
         <div className="mt-6 text-left">

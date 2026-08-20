@@ -9,6 +9,7 @@ import registrationRoutes from './routes/registrations.js';
 import adminRoutes from './routes/admin.js';
 import verifyRoutes from './routes/verify.js';
 import contentRoutes from './routes/content.js';
+import downloadRoutes from './routes/downloads.js';
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/api/registrations', registrationRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/verify', verifyRoutes);
 app.use('/api/content', contentRoutes);
+app.use('/api/downloads', downloadRoutes);
 
 app.use('/api', notFound);
 app.use(errorHandler);

@@ -82,6 +82,9 @@ export const api = {
 
   adminCheckins: () => request('/api/admin/checkins', { admin: true }),
 
+  /** Agenda PDF download counts. */
+  downloadStats: () => request('/api/downloads/stats', { admin: true }),
+
   adminDetail: (id) => request(`/api/admin/registrations/${encodeURIComponent(id)}`, { admin: true }),
 
   adminReview: (id) =>

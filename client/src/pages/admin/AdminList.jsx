@@ -14,6 +14,71 @@ const STATUS_TABS = [
 
 const LIMIT = 25;
 
+/*
+ * Agenda PDF downloads.
+ *
+ * Sits on the applications page rather than behind its own route: it is one
+ * number the secretariat glances at, and a whole screen for it would be a
+ * screen nobody opens. Fails quietly — a stats outage must not break the list
+ * this page exists to show.
+ */
+function DownloadStats() {
+  const [stats, setStats] = useState(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    api.downloadStats()
+      .then((d) => { if (alive) setStats(d); })
+      .catch(() => { if (alive) setFailed(true); });
+    return () => { alive = false; };
+  }, []);
+
+  if (failed || !stats) return null;
+
+  const recent = (stats.byDay || []).slice(-7);
+  const peak = Math.max(1, ...recent.map((d) => d.count));
+
+  return (
+    <section className="mb-6 rounded-card border border-ink-200 bg-white p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
+        <h2 className="font-display text-sm font-semibold text-ink-900">Agenda downloads</h2>
+        <p className="text-xs text-ink-500">
+          <span className="font-bold text-ink-900">{stats.total}</span> total
+          {stats.today > 0 && <> · <span className="font-bold text-teal-700">{stats.today}</span> today</>}
+        </p>
+      </div>
+
+      {/*
+         A single day of data drew one bar the width of the card, which reads
+         as a filled block rather than a chart. Bars are capped so a sparse
+         history still looks like a series, and the row stays left-aligned so
+         days accumulate rightwards as they arrive.
+      */}
+      {recent.length > 0 && (
+        <div className="mt-4 flex items-end gap-1.5" aria-hidden="true">
+          {recent.map((d) => (
+            <div key={d.date} className="w-10 shrink-0">
+              <div
+                className="rounded-t bg-teal-400"
+                style={{ height: `${Math.max(4, (d.count / peak) * 44)}px` }}
+                title={`${d.date}: ${d.count}`}
+              />
+              <p className="mt-1 text-center text-[10px] text-ink-500">{d.date.slice(8)}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {(stats.byReferrer || []).length > 0 && (
+        <p className="mt-3 text-xs text-ink-500">
+          Top sources: {stats.byReferrer.slice(0, 3).map((r) => `${r.source} (${r.count})`).join(' · ')}
+        </p>
+      )}
+    </section>
+  );
+}
+
 export default function AdminList() {
   const navigate = useNavigate();
   const [status, setStatus] = useState('');
@@ -58,6 +123,8 @@ export default function AdminList() {
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
+      <DownloadStats />
+
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="font-display text-2xl text-ink-900">Applications</h1>
