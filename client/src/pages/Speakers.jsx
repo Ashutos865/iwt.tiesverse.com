@@ -155,48 +155,45 @@ export default function Speakers() {
             Dialogue by Tiesverse Foundation on
           </p>
 
-          <h1 className="mt-4 font-title text-4xl font-normal uppercase leading-[1.05] tracking-tight text-ink-900 sm:text-5xl">
-            Indus
-            <span className="mt-1 block text-3xl sm:text-4xl">Waters Treaty</span>
-            <span className="mt-2 flex items-center gap-3 text-lg tracking-[0.3em] sm:text-xl">
-              <span aria-hidden="true" className="h-px w-8 bg-ink-200" />
-              Dialogue
-              <span aria-hidden="true" className="h-px flex-1 bg-ink-200" />
-            </span>
+          {/* One line, sized to the column, matching the Agenda page. The
+              stacked "INDUS / WATERS TREATY / DIALOGUE" split one name across
+              three lines and read as three separate things. */}
+          <h1 className="agenda-title mt-4 font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
+            Indus Waters Treaty Dialogue
           </h1>
 
           <p className="mt-5 font-title text-lg italic text-teal-700">
             “{SUMMIT.theme}”
           </p>
 
-          <dl className="mt-8 space-y-4">
-            <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
+          <dl className="mt-8 flex items-center gap-4 sm:gap-8">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700 sm:h-10 sm:w-10">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" />
                 </svg>
               </span>
               <div>
                 <dt className="sr-only">Date</dt>
-                <dd className="font-display text-sm font-bold uppercase tracking-wide text-ink-900">
+                <dd className="font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
                   {SUMMIT.date}
                 </dd>
-                <dd className="text-xs uppercase tracking-wide text-ink-500">Saturday</dd>
+                <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">Saturday</dd>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700 sm:h-10 sm:w-10">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
                 </svg>
               </span>
               <div>
                 <dt className="sr-only">Venue</dt>
-                <dd className="font-display text-sm font-bold uppercase tracking-wide text-ink-900">
+                <dd className="font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
                   Bharat Mandapam
                 </dd>
-                <dd className="text-xs uppercase tracking-wide text-ink-500">New Delhi</dd>
+                <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">New Delhi</dd>
               </div>
             </div>
           </dl>
@@ -275,7 +272,7 @@ export default function Speakers() {
 
           {/* Closing note, as in the approved design. */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-card border border-ink-200 bg-ink-50 p-5">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
               <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-teal-700 ring-1 ring-ink-200">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />

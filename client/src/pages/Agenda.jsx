@@ -165,7 +165,9 @@ function AgendaActions() {
         </button>
 
         <a
-          href="/api/downloads/agenda.pdf"
+          // nginx maps this to the generating endpoint; the document-shaped
+          // URL is what people copy and see in their downloads.
+          href="/agenda.pdf"
           className="btn-primary !min-h-[40px] !px-4 !text-xs"
           // `download` asks the browser to save rather than navigate; the
           // server sends the filename in Content-Disposition either way.

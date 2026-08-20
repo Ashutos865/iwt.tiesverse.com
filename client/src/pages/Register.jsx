@@ -190,40 +190,37 @@ export default function Register() {
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500">
             Dialogue by Tiesverse Foundation on
           </p>
-          <h1 className="title-display mt-3 text-4xl leading-[0.95] text-ink-900 sm:text-5xl">
-            INDUS
-            <span className="mt-1 block">WATERS TREATY</span>
+          {/* One line, as on the Agenda and Speakers pages. Split across
+              "INDUS / WATERS TREATY / DIALOGUE" the event's name read as three
+              separate headings stacked on top of each other. */}
+          <h1 className="agenda-title mt-3 font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
+            Indus Waters Treaty Dialogue
           </h1>
-          <p className="mt-2 flex items-center gap-3 text-lg tracking-[0.34em] text-ink-700">
-            <span aria-hidden="true" className="h-px w-8 bg-ink-200" />
-            DIALOGUE
-            <span aria-hidden="true" className="h-px flex-1 bg-ink-200" />
-          </p>
           <p className="mt-5 font-title text-lg italic text-ink-700">
             &ldquo;Blood and Water cannot flow together&rdquo;
           </p>
 
-          <dl className="mt-7 space-y-4">
-            <div className="flex items-start gap-3">
-              <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
+          <dl className="mt-7 flex items-center gap-4 sm:gap-8">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700 sm:h-10 sm:w-10">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                   <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M8 3v4M16 3v4M3 10h18" />
                 </svg>
               </span>
               <div>
-                <dt className="text-sm font-bold text-ink-900">19 SEPTEMBER 2026</dt>
-                <dd className="text-xs uppercase tracking-wide text-ink-500">Saturday</dd>
+                <dt className="text-xs font-bold text-ink-900 sm:text-sm">19 SEPTEMBER 2026</dt>
+                <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">Saturday</dd>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700 sm:h-10 sm:w-10">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                   <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" /><circle cx="12" cy="10" r="2.6" />
                 </svg>
               </span>
               <div>
-                <dt className="text-sm font-bold text-ink-900">BHARAT MANDAPAM</dt>
-                <dd className="text-xs uppercase tracking-wide text-ink-500">New Delhi</dd>
+                <dt className="text-xs font-bold text-ink-900 sm:text-sm">BHARAT MANDAPAM</dt>
+                <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">New Delhi</dd>
               </div>
             </div>
           </dl>
