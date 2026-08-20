@@ -5,12 +5,12 @@ import useSiteContent from '../lib/useSiteContent.js';
 import { SUMMIT } from '../lib/constants.js';
 
 /**
- * Single-day running order, in the approved split layout: a standing header
- * on the left over the valley drawing, the timeline on the right.
+ * Single-day running order: title and particulars centred, the schedule as a
+ * table beneath them.
  *
  * The dialogue convenes on one day only, so there are no day tabs and no
  * track/room filters — with thirteen rows, a filter rail hides more than it
- * reveals. Breaks render as quiet rules so the eye lands on the sessions.
+ * reveals. Breaks render as quiet rows so the eye lands on the sessions.
  */
 
 const GROUP_TONE = {
@@ -117,87 +117,75 @@ function SessionRow({ item, open, onToggle }) {
 export default function Agenda() {
   const { sessions: SESSIONS } = useSiteContent();
   const [openId, setOpenId] = useState(null);
-  const [showBreaks, setShowBreaks] = useState(true);
 
-  const rows = showBreaks ? SESSIONS : SESSIONS.filter((s) => s.kind === 'session');
+  // Breaks always show: they are part of the day's shape, and hiding them made
+  // the running order misstate how long the sessions actually run.
+  const rows = SESSIONS;
   const sessionCount = SESSIONS.filter((s) => s.kind === 'session').length;
 
   return (
     <div className="agenda-split">
       {/*
-        The title spans the page rather than sitting in the left column. It is
-        43 characters and must hold on one line at every width; inside the
-        457px sidebar that meant setting it at 22px, which is smaller than the
-        body text beside it. Across the full measure the same line sets at
-        about 40px and still reads as the page's title.
+        One centred column rather than the previous two-column split.
+
+        The table is the page — the particulars above it are a caption, not a
+        sibling panel — so date and venue run as one horizontal line under the
+        title and the schedule sits centred beneath them at a readable measure.
+        The "show breaks" toggle is gone with the split: the breaks are part of
+        the day's shape, and hiding them made the running order lie about how
+        long the sessions actually run.
       */}
-      <div className="shell pt-8 lg:pt-10">
-        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-700">
-          Agenda
-        </p>
-        <h1 className="agenda-title mt-3 font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
+      <div className="shell max-w-4xl py-8 text-center lg:py-12">
+        <h1 className="agenda-title font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
           Indus Waters Treaty by Tiesverse Foundation
         </h1>
-        <span aria-hidden="true" className="mt-5 block h-0.5 w-16 bg-teal-700" />
-      </div>
 
-      <div className="shell grid gap-8 py-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14 lg:py-10">
-        {/*
-          Standing header. Sticky on wide screens so the particulars stay with
-          the table as it scrolls — on a narrow screen it simply sits above,
-          because a stuck panel would eat the viewport.
-        */}
-        <header className="lg:sticky lg:top-24 lg:self-start">
-
-          <dl className="mt-6 space-y-4">
-            <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" />
-                </svg>
-              </span>
-              <div>
-                <dt className="sr-only">Date</dt>
-                <dd className="font-display text-sm font-bold uppercase tracking-wide text-ink-900">
-                  {SUMMIT.date}
-                </dd>
-                <dd className="text-xs uppercase tracking-wide text-ink-500">Saturday</dd>
-              </div>
+        {/* Date and venue on one line, splitting onto two only when a phone
+            leaves no room for both. */}
+        <dl className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+          <div className="flex items-center gap-3">
+            <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" />
+              </svg>
+            </span>
+            <div className="text-left">
+              <dt className="sr-only">Date</dt>
+              <dd className="font-display text-sm font-bold uppercase tracking-wide text-ink-900">
+                {SUMMIT.date}
+              </dd>
+              <dd className="text-xs uppercase tracking-wide text-ink-500">Saturday</dd>
             </div>
+          </div>
 
-            <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
-                </svg>
-              </span>
-              <div>
-                <dt className="sr-only">Venue</dt>
-                <dd className="font-display text-sm font-bold uppercase tracking-wide text-ink-900">
-                  Bharat Mandapam
-                </dd>
-                <dd className="text-xs uppercase tracking-wide text-ink-500">New Delhi</dd>
-              </div>
+          <div className="flex items-center gap-3">
+            <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
+              </svg>
+            </span>
+            <div className="text-left">
+              <dt className="sr-only">Venue</dt>
+              <dd className="font-display text-sm font-bold uppercase tracking-wide text-ink-900">
+                Bharat Mandapam
+              </dd>
+              <dd className="text-xs uppercase tracking-wide text-ink-500">New Delhi</dd>
             </div>
-          </dl>
+          </div>
+        </dl>
 
-          <p className="mt-6 text-xs text-ink-500">
-            09:00–18:00 · {sessionCount} sessions
-          </p>
-
-          <label className="mt-3 flex w-fit cursor-pointer items-center gap-2 text-xs font-semibold text-ink-700">
-            <input
-              type="checkbox"
-              className="h-4 w-4 accent-teal-700"
-              checked={showBreaks}
-              onChange={(e) => setShowBreaks(e.target.checked)}
-            />
-            Show breaks
-          </label>
-        </header>
+        {/* The eyebrow moves here, from above the title to just above the
+            table, so it labels the thing it actually introduces. */}
+        <p className="mt-10 text-[11px] font-bold uppercase tracking-[0.2em] text-teal-700">
+          Agenda
+        </p>
+        <p className="mt-1.5 text-xs text-ink-500">
+          09:00–18:00 · {sessionCount} sessions
+        </p>
+        <span aria-hidden="true" className="mx-auto mt-4 block h-0.5 w-16 bg-teal-700" />
 
         {/* ── The running order ── */}
-        <div className="min-w-0">
+        <div className="mt-6 text-left">
           {/* Rounded frame with the border on the wrapper, not the table, so
               the corners stay round however many rows are inside. */}
           <div className="overflow-hidden rounded-card border border-ink-200 bg-white">
