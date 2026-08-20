@@ -182,27 +182,52 @@
      Same 16% opacity as the home hero so the two pages read as one treatment
      rather than two different uses of the same picture.
   */
+  /*
+     Agenda, Speakers and Registration share this ground.
+
+     The drawing is FIXED to the viewport while the content scrolls over it, so
+     the valley reads as the room the page sits in rather than a strip that
+     travels with the text. `overflow-hidden` is gone from the wrapper with it:
+     it would establish a containing block and pin the fixed layer back to the
+     section, which is the usual reason this effect silently fails.
+  */
   .agenda-split {
-    @apply relative isolate overflow-hidden bg-paper;
+    @apply relative isolate bg-paper;
+  }
+  /*
+     A fixed layer spans the viewport, so it shows under whatever scrolls past
+     — including the footer, which is not part of this page's composition. The
+     footer already sets bg-white; this makes the guarantee explicit so the
+     drawing stops at the end of the content.
+  */
+  .agenda-split ~ footer,
+  footer.no-print {
+    @apply relative z-0 bg-white;
   }
   .agenda-split::before {
     content: '';
-    @apply pointer-events-none absolute inset-y-0 left-0 -z-10 hidden w-[46%] lg:block;
+    /*
+       fixed, not absolute: the layer stays put against the viewport instead of
+       scrolling away with the section. inset-0 covers the whole window, so the
+       artwork is never cut short on a long page.
+    */
+    @apply pointer-events-none fixed inset-0 -z-10 hidden lg:block;
     background-image: url('/brand/valley-panel.webp');
     background-repeat: no-repeat;
-    background-position: bottom left;
+    background-position: bottom center;
     background-size: cover;
     /*
-       0.14, and the mask below, because this drawing has no sky. Measured, it
-       is only 25% clear paper — its middle bands are 6-16% clear — so unlike
-       the hero artwork it cannot run at full strength behind text without
-       burying it. It is a panel beside the content, not a ground beneath it:
-       faded, held to the left column, and faded out again before it reaches
-       the table.
+       0.10 across the full width, down from 0.14 over 46%.
+
+       The drawing is only 25% clear paper — its middle bands are 6-16% clear —
+       so behind the whole page rather than one column it has to sit lighter or
+       the table rows read against hatching. The mask fades it out toward the
+       top so the header and the first rows meet plain paper, and the valley
+       rises into view as the page scrolls.
     */
-    opacity: 0.14;
-    -webkit-mask-image: linear-gradient(to right, black 0%, black 55%, transparent 100%);
-    mask-image: linear-gradient(to right, black 0%, black 55%, transparent 100%);
+    opacity: 0.10;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 45%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 45%, black 100%);
   }
 
   /*
