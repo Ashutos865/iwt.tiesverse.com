@@ -34,7 +34,7 @@ export default function ReviewStep({ config, values, onEditStep }) {
               <button
                 type="button"
                 onClick={() => onEditStep(index)}
-                className="text-xs font-semibold text-brand-600 hover:underline"
+                className="text-xs font-semibold text-teal-700 hover:underline"
               >
                 Edit
               </button>

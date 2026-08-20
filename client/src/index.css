@@ -72,7 +72,7 @@
     @apply btn bg-teal-400 text-ink-900 hover:bg-teal-300 active:bg-teal-200;
   }
   .btn-dark {
-    @apply btn bg-brand-900 text-white hover:bg-brand-800;
+    @apply btn bg-teal-900 text-white hover:bg-teal-800;
   }
   /* Outlined — the default secondary action. */
   .btn-ghost {
@@ -311,21 +311,21 @@
     @apply flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-500;
   }
   .crumbs a {
-    @apply font-medium text-brand-700 hover:underline;
+    @apply font-medium text-teal-700 hover:underline;
   }
   /* Category pill above a page title. */
   .chip {
     @apply inline-flex items-center rounded-pill bg-white px-4 py-1.5 text-xs
-           font-bold uppercase tracking-[0.1em] text-brand-800 shadow-tile;
+           font-bold uppercase tracking-[0.1em] text-teal-800 shadow-tile;
   }
   .page-title {
-    @apply text-3xl font-bold leading-tight tracking-tight text-brand-800 sm:text-[42px];
+    @apply text-3xl font-bold leading-tight tracking-tight text-teal-800 sm:text-[42px];
   }
   .section-title {
-    @apply text-2xl font-bold tracking-tight text-brand-800 sm:text-3xl;
+    @apply text-2xl font-bold tracking-tight text-teal-800 sm:text-3xl;
   }
   .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.12em] text-brand-700;
+    @apply text-xs font-bold uppercase tracking-[0.12em] text-teal-700;
   }
 
   /* ── Forms ─────────────────────────────────────────────────────── */
@@ -335,7 +335,7 @@
   .input {
     @apply min-h-[44px] w-full rounded border border-ink-200 bg-white px-3.5 py-2 text-[15px]
            text-ink-900 outline-none transition placeholder:text-ink-500/70
-           focus:border-brand-600 focus:ring-2 focus:ring-brand-600/20;
+           focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20;
   }
   .input-error {
     @apply border-bad focus:border-bad focus:ring-bad/20;
@@ -354,7 +354,7 @@
   .pill-ok    { @apply pill bg-ok-bg text-ok; }
   .pill-warn  { @apply pill bg-warn-bg text-warn; }
   .pill-bad   { @apply pill bg-bad-bg text-bad; }
-  .pill-info  { @apply pill bg-brand-100 text-brand-800; }
+  .pill-info  { @apply pill bg-teal-100 text-teal-800; }
   .pill-muted { @apply pill bg-ink-100 text-ink-700; }
 
   .ev-badge {
@@ -369,6 +369,15 @@
      inherited the same tight margin. */
   .shell {
     @apply mx-auto w-full max-w-shell px-5 sm:px-6;
+  }
+  /*
+     Full-bleed furniture: the top strip, the nav bar and the footer. These
+     span the window rather than the 1180px reading column, so their contents
+     line up with each other and with the screen edge. Defined once because
+     three separate copies of the same padding is how they drift apart.
+  */
+  .shell-wide {
+    @apply mx-auto w-full px-6 lg:px-10 2xl:px-14;
   }
 }
 

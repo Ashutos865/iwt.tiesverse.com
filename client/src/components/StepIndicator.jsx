@@ -13,7 +13,7 @@ export default function StepIndicator({ steps, current, onJump }) {
         </p>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ink-100">
           <div
-            className="h-full rounded-full bg-brand-600 transition-all"
+            className="h-full rounded-full bg-teal-700 transition-all"
             style={{ width: `${((current + 1) / steps.length) * 100}%` }}
           />
         </div>
@@ -36,9 +36,9 @@ export default function StepIndicator({ steps, current, onJump }) {
               <span
                 className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold transition ${
                   active
-                    ? 'border-brand-600 bg-brand-600 text-white'
+                    ? 'border-teal-700 bg-teal-700 text-white'
                     : done
-                      ? 'border-brand-600 bg-white text-brand-600'
+                      ? 'border-teal-700 bg-white text-teal-700'
                       : 'border-ink-200 bg-white text-ink-600/50'
                 }`}
               >
@@ -55,7 +55,7 @@ export default function StepIndicator({ steps, current, onJump }) {
 
             {i < steps.length - 1 && (
               <span
-                className={`mt-[17px] h-0.5 flex-1 ${done ? 'bg-brand-600' : 'bg-ink-200'}`}
+                className={`mt-[17px] h-0.5 flex-1 ${done ? 'bg-teal-700' : 'bg-ink-200'}`}
               />
             )}
           </li>

@@ -49,6 +49,18 @@ export const SUMMIT = {
   phone: null,
 };
 
+/*
+ * Tiesverse's own accounts, taken from the links published on tiesverse.com
+ * rather than guessed from the brand name — a handle that looks right but
+ * belongs to somebody else sends delegates to a stranger.
+ */
+export const SOCIALS = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/thetiesmedia' },
+  { label: 'Instagram', href: 'https://www.instagram.com/ties.in/' },
+  { label: 'X', href: 'https://x.com/TiesIndia' },
+  { label: 'YouTube', href: 'https://youtube.com/@TiesIndia' },
+];
+
 export const ORGANISER = {
   name: 'Tiesverse Foundation',
   abbr: 'TIES',

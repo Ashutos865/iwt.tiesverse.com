@@ -69,7 +69,7 @@ export default function FieldRenderer({ field, form }) {
             {field.options.map((opt) => (
               <label
                 key={opt}
-                className="flex cursor-pointer items-center gap-2 rounded-md border border-ink-200 bg-white px-3 py-2 text-sm hover:border-brand-400"
+                className="flex cursor-pointer items-center gap-2 rounded-md border border-ink-200 bg-white px-3 py-2 text-sm hover:border-teal-500"
               >
                 <input type="radio" value={opt} {...register(field.name, rules)} />
                 {opt}
@@ -84,7 +84,7 @@ export default function FieldRenderer({ field, form }) {
             {field.options.map((opt) => (
               <label
                 key={opt}
-                className="flex cursor-pointer items-center gap-2 rounded-md border border-ink-200 bg-white px-3 py-2 text-sm hover:border-brand-400"
+                className="flex cursor-pointer items-center gap-2 rounded-md border border-ink-200 bg-white px-3 py-2 text-sm hover:border-teal-500"
               >
                 <input type="checkbox" value={opt} {...register(field.name, rules)} />
                 {opt}

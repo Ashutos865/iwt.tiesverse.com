@@ -34,7 +34,7 @@ export default function Home() {
     */
     <section className="hero-indus">
       <div className="shell relative z-10 flex flex-col items-center py-12 text-center sm:py-16 lg:py-20">
-        <p className="text-sm font-semibold tracking-wide text-brand-700">
+        <p className="text-sm font-semibold tracking-wide text-teal-700">
           {SUMMIT.date} · {SUMMIT.venue}
         </p>
 

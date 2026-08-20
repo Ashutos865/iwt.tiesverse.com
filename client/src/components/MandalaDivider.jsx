@@ -86,7 +86,7 @@ export default function MandalaDivider({ className = '' }) {
   const r = Math.max(6, Math.min(cell, IDEAL_CELL + 8) * 0.38);
 
   return (
-    <div ref={hostRef} className={`text-brand-500 ${className}`} aria-hidden="true">
+    <div ref={hostRef} className={`text-teal-600 ${className}`} aria-hidden="true">
       {count > 0 && (
         <svg width={width} height={HEIGHT} focusable="false" role="presentation" className="block">
           {Array.from({ length: count }, (_, i) => (

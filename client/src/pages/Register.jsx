@@ -205,7 +205,7 @@ export default function Register() {
 
           <dl className="mt-7 space-y-4">
             <div className="flex items-start gap-3">
-              <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-brand-600">
+              <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                   <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M8 3v4M16 3v4M3 10h18" />
                 </svg>
@@ -216,7 +216,7 @@ export default function Register() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-brand-600">
+              <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                   <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" /><circle cx="12" cy="10" r="2.6" />
                 </svg>
@@ -238,13 +238,13 @@ export default function Register() {
         <section>
           <div className="card !p-5 sm:!p-6">
             <div className="flex items-start gap-3.5">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-teal-700 text-white">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
                   <circle cx="12" cy="8.5" r="3.6" /><path d="M4.5 20c1.4-3.7 4.2-5.6 7.5-5.6s6.1 1.9 7.5 5.6" />
                 </svg>
               </span>
               <div>
-                <h2 className="text-xl font-bold text-brand-700">REGISTER NOW</h2>
+                <h2 className="text-xl font-bold text-teal-700">REGISTER NOW</h2>
                 <p className="mt-1 text-sm text-ink-700">
                   Please fill in your details to register for the Dialogue.
                 </p>
@@ -303,7 +303,7 @@ export default function Register() {
                                 type="button"
                                 onClick={sendCode}
                                 disabled={otpBusy || !emailLooksValid}
-                                className="text-xs font-semibold text-brand-700 underline underline-offset-2 disabled:opacity-50"
+                                className="text-xs font-semibold text-teal-700 underline underline-offset-2 disabled:opacity-50"
                               >
                                 {otpBusy ? 'Sending…' : 'Send verification code'}
                               </button>

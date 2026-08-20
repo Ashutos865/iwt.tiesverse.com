@@ -145,7 +145,7 @@ function Field({ field, value, onChange }) {
           type="checkbox"
           checked={value === true || value === 'true'}
           onChange={(e) => onChange(field.name, e.target.checked)}
-          className="mt-0.5 h-4 w-4 shrink-0 accent-brand-600"
+          className="mt-0.5 h-4 w-4 shrink-0 accent-teal-700"
         />
         <span>
           <span className="label !mb-0">{field.label}</span>
@@ -261,7 +261,7 @@ export default function AdminContent() {
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-5 sm:py-10">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-brand-600">Website</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-teal-700">Website</p>
           <h1 className="font-display text-2xl text-ink-900">Content</h1>
         </div>
         <div className="flex gap-2">
@@ -281,8 +281,8 @@ export default function AdminContent() {
               aria-pressed={active.kind === t.kind}
               className={`whitespace-nowrap rounded-full border px-4 py-2 text-xs font-semibold transition ${
                 active.kind === t.kind
-                  ? 'border-brand-600 bg-brand-600 text-white'
-                  : 'border-ink-200 bg-white text-ink-700 hover:border-brand-600'
+                  ? 'border-teal-700 bg-teal-700 text-white'
+                  : 'border-ink-200 bg-white text-ink-700 hover:border-teal-700'
               }`}
             >
               {t.label}{data ? ` (${(data[t.kind] || []).length})` : ''}

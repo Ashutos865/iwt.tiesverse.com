@@ -4,7 +4,7 @@ import { SUMMIT } from '../lib/constants.js';
 export default function QRPassCard({ registration }) {
   return (
     <div className="overflow-hidden rounded-xl border border-ink-200 bg-white shadow-sm">
-      <div className="bg-brand-900 px-6 py-4 text-white">
+      <div className="bg-teal-900 px-6 py-4 text-white">
         <p className="text-lg font-bold leading-none">{SUMMIT.name}</p>
         <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/60">
           {SUMMIT.date} · {SUMMIT.venue}

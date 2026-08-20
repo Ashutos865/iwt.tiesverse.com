@@ -21,160 +21,96 @@ const GROUP_TONE = {
 };
 
 /*
- * One icon per track, drawn inline.
+ * The running order, as a table.
  *
- * Inline SVG rather than an icon package: this is the only page that needs
- * them, and adding a dependency for five glyphs would cost more than the
- * glyphs. Each is stroked in currentColor so it inherits the rail's colour,
- * and marked aria-hidden — the session title beside it already says what the
- * session is, so announcing "scales icon" would only repeat it.
+ * Two columns are visible — when, and what — and nothing else. Every session
+ * here carries a full paragraph of brief, and showing those inline turned the
+ * day into a wall of text you had to scroll past to see the shape of it. The
+ * brief opens on click, in a row beneath the one you pressed, so the schedule
+ * stays scannable and the detail is one press away.
+ *
+ * A real <table> rather than a grid of divs: this is tabular data, and the
+ * markup is what lets a screen reader announce "Time, 09:30 to 10:45" against
+ * each session instead of reading two loose columns of text.
  */
-const ICONS = {
-  // Lectern — the opening address.
-  Introduction: (
-    <>
-      <path d="M12 3v18" /><path d="M5 8h14" /><path d="M7 21h10" />
-      <path d="M9 8l-2 6h10l-2-6" />
-    </>
-  ),
-  // Head in profile — identity and heritage.
-  'Identity Crisis': (
-    <>
-      <path d="M15.5 21v-2.5a3 3 0 0 1 1.2-2.4A8 8 0 1 0 5 9.8" />
-      <path d="M5 10v4h2.5v3.5a2 2 0 0 0 2 2H12" />
-      <circle cx="11.5" cy="9.5" r="1" />
-    </>
-  ),
-  // Scales — legal breach and accountability.
-  "Decoding Pakistan's Narrative": (
-    <>
-      <path d="M12 4v16" /><path d="M6 20h12" /><path d="M4 8h16" />
-      <path d="M7 8l-3 6h6z" /><path d="M17 8l-3 6h6z" />
-    </>
-  ),
-  // Rising bars — economics and the red line.
-  'Economics & The Red Line': (
-    <>
-      <path d="M4 20V10" /><path d="M10 20V4" /><path d="M16 20v-7" /><path d="M22 20V8" />
-      <path d="M2 20h20" />
-    </>
-  ),
-  // Document — the adopted declaration.
-  Conclusion: (
-    <>
-      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
-      <path d="M14 3v5h5" /><path d="M9 13h6" /><path d="M9 17h4" />
-    </>
-  ),
-};
-
-function TrackIcon({ group }) {
-  const paths = ICONS[group] || ICONS.Conclusion;
-  return (
-    <span
-      aria-hidden="true"
-      className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-brand-600 shadow-sm"
-    >
-      <svg
-        width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
-      >
-        {paths}
-      </svg>
-    </span>
-  );
-}
-
 function BreakRow({ item }) {
   return (
-    <li className="flex items-center gap-4 py-3 sm:gap-5">
-      <span className="w-[86px] shrink-0 text-right text-xs font-semibold tabular-nums text-ink-500">
+    <tr className="border-t border-ink-100 bg-ink-50/60">
+      <td className="whitespace-nowrap px-4 py-2.5 text-xs font-semibold tabular-nums text-ink-500 sm:px-5">
         {item.start}–{item.end}
-      </span>
-      {/* The rail continues through a break, so the day reads as one thread. */}
-      <span className="grid w-12 shrink-0 place-items-center">
-        <span className="h-full w-px bg-ink-200" />
-      </span>
-      <span className="flex-1 border-t border-dashed border-ink-200" aria-hidden="true" />
-      <span className="shrink-0 text-[11px] font-semibold uppercase tracking-wide text-ink-500">
+      </td>
+      <td className="px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-ink-500 sm:px-5">
         {item.title}
-      </span>
-    </li>
+      </td>
+    </tr>
   );
 }
 
 function SessionRow({ item, open, onToggle }) {
+  const panelId = `agenda-panel-${item.id}`;
   return (
-    <li className="flex gap-4 sm:gap-5">
-      {/* pt-4 on both, matching the card's py-4, so the time, the icon and the
-          session label all sit on the same optical line. */}
-      <div className="w-[86px] shrink-0 pt-4 text-right">
-        <p className="text-xs font-bold tabular-nums leading-tight text-ink-900">{item.start}</p>
-        <p className="text-xs tabular-nums leading-tight text-ink-500">{item.end}</p>
-      </div>
-
-      {/* Icon on the rail. The line runs the full height of the row so the
-          markers read as points on one continuous thread. */}
-      <div className="relative flex w-12 shrink-0 flex-col items-center">
-        <span aria-hidden="true" className="absolute inset-y-0 w-px bg-ink-200" />
-        <span className="relative mt-1.5">
-          <TrackIcon group={item.group} />
-        </span>
-      </div>
-
-      <article className="card mb-3 min-w-0 flex-1 !p-0">
-        <button
-          type="button"
-          onClick={onToggle}
-          aria-expanded={open}
-          className="flex w-full items-start gap-4 px-5 py-4 text-left"
-        >
-          <span className="min-w-0 flex-1">
-            <span className="flex flex-wrap items-center gap-2">
-              <span className="text-[11px] font-bold uppercase tracking-wide text-brand-600">
-                {item.type}
+    <>
+      <tr className="border-t border-ink-100">
+        <td className="whitespace-nowrap px-4 py-3 align-top text-xs font-bold tabular-nums text-ink-900 sm:px-5 sm:py-4">
+          {item.start}–{item.end}
+        </td>
+        <td className="px-4 py-3 sm:px-5 sm:py-4">
+          {/*
+             The whole cell is the control, so the target is the row rather
+             than a small chevron — easier to hit, and it means the row reads
+             as one thing you can press.
+          */}
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-expanded={open}
+            aria-controls={panelId}
+            className="flex w-full items-start gap-3 text-left"
+          >
+            <span className="min-w-0 flex-1">
+              <span className="block font-display text-sm font-semibold leading-snug text-ink-900 sm:text-base">
+                {item.title}
               </span>
-              {item.group && (
-                <span className={GROUP_TONE[item.group] || 'pill-muted'}>{item.group}</span>
+              {item.theme && (
+                <span className="mt-0.5 block text-xs italic text-ink-500">
+                  Theme: ‘{item.theme}’
+                </span>
               )}
             </span>
-
-            <span className="mt-2 block font-display text-lg font-semibold leading-snug text-ink-900">
-              {item.title}
+            <span
+              aria-hidden="true"
+              className={`mt-0.5 shrink-0 text-teal-700 transition-transform ${open ? 'rotate-90' : ''}`}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
             </span>
+          </button>
+        </td>
+      </tr>
 
-            {item.theme && (
-              <span className="mt-1 block text-sm italic text-ink-700">Theme: ‘{item.theme}’</span>
-            )}
-
-            {/*
-              No preview of the brief in the collapsed state. Several of these
-              descriptions run to a full paragraph, and even clamped to two
-              lines they made each card tall enough that the day stopped
-              reading as a timeline. The whole brief is one click away, and the
-              arrow says so.
-            */}
-          </span>
-
-          {/* The arrow of the approved design, rotating to double as the
-              open/closed indicator rather than adding a second control. */}
-          <span
-            aria-hidden="true"
-            className={`mt-0.5 shrink-0 text-brand-600 transition-transform ${open ? 'rotate-90' : ''}`}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
-            </svg>
-          </span>
-        </button>
-
-        {open && (
-          <div className="border-t border-ink-100 bg-ink-50 px-5 py-4">
+      {open && (
+        <tr id={panelId} className="bg-ink-50">
+          {/* Spans both columns so the brief uses the table's full width
+              rather than being squeezed into the session column. */}
+          <td colSpan={2} className="px-4 pb-4 pt-1 sm:px-5">
             <p className="text-sm leading-relaxed text-ink-700">{item.description}</p>
-          </div>
-        )}
-      </article>
-    </li>
+            {(item.type || item.group) && (
+              <p className="mt-2 flex flex-wrap items-center gap-2">
+                {item.type && (
+                  <span className="text-[11px] font-bold uppercase tracking-wide text-teal-700">
+                    {item.type}
+                  </span>
+                )}
+                {item.group && (
+                  <span className={GROUP_TONE[item.group] || 'pill-muted'}>{item.group}</span>
+                )}
+              </p>
+            )}
+          </td>
+        </tr>
+      )}
+    </>
   );
 }
 
@@ -195,22 +131,20 @@ export default function Agenda() {
           it simply sits above, because a stuck panel would eat the viewport.
         */}
         <header className="lg:sticky lg:top-24 lg:self-start">
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-600">
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-700">
             Agenda
           </p>
+          {/* One line, no forced break: the title wraps to the column it is
+              given rather than to a hard-coded shape. */}
           <h1 className="mt-3 font-title text-4xl font-normal uppercase leading-[1.08] tracking-tight text-ink-900 sm:text-5xl">
-            Shaping the waters.<br />Securing the future.
+            Indus Waters Treaty by Tiesverse Foundation
           </h1>
-          <p className="mt-4 max-w-md text-base leading-relaxed text-ink-700">
-            A day of high-level dialogue and expert sessions on the Indus Waters
-            Treaty — exploring law, security, history, narrative and the road ahead.
-          </p>
 
-          <span aria-hidden="true" className="mt-5 block h-0.5 w-16 bg-brand-600" />
+          <span aria-hidden="true" className="mt-5 block h-0.5 w-16 bg-teal-700" />
 
           <dl className="mt-6 space-y-4">
             <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-brand-600">
+              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" />
                 </svg>
@@ -225,7 +159,7 @@ export default function Agenda() {
             </div>
 
             <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-brand-600">
+              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
                 </svg>
@@ -247,7 +181,7 @@ export default function Agenda() {
           <label className="mt-3 flex w-fit cursor-pointer items-center gap-2 text-xs font-semibold text-ink-700">
             <input
               type="checkbox"
-              className="h-4 w-4 accent-brand-600"
+              className="h-4 w-4 accent-teal-700"
               checked={showBreaks}
               onChange={(e) => setShowBreaks(e.target.checked)}
             />
@@ -257,20 +191,39 @@ export default function Agenda() {
 
         {/* ── The running order ── */}
         <div className="min-w-0">
-          <ul>
-            {rows.map((item) =>
-              item.kind === 'break' ? (
-                <BreakRow key={item.id} item={item} />
-              ) : (
-                <SessionRow
-                  key={item.id}
-                  item={item}
-                  open={openId === item.id}
-                  onToggle={() => setOpenId(openId === item.id ? null : item.id)}
-                />
-              ),
-            )}
-          </ul>
+          {/* Rounded frame with the border on the wrapper, not the table, so
+              the corners stay round however many rows are inside. */}
+          <div className="overflow-hidden rounded-card border border-ink-200 bg-white">
+            <table className="w-full border-collapse text-left">
+              <caption className="sr-only">
+                Running order for {SUMMIT.date}. Select a session to read its brief.
+              </caption>
+              <thead>
+                <tr className="bg-ink-50">
+                  <th scope="col" className="w-[128px] px-4 py-3 text-[11px] font-bold uppercase tracking-[0.09em] text-ink-700 sm:px-5">
+                    Time
+                  </th>
+                  <th scope="col" className="px-4 py-3 text-[11px] font-bold uppercase tracking-[0.09em] text-ink-700 sm:px-5">
+                    Session
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((item) =>
+                  item.kind === 'break' ? (
+                    <BreakRow key={item.id} item={item} />
+                  ) : (
+                    <SessionRow
+                      key={item.id}
+                      item={item}
+                      open={openId === item.id}
+                      onToggle={() => setOpenId(openId === item.id ? null : item.id)}
+                    />
+                  ),
+                )}
+              </tbody>
+            </table>
+          </div>
 
           {/* The concept note is explicit that named speakers are proposed, not confirmed. */}
           <p className="mt-6 text-xs leading-relaxed text-ink-500">
@@ -286,7 +239,7 @@ export default function Agenda() {
             </div>
             <Link
               to="/register"
-              className="btn mt-4 min-h-[44px] shrink-0 bg-white text-ink-900 hover:bg-brand-50 sm:mt-0"
+              className="btn mt-4 min-h-[44px] shrink-0 bg-white text-ink-900 hover:bg-teal-50 sm:mt-0"
             >
               Register now
             </Link>

@@ -16,7 +16,7 @@ export default function Success() {
           Your {state.categoryLabel} application has been submitted for review.
         </p>
 
-        <div className="mt-8 rounded-lg border border-dashed border-brand-400 bg-brand-400/5 p-5">
+        <div className="mt-8 rounded-lg border border-dashed border-teal-500 bg-teal-500/5 p-5">
           <p className="text-xs uppercase tracking-[0.2em] text-ink-600/60">
             Your registration number
           </p>

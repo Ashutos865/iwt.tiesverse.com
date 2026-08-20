@@ -79,7 +79,7 @@ export default function AdminCheckin() {
     <div className="mx-auto max-w-md px-4 py-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-brand-600">Check-in</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-teal-700">Check-in</p>
           <h1 className="font-display text-2xl text-ink-900">Scan a badge</h1>
         </div>
         <div className="flex gap-3">
@@ -88,7 +88,7 @@ export default function AdminCheckin() {
         </div>
       </div>
 
-      <div className="relative overflow-hidden rounded-card border border-ink-200 bg-brand-950">
+      <div className="relative overflow-hidden rounded-card border border-ink-200 bg-teal-950">
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video ref={videoRef} playsInline muted className="block aspect-[3/4] w-full object-cover" />
         {/* aiming frame */}

@@ -36,7 +36,7 @@ export default function StatusCheck() {
   return (
     <div className="mx-auto max-w-2xl px-5 py-14">
       <div className="no-print">
-        <p className="text-xs uppercase tracking-[0.2em] text-brand-600">Applicants</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-teal-700">Applicants</p>
         <h1 className="mt-2 font-display text-3xl text-ink-900">Check your application</h1>
         <p className="mt-2 text-sm text-ink-600/80">
           Enter the email you applied with and the registration number from your confirmation.

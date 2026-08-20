@@ -32,7 +32,7 @@ export default function AdminLogin() {
   return (
     <div className="mx-auto flex min-h-[70vh] max-w-md items-center px-5">
       <form onSubmit={handleSubmit} className="card w-full">
-        <p className="text-xs uppercase tracking-[0.2em] text-brand-600">Secretariat</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-teal-700">Secretariat</p>
         <h1 className="mt-2 font-display text-2xl text-ink-900">Admin sign in</h1>
         <p className="mt-1 text-sm text-ink-600/80">
           Review applications, approve delegates and issue passes.

@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { ORGANISER, SUMMIT } from '../lib/constants.js';
+import { ORGANISER, SOCIALS, SUMMIT } from '../lib/constants.js';
 
 /**
  * Site shell, in the cop30.br idiom: centred logo, a floating white nav card
@@ -106,6 +106,47 @@ const FOOTER_LINKS = [
   },
 ];
 
+/*
+ * Social marks, drawn inline rather than pulled from an icon package: four
+ * glyphs do not justify a dependency, and inline paths inherit currentColor so
+ * each follows its link's hover state. aria-hidden throughout — the anchor
+ * around them carries the label.
+ */
+const SOCIAL_PATHS = {
+  LinkedIn: (
+    <>
+      <path d="M4.98 3.5a2 2 0 1 1-.02 4 2 2 0 0 1 .02-4Z" />
+      <path d="M3.5 8.8h3v11.7h-3z" />
+      <path d="M9.5 8.8h2.9v1.6a3.2 3.2 0 0 1 2.9-1.6c3 0 3.6 2 3.6 4.6v6.1h-3v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.5h-3z" />
+    </>
+  ),
+  Instagram: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+    </>
+  ),
+  X: <path d="M4 4h3.6l4.5 6 5.2-6H21l-6.8 7.8L21.4 20h-3.6l-4.8-6.4L7.3 20H4l7.2-8.3z" />,
+  YouTube: (
+    <>
+      <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+      <path d="M10.2 9.4v5.2l4.6-2.6z" fill="currentColor" stroke="none" />
+    </>
+  ),
+};
+
+function SocialIcon({ name }) {
+  return (
+    <svg
+      width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+    >
+      {SOCIAL_PATHS[name]}
+    </svg>
+  );
+}
+
 function Chevron({ open }) {
   return (
     <svg
@@ -189,7 +230,7 @@ function MobileItem({ item, onNavigate }) {
           end={item.end}
           onClick={onNavigate}
           className={({ isActive }) =>
-            `flex-1 py-4 text-base font-semibold ${isActive ? 'text-brand-700' : 'text-ink-900'}`
+            `flex-1 py-4 text-base font-semibold ${isActive ? 'text-teal-700' : 'text-ink-900'}`
           }
         >
           {item.label}
@@ -285,8 +326,8 @@ export default function Layout() {
           rather than being decorative — a visitor who arrived here from a
           shared invitation has no other route to the rest of Tiesverse.
         */}
-        <div className="bg-brand-950 text-center text-[13px] text-white/90">
-          <div className="shell py-2.5">
+        <div className="bg-teal-950 text-center text-[13px] text-white/90">
+          <div className="shell-wide py-2.5">
             Inspired by the upcoming event?{' '}
             <a
               href={ORGANISER.website}
@@ -322,7 +363,7 @@ export default function Layout() {
           header is furniture, not prose — it reads better anchored to the
           screen edges, with a wider gutter so nothing touches the glass.
         */}
-        <div className="w-full px-6 lg:px-10 2xl:px-14">
+        <div className="shell-wide">
           <nav className="flex items-center justify-between gap-4 py-3" aria-label="Main">
               {/*
                 Logo slot. The mark is decided separately, so this reserves a
@@ -372,7 +413,7 @@ export default function Layout() {
                 */}
                 <Link
                   to="/contact"
-                  className="hidden !min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-btn border border-ink-200 px-4 py-2 text-xs font-semibold text-ink-900 transition hover:border-brand-700 hover:text-teal-700 lg:inline-flex"
+                  className="hidden !min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-btn border border-ink-200 px-4 py-2 text-xs font-semibold text-ink-900 transition hover:border-teal-700 hover:text-teal-700 lg:inline-flex"
                 >
                   Request invitation
                 </Link>
@@ -385,7 +426,7 @@ export default function Layout() {
                 </Link>
                 <button
                   type="button"
-                  className="flex h-11 w-11 items-center justify-center rounded-pill text-ink-900 hover:bg-brand-50 lg:hidden"
+                  className="flex h-11 w-11 items-center justify-center rounded-pill text-ink-900 hover:bg-teal-50 lg:hidden"
                   aria-expanded={menuOpen}
                   aria-label={menuOpen ? 'Close menu' : 'Open menu'}
                   onClick={() => setMenuOpen((v) => !v)}
@@ -455,7 +496,7 @@ export default function Layout() {
           halves that, and the gaps tighten on small screens where the
           generous desktop rhythm is not doing any work.
         */}
-        <div className="shell grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:gap-10 sm:py-12 lg:grid-cols-4">
+        <div className="shell-wide grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:gap-10 sm:py-12 lg:grid-cols-4">
           {/* Full width on a phone: this block is prose, and half a 402px
               screen is too narrow for it to set without ragging badly. */}
           <div className="col-span-2 lg:col-span-1">
@@ -505,11 +546,33 @@ export default function Layout() {
             >
               {ORGANISER.name}
             </a>
+
+            {/*
+              Tiesverse's accounts. Icon-only, so each carries its network name
+              as the accessible label — an unlabelled glyph announces as "link"
+              and tells a screen-reader user nothing about where it goes.
+            */}
+            <ul className="mt-4 flex flex-wrap items-center gap-2">
+              {SOCIALS.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={`${ORGANISER.abbr} on ${s.label}`}
+                    title={s.label}
+                    className="grid h-9 w-9 place-items-center rounded-full border border-ink-200 text-ink-700 transition hover:border-teal-700 hover:bg-teal-50 hover:text-teal-700"
+                  >
+                    <SocialIcon name={s.label} />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         <div className="border-t border-ink-200">
-          <div className="shell flex flex-col items-center gap-2 py-4 text-xs text-ink-500 sm:flex-row sm:justify-between">
+          <div className="shell-wide flex flex-col items-center gap-2 py-4 text-xs text-ink-500 sm:flex-row sm:justify-between">
             <span>© 2026 {ORGANISER.name}. All rights reserved.</span>
             <span className="flex gap-4">
               <Link to="/about#code-of-conduct" className="hover:text-teal-700">Code of Conduct</Link>

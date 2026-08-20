@@ -65,7 +65,7 @@ function AreaBadge({ area }) {
   return (
     <span
       aria-hidden="true"
-      className="absolute right-2.5 top-2.5 grid h-7 w-7 place-items-center rounded-full border border-ink-200 bg-white text-brand-600"
+      className="absolute right-2.5 top-2.5 grid h-7 w-7 place-items-center rounded-full border border-ink-200 bg-white text-teal-700"
     >
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -89,10 +89,10 @@ function initials(name = '') {
 function SpeakerCard({ sp }) {
   const area = sp.category;
   return (
-    <article className="card relative flex flex-col items-center !px-4 !py-4 text-center transition hover:border-brand-300 hover:shadow-nav">
+    <article className="card relative flex flex-col items-center !px-4 !py-4 text-center transition hover:border-teal-300 hover:shadow-nav">
       <AreaBadge area={area} />
 
-      <div className="grid h-[76px] w-[76px] shrink-0 place-items-center overflow-hidden rounded-full bg-brand-50 ring-1 ring-ink-200">
+      <div className="grid h-[76px] w-[76px] shrink-0 place-items-center overflow-hidden rounded-full bg-teal-50 ring-1 ring-ink-200">
         {sp.photo_url || sp.photo ? (
           <img
             src={sp.photo_url || sp.photo}
@@ -101,7 +101,7 @@ function SpeakerCard({ sp }) {
             className="h-full w-full object-cover"
           />
         ) : (
-          <span className="font-display text-2xl font-semibold text-brand-600">
+          <span className="font-display text-2xl font-semibold text-teal-700">
             {initials(sp.name)}
           </span>
         )}
@@ -120,7 +120,7 @@ function SpeakerCard({ sp }) {
       )}
 
       {area && (
-        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.06em] text-brand-700">
+        <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.06em] text-teal-700">
           {AREA_SHORT[area] || area}
         </p>
       )}
@@ -165,13 +165,13 @@ export default function Speakers() {
             </span>
           </h1>
 
-          <p className="mt-5 font-title text-lg italic text-brand-700">
+          <p className="mt-5 font-title text-lg italic text-teal-700">
             “{SUMMIT.theme}”
           </p>
 
           <dl className="mt-8 space-y-4">
             <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-brand-600">
+              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" />
                 </svg>
@@ -186,7 +186,7 @@ export default function Speakers() {
             </div>
 
             <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-brand-600">
+              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
                 </svg>
@@ -209,10 +209,10 @@ export default function Speakers() {
 
         {/* ── The grid ── */}
         <div className="min-w-0">
-          <h2 className="text-[13px] font-bold uppercase tracking-[0.18em] text-brand-700">
+          <h2 className="text-[13px] font-bold uppercase tracking-[0.18em] text-teal-700">
             Our speakers
           </h2>
-          <span aria-hidden="true" className="mt-3 block h-0.5 w-12 bg-brand-600" />
+          <span aria-hidden="true" className="mt-3 block h-0.5 w-12 bg-teal-700" />
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-700">
             Meet the distinguished jurists, experts, scholars, diplomats and
@@ -233,8 +233,8 @@ export default function Speakers() {
                       aria-pressed={area === t}
                       className={`rounded-btn px-3.5 py-2 text-xs font-semibold transition ${
                         area === t
-                          ? 'bg-brand-600 text-white'
-                          : 'text-ink-700 hover:bg-brand-50 hover:text-brand-800'
+                          ? 'bg-teal-700 text-white'
+                          : 'text-ink-700 hover:bg-teal-50 hover:text-teal-800'
                       }`}
                     >
                       {t === 'All' ? 'All' : (AREA_SHORT[t] || t)}
@@ -276,7 +276,7 @@ export default function Speakers() {
           {/* Closing note, as in the approved design. */}
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-card border border-ink-200 bg-ink-50 p-5">
             <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-brand-600 ring-1 ring-ink-200">
+              <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-teal-700 ring-1 ring-ink-200">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />

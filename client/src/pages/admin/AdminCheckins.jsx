@@ -57,7 +57,7 @@ export default function AdminCheckins() {
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-5 sm:py-10">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-brand-600">Attendance</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-teal-700">Attendance</p>
           <h1 className="font-display text-2xl text-ink-900">Check-ins</h1>
         </div>
         <div className="flex items-center gap-2">

@@ -99,18 +99,19 @@ export default {
         // band that should feel like a continuation of the artwork rather
         // than a UI surface.
         sand: '#FAEDDC',
-        // Portal tiles. Contrast with white / with ink-900:
-        //   deep    13.03 / 1.09 -> white text
-        //   mid      6.12 / 2.13 -> white text
-        //   river    4.35 / 2.99 -> white text (large only) — used for wide tiles
-        //   mist     1.42 / 8.45 -> DARK text
-        //   sand     1.19 / 10.1 -> DARK text
-        // Every tile therefore sets its own text colour; see TILES in Home.jsx.
+        // Portal tiles, in the teal family so the grid belongs to the same
+        // system as the buttons and the artwork. Contrast with white / with
+        // ink-900 (#272727):
+        //   deep   10.05 / 1.49  -> white text
+        //   mid     7.06 / 2.12  -> white text
+        //   river   4.89 / 3.06  -> white text
+        //   mist    1.26 / 11.87 -> DARK text
+        //   sand    1.33 / 11.26 -> DARK text
         tile: {
-          deep: '#16305C',
-          mid: '#2160B8',
-          river: '#3B79D0',
-          mist: '#C0D6F4',
+          deep: '#0A4A49',
+          mid: '#0D6361',
+          river: '#117E7B',
+          mist: '#A5F3F1',
           sand: '#E8DFC9',
         },
         ok: { DEFAULT: '#1F7A4C', bg: '#E8F5EE' },

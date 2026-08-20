@@ -62,7 +62,7 @@ export default function Partners() {
         )}
 
         {/* Become a partner — the offer, stated in terms of the actual outputs. */}
-        <section id="become-a-partner" className="rounded-card bg-tile-bluegreen p-8 text-white">
+        <section id="become-a-partner" className="rounded-card bg-tile-deep p-8 text-white">
           <h2 className="font-display text-2xl font-semibold">Become a partner</h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/75">
             Partnership associates your institution with a single-day policy dialogue at Bharat
@@ -75,7 +75,7 @@ export default function Partners() {
             {DELIVERABLES.slice(0, 3).map((d) => (
               <div key={d.n} className="rounded-card bg-white/5 p-4">
                 <p className="font-display text-sm font-semibold text-white/40">{d.n}</p>
-                <p className="mt-1 text-sm font-semibold text-brand-400">{d.title}</p>
+                <p className="mt-1 text-sm font-semibold text-teal-500">{d.title}</p>
               </div>
             ))}
           </div>

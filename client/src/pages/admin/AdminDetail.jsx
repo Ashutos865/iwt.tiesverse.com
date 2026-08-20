@@ -121,7 +121,7 @@ export default function AdminDetail() {
                 href={docUrl(meta.url)}
                 target="_blank"
                 rel="noreferrer"
-                className="group rounded-lg border border-ink-100 p-3 transition hover:border-brand-400"
+                className="group rounded-lg border border-ink-100 p-3 transition hover:border-teal-500"
               >
                 {meta.mimetype.startsWith('image/') ? (
                   <img src={docUrl(meta.url)} alt="" className="h-28 w-full rounded object-cover" />

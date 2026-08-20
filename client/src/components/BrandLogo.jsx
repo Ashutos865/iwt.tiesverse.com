@@ -47,7 +47,7 @@ export default function BrandLogo({ light = true, compact = false }) {
           Indus Water Treaty
         </span>
         <span
-          className="block font-semibold uppercase text-brand-400"
+          className="block font-semibold uppercase text-teal-500"
           style={{ fontSize: compact ? 9 : 10, letterSpacing: '0.16em' }}
         >
           Dialogue 2026 · New Delhi

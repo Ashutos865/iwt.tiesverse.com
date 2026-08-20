@@ -94,7 +94,7 @@ export default function AdminList() {
             onClick={() => changeFilter(setStatus)(tab.value)}
             className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
               status === tab.value
-                ? 'bg-brand-900 text-white'
+                ? 'bg-teal-900 text-white'
                 : 'border border-ink-200 bg-white text-ink-800 hover:bg-ink-50'
             }`}
           >
@@ -161,7 +161,7 @@ export default function AdminList() {
                   <td className="px-4 py-3">
                     <Link
                       to={`/admin/applications/${item.registrationId}`}
-                      className="font-mono text-xs font-semibold text-brand-600 hover:underline"
+                      className="font-mono text-xs font-semibold text-teal-700 hover:underline"
                     >
                       {item.registrationId}
                     </Link>

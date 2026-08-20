@@ -58,7 +58,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="mt-6 rounded-card border border-brand-100 bg-brand-50 p-5 text-sm text-ink-700">
+        <div className="mt-6 rounded-card border border-teal-100 bg-teal-50 p-5 text-sm text-ink-700">
           Already applied? Track your application any time from{' '}
           <Link to="/status" className="font-semibold text-teal-700 underline">Check Status</Link>
           {' '}— you only need the email you applied with.
@@ -75,12 +75,12 @@ export default function Contact() {
               <div key={f.q}>
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-ink-900 hover:bg-brand-50"
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-ink-900 hover:bg-teal-50"
                   aria-expanded={openFaq === i}
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
                   {f.q}
-                  <span className="text-lg text-brand-700">{openFaq === i ? '−' : '+'}</span>
+                  <span className="text-lg text-teal-700">{openFaq === i ? '−' : '+'}</span>
                 </button>
                 {openFaq === i && (
                   <p className="px-5 pb-4 text-sm leading-relaxed text-ink-700">{f.a}</p>

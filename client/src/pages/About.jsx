@@ -32,7 +32,7 @@ export default function About() {
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
             {KEY_FACTS.map((f) => (
               <div key={f.label} className="card !p-4 text-center">
-                <p className="font-display text-2xl font-semibold text-brand-600">{f.value}</p>
+                <p className="font-display text-2xl font-semibold text-teal-700">{f.value}</p>
                 <p className="text-xs uppercase tracking-wide text-ink-500">{f.label}</p>
               </div>
             ))}
@@ -51,7 +51,7 @@ export default function About() {
             {THEMES.map((t) => (
               <article key={t.n} className="card">
                 <div className="flex gap-4">
-                  <span className="font-display text-2xl font-semibold text-brand-500">{t.n}</span>
+                  <span className="font-display text-2xl font-semibold text-teal-600">{t.n}</span>
                   <div className="min-w-0">
                     <h3 className="font-display text-lg font-semibold leading-snug text-ink-900">
                       {t.title}
@@ -87,7 +87,7 @@ export default function About() {
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {DELIVERABLES.map((d) => (
               <div key={d.n} className="card">
-                <p className="font-display text-sm font-semibold text-brand-500">{d.n}</p>
+                <p className="font-display text-sm font-semibold text-teal-600">{d.n}</p>
                 <h3 className="mt-1 font-display text-base font-semibold leading-snug text-ink-900">
                   {d.title}
                 </h3>
@@ -126,7 +126,7 @@ export default function About() {
           </p>
         </section>
 
-        <section className="mt-12 rounded-card bg-tile-bluegreen p-6 text-white sm:flex sm:items-center sm:justify-between">
+        <section className="mt-12 rounded-card bg-tile-deep p-6 text-white sm:flex sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-lg font-semibold">Join the Dialogue</p>
             <p className="mt-1 text-sm text-white/70">Applications are reviewed before attendance is confirmed.</p>

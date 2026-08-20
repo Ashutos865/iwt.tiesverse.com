@@ -65,7 +65,7 @@ export default function Countdown({ className = '' }) {
   const { days, hours, minutes, seconds } = split(Math.max(0, START - now));
 
   return (
-    <div className={`rounded-card bg-brand-900 px-5 py-6 shadow-tile sm:px-8 ${className}`}>
+    <div className={`rounded-card bg-teal-900 px-5 py-6 shadow-tile sm:px-8 ${className}`}>
       <p className="text-center text-xs font-medium text-white/60">
         {SUMMIT.shortName}, {SUMMIT.date}
       </p>

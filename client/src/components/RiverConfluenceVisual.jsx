@@ -49,7 +49,7 @@ export default function RiverConfluenceVisual() {
       </svg>
 
       {/* edition stamp */}
-      <div className="absolute bottom-6 left-2 border-l-2 border-brand-400 pl-4 text-white">
+      <div className="absolute bottom-6 left-2 border-l-2 border-teal-500 pl-4 text-white">
         <p className="text-[13px] font-bold tracking-[0.14em]">19–20 SEP</p>
         <p className="font-display text-[26px] leading-none">2026</p>
         <p className="mt-1 text-[11px] font-semibold tracking-[0.18em] text-white/60">NEW DELHI</p>
@@ -60,11 +60,11 @@ export default function RiverConfluenceVisual() {
         {phase === 'pre' && (
           <>
             <p className="font-display text-[56px] font-medium leading-none">{days}</p>
-            <p className="mt-1 text-[11px] font-bold tracking-[0.2em] text-brand-400">DAYS TO GO</p>
+            <p className="mt-1 text-[11px] font-bold tracking-[0.2em] text-teal-500">DAYS TO GO</p>
           </>
         )}
         {phase === 'live' && (
-          <p className="text-[13px] font-bold tracking-[0.2em] text-brand-400">
+          <p className="text-[13px] font-bold tracking-[0.2em] text-teal-500">
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-ok align-middle" />EVENT LIVE
           </p>
         )}

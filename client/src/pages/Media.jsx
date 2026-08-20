@@ -60,7 +60,7 @@ export default function Media() {
                 aria-selected={tab === t}
                 onClick={() => setTab(t)}
                 className={`whitespace-nowrap border-b-[3px] px-5 py-3.5 text-sm font-semibold transition ${
-                  tab === t ? 'border-brand-600 text-ink-900' : 'border-transparent text-ink-500 hover:text-ink-900'
+                  tab === t ? 'border-teal-700 text-ink-900' : 'border-transparent text-ink-500 hover:text-ink-900'
                 }`}
               >
                 {t}
