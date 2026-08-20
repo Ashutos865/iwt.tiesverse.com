@@ -148,7 +148,7 @@ export default function Speakers() {
           came out 149px wide, which wrapped "Justice (Retd.) Aarti Deshmukh"
           onto three lines. The header column only needs room for the title
           block, so the split favours the grid. */}
-      <div className="shell grid gap-8 py-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.6fr)] lg:gap-10 lg:py-10">
+      <div className="shell-wide grid gap-8 py-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.6fr)] lg:gap-10 lg:py-10">
         {/* ── Standing event header ── */}
         <header className="lg:sticky lg:top-24 lg:self-start">
 
@@ -177,7 +177,7 @@ export default function Speakers() {
               </span>
               <div>
                 <dt className="sr-only">Date</dt>
-                <dd className="font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
+                <dd className="whitespace-nowrap font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
                   {SUMMIT.date}
                 </dd>
                 <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">Saturday</dd>
@@ -192,7 +192,7 @@ export default function Speakers() {
               </span>
               <div>
                 <dt className="sr-only">Venue</dt>
-                <dd className="font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
+                <dd className="whitespace-nowrap font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
                   Bharat Mandapam
                 </dd>
                 <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">New Delhi</dd>

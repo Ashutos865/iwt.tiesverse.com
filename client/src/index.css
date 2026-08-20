@@ -229,8 +229,13 @@
      The divisor is measured, not estimated. Rendering the title and reading
      its width back gives a consistent 13.3em for these 28 characters — an
      assumed 0.615em/char had put it at 17.2em, which left roughly a third of
-     every column unused. 13.8 keeps a small margin so a hinting difference
-     between platforms cannot tip it into an overflow.
+     every column unused.
+
+     15.2, not 13.3: the measured width is the advance of the text, but a
+     display serif paints beyond it — the final E's terminal overhung the
+     column and bled into the panel beside it at 13.8. The extra margin covers
+     that overhang and any hinting difference between platforms. Overflow here
+     is not a clipped edge, it is letters landing on the next column.
 
      Capped at 52px so it stops growing on a very wide page, where filling the
      whole measure would read as a banner rather than a heading.
@@ -240,10 +245,13 @@
   */
   .agenda-title-wrap {
     container-type: inline-size;
+    /* Belt and braces: if the title is ever lengthened, it is cut off at its
+       own column rather than painted over the content beside it. */
+    overflow: hidden;
   }
   .agenda-title {
     white-space: nowrap;
-    font-size: min(52px, calc(100cqw / 13.8));
+    font-size: min(52px, calc(100cqw / 15.2));
   }
   /* Fallback for browsers without container queries: the viewport formula,
      which is right on the full-width Agenda page and merely small elsewhere —

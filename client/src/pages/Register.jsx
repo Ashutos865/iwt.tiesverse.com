@@ -184,7 +184,7 @@ export default function Register() {
 
   return (
     <div className="agenda-split">
-      <div className="shell grid gap-8 py-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.15fr)] lg:gap-12 lg:py-7">
+      <div className="shell-wide grid gap-8 py-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.15fr)] lg:gap-12 lg:py-7">
         {/* ── Standing event header, matching the other pages ── */}
         <header className="lg:sticky lg:top-24 lg:self-start">
           {/* One line, as on the Agenda and Speakers pages. Split across

@@ -208,7 +208,7 @@ export default function Agenda() {
         the day's shape, and hiding them made the running order lie about how
         long the sessions actually run.
       */}
-      <div className="shell max-w-4xl py-8 text-center lg:py-12">
+      <div className="shell-wide mx-auto max-w-4xl py-8 text-center lg:py-12">
         {/*
           The event's name is the heading; the organiser is a credit beneath it.
           Running them as one 43-character line forced the type down to 13px on
@@ -237,7 +237,7 @@ export default function Agenda() {
             </span>
             <div className="text-left">
               <dt className="sr-only">Date</dt>
-              <dd className="font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
+              <dd className="whitespace-nowrap font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
                 {SUMMIT.date}
               </dd>
               <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">Saturday</dd>
@@ -252,7 +252,7 @@ export default function Agenda() {
             </span>
             <div className="text-left">
               <dt className="sr-only">Venue</dt>
-              <dd className="font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
+              <dd className="whitespace-nowrap font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
                 Bharat Mandapam
               </dd>
               <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">New Delhi</dd>
