@@ -220,7 +220,7 @@ export default function Agenda() {
           Indus Waters Treaty Dialogue
         </h1>
         <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500 sm:text-xs">
-          Tiesverse Foundation
+          by Tiesverse Foundation
         </p>
 
         {/* One horizontal row at every width. The icons shrink and the gap

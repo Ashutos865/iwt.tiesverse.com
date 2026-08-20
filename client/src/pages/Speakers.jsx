@@ -151,9 +151,6 @@ export default function Speakers() {
       <div className="shell grid gap-8 py-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.6fr)] lg:gap-10 lg:py-10">
         {/* ── Standing event header ── */}
         <header className="lg:sticky lg:top-24 lg:self-start">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500">
-            Dialogue by Tiesverse Foundation on
-          </p>
 
           {/* One line, sized to the column, matching the Agenda page. The
               stacked "INDUS / WATERS TREATY / DIALOGUE" split one name across
@@ -161,6 +158,9 @@ export default function Speakers() {
           <h1 className="agenda-title mt-4 font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
             Indus Waters Treaty Dialogue
           </h1>
+          <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500 sm:text-xs">
+            by Tiesverse Foundation
+          </p>
 
           <p className="mt-5 font-title text-lg italic text-teal-700">
             “{SUMMIT.theme}”

@@ -187,15 +187,15 @@ export default function Register() {
       <div className="shell grid gap-8 py-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.15fr)] lg:gap-12 lg:py-7">
         {/* ── Standing event header, matching the other pages ── */}
         <header className="lg:sticky lg:top-24 lg:self-start">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500">
-            Dialogue by Tiesverse Foundation on
-          </p>
           {/* One line, as on the Agenda and Speakers pages. Split across
               "INDUS / WATERS TREATY / DIALOGUE" the event's name read as three
               separate headings stacked on top of each other. */}
           <h1 className="agenda-title mt-3 font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
             Indus Waters Treaty Dialogue
           </h1>
+          <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500 sm:text-xs">
+            by Tiesverse Foundation
+          </p>
           <p className="mt-5 font-title text-lg italic text-ink-700">
             &ldquo;Blood and Water cannot flow together&rdquo;
           </p>

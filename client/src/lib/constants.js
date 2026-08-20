@@ -50,12 +50,16 @@ export const SUMMIT = {
 };
 
 /*
- * Tiesverse's own accounts, taken from the links published on tiesverse.com
+ * Tiesverse's own accounts. Taken from the links published on tiesverse.com
  * rather than guessed from the brand name — a handle that looks right but
  * belongs to somebody else sends delegates to a stranger.
+ *
+ * LinkedIn is the exception: tiesverse.com still points at an older
+ * /thetiesmedia page, and /ties-in is the current one, supplied directly. Worth
+ * correcting on the main site too, so the two do not disagree.
  */
 export const SOCIALS = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/thetiesmedia' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/ties-in/' },
   { label: 'Instagram', href: 'https://www.instagram.com/ties.in/' },
   { label: 'X', href: 'https://x.com/TiesIndia' },
   { label: 'YouTube', href: 'https://youtube.com/@TiesIndia' },
