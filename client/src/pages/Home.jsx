@@ -33,7 +33,25 @@ export default function Home() {
       screen-reader-only heading and no visible title at all.
     */
     <section className="hero-indus">
-      <div className="shell relative z-10 flex flex-col items-center py-12 text-center sm:py-16 lg:py-20">
+      {/*
+        The floor under the content is reserved for the mountains.
+
+        The drawing is sized to the viewport width and anchored to the bottom,
+        so its skyline always sits a fixed share of that width above the base —
+        measured on the asset, the art below the centre skyline is 17.6% of the
+        image width. Reserving 19vw underneath (a little more, for the taller
+        flanking ridges) means the buttons and the stats line cannot reach the
+        peaks at any window size. A fixed pixel value cannot do this: the peak
+        line moves with the width, so any literal is right at one size and
+        wrong at the next.
+
+        Capped at 300px so the reserve stops growing on an ultrawide monitor,
+        where 19vw would push the content needlessly far up the screen.
+      */}
+      <div
+        className="shell relative z-10 flex flex-col items-center py-12 text-center sm:py-16 lg:pt-20"
+        style={{ paddingBottom: 'min(300px, max(3rem, 19vw))' }}
+      >
         <p className="text-sm font-semibold tracking-wide text-teal-700">
           {SUMMIT.date} · {SUMMIT.venue}
         </p>
@@ -63,12 +81,7 @@ export default function Home() {
             explanation without adding another line of copy. */}
         <span aria-hidden="true" className="mt-7 block h-px w-40 bg-ink-200" />
 
-        <p className="mt-7 max-w-xl text-base leading-relaxed text-ink-700 sm:text-lg">
-          Join us as we uncover the legal, economic and strategic realities
-          shaping the future of the Indus Waters Treaty.
-        </p>
-
-        <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+        <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
           <Link to="/register" className="btn-primary">Register Now</Link>
           <Link to="/agenda" className="btn-ghost">Explore the Agenda</Link>
         </div>
