@@ -340,8 +340,15 @@ export default function Layout() {
               className="focus-on-dark group rounded-sm font-semibold text-white no-underline"
             >
               Explore our other work at{' '}
+              {/* The full address, www included, as the organisation writes it.
+                  The arrow marks this as leaving for another site — it sits
+                  outside the underline so the rule stays under the address
+                  itself rather than trailing past it. */}
               <span className="underline decoration-white/40 underline-offset-4 group-hover:decoration-white">
-                {ORGANISER.websiteLabel.replace(/^www\./, '')}
+                {ORGANISER.websiteLabel}
+              </span>
+              <span aria-hidden="true" className="ml-1 inline-block transition-transform group-hover:translate-x-0.5">
+                ↗
               </span>
             </a>
           </div>
