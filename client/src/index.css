@@ -219,8 +219,8 @@
   */
   /*
      The agenda title, held to a single line at every width.
-     43 uppercase characters at roughly 0.615em average advance need about
-     26.5em of measure, so the size has to follow the column rather than step
+     28 uppercase characters at roughly 0.615em average advance need about
+     17.2em of measure, so the size has to follow the column rather than step
      between fixed breakpoints — any literal is either too big at one width or
      needlessly small at the next. 100vw minus the gutters divided by that
      measure gives the largest size that still fits, and `white-space: nowrap`
@@ -231,11 +231,11 @@
   */
   .agenda-title {
     white-space: nowrap;
-    font-size: min(44px, calc((min(100vw, 1180px) - 2.5rem) / 26.5));
+    font-size: min(52px, calc((min(100vw, 1180px) - 2.5rem) / 17.2));
   }
   @media (min-width: 640px) {
     .agenda-title {
-      font-size: min(44px, calc((min(100vw, 1180px) - 3rem) / 26.5));
+      font-size: min(52px, calc((min(100vw, 1180px) - 3rem) / 17.2));
     }
   }
 

@@ -136,40 +136,51 @@ export default function Agenda() {
         long the sessions actually run.
       */}
       <div className="shell max-w-4xl py-8 text-center lg:py-12">
+        {/*
+          The event's name is the heading; the organiser is a credit beneath it.
+          Running them as one 43-character line forced the type down to 13px on
+          a phone — smaller than the body copy under it. Split, the name is 28
+          characters and holds one line at a size that still reads as a title,
+          and "Tiesverse Foundation" keeps its place without competing.
+        */}
         <h1 className="agenda-title font-title font-normal uppercase leading-[1.06] tracking-tight text-ink-900">
-          Indus Waters Treaty by Tiesverse Foundation
+          Indus Waters Treaty Dialogue
         </h1>
+        <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-500 sm:text-xs">
+          Tiesverse Foundation
+        </p>
 
-        {/* Date and venue on one line, splitting onto two only when a phone
-            leaves no room for both. */}
-        <dl className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-          <div className="flex items-center gap-3">
-            <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        {/* One horizontal row at every width. The icons shrink and the gap
+            tightens on a phone rather than the pair stacking, so the two
+            particulars stay readable as a single line of fact. */}
+        <dl className="mt-6 flex items-center justify-center gap-4 sm:gap-8">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700 sm:h-10 sm:w-10">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" />
               </svg>
             </span>
             <div className="text-left">
               <dt className="sr-only">Date</dt>
-              <dd className="font-display text-sm font-bold uppercase tracking-wide text-ink-900">
+              <dd className="font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
                 {SUMMIT.date}
               </dd>
-              <dd className="text-xs uppercase tracking-wide text-ink-500">Saturday</dd>
+              <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">Saturday</dd>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink-200 bg-white text-teal-700 sm:h-10 sm:w-10">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
               </svg>
             </span>
             <div className="text-left">
               <dt className="sr-only">Venue</dt>
-              <dd className="font-display text-sm font-bold uppercase tracking-wide text-ink-900">
+              <dd className="font-display text-xs font-bold uppercase tracking-wide text-ink-900 sm:text-sm">
                 Bharat Mandapam
               </dd>
-              <dd className="text-xs uppercase tracking-wide text-ink-500">New Delhi</dd>
+              <dd className="text-[10px] uppercase tracking-wide text-ink-500 sm:text-xs">New Delhi</dd>
             </div>
           </div>
         </dl>

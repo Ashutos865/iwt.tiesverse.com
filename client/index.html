@@ -8,6 +8,38 @@
       name="description"
       content="A one-day dialogue on the Indus Waters Treaty, convened by Tiesverse Foundation at Bharat Mandapam, New Delhi on 19 September 2026 — the 66th anniversary of the Treaty's signing."
     />
+    <!--
+      Link previews. WhatsApp, LinkedIn, X and Facebook all read these from the
+      raw HTML — none of them run JavaScript — so they must be here in
+      index.html rather than set by the app at runtime. Without og:image each
+      of them picks whatever image it finds first on the page, which is why a
+      shared link was showing an arbitrary picture.
+
+      og:image must be an absolute URL: a relative path resolves against the
+      crawler's own host, not ours, and silently yields no image at all.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Indus Waters Treaty Dialogue" />
+    <meta property="og:title" content="Indus Waters Treaty Dialogue — 19 September 2026, Bharat Mandapam" />
+    <meta
+      property="og:description"
+      content="A one-day dialogue on the Indus Waters Treaty, convened by Tiesverse Foundation at Bharat Mandapam, New Delhi on 19 September 2026."
+    />
+    <meta property="og:url" content="https://iwtdialogue.tiesverse.com/" />
+    <meta property="og:image" content="https://iwtdialogue.tiesverse.com/brand/share-card.jpg" />
+    <meta property="og:image:secure_url" content="https://iwtdialogue.tiesverse.com/brand/share-card.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Indus Waters Treaty Dialogue — 19 September 2026, Bharat Mandapam, New Delhi" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Indus Waters Treaty Dialogue — 19 September 2026" />
+    <meta
+      name="twitter:description"
+      content="A one-day dialogue on the Indus Waters Treaty, convened by Tiesverse Foundation at Bharat Mandapam, New Delhi."
+    />
+    <meta name="twitter:image" content="https://iwtdialogue.tiesverse.com/brand/share-card.jpg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
