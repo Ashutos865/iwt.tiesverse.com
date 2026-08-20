@@ -231,11 +231,18 @@
      assumed 0.615em/char had put it at 17.2em, which left roughly a third of
      every column unused.
 
-     15.2, not 13.3: the measured width is the advance of the text, but a
-     display serif paints beyond it — the final E's terminal overhung the
-     column and bled into the panel beside it at 13.8. The extra margin covers
-     that overhang and any hinting difference between platforms. Overflow here
-     is not a clipped edge, it is letters landing on the next column.
+     17.4, measured on the element itself with a Range over its text node.
+
+     Earlier values came from canvas measureText, which silently fell back to
+     a different face and reported 13.2em; the page actually renders Larken,
+     which needs 16.6em for these 28 characters. Every divisor derived from
+     the canvas figure was therefore too small, and the title ran into the
+     column beside it — the difference is a quarter of the width, not a
+     rounding error.
+
+     17.4 is 16.6 plus about 5% for hinting differences and for the fallback
+     face when Larken is unavailable. Measure with a Range, never canvas, if
+     this is ever retuned.
 
      Capped at 52px so it stops growing on a very wide page, where filling the
      whole measure would read as a banner rather than a heading.
@@ -245,13 +252,17 @@
   */
   .agenda-title-wrap {
     container-type: inline-size;
-    /* Belt and braces: if the title is ever lengthened, it is cut off at its
-       own column rather than painted over the content beside it. */
-    overflow: hidden;
+    /*
+       NOT overflow:hidden. Clipping here cut the last glyph off the title —
+       "DIALOGUE" rendered as "DIALOG" — because the browser lays the line out
+       to its advance width while the serif's final stroke paints a fraction
+       past it, and the clip lands exactly on that fraction. The size formula
+       below already keeps the text inside its column; nothing needs cutting.
+    */
   }
   .agenda-title {
     white-space: nowrap;
-    font-size: min(52px, calc(100cqw / 15.2));
+    font-size: min(52px, calc(100cqw / 17.4));
   }
   /* Fallback for browsers without container queries: the viewport formula,
      which is right on the full-width Agenda page and merely small elsewhere —
