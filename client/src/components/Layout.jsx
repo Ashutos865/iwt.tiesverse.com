@@ -329,13 +329,20 @@ export default function Layout() {
         <div className="bg-teal-950 text-center text-[13px] text-white/90">
           <div className="shell-wide py-2.5">
             Inspired by the upcoming event?{' '}
+            {/* The rule sits under the domain only. Underlining the whole
+                sentence drew a line the width of the strip, which read as a
+                border rather than as a link; the address is the part that
+                behaves like one. */}
             <a
               href={ORGANISER.website}
               target="_blank"
               rel="noreferrer noopener"
-              className="focus-on-dark rounded-sm font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
+              className="focus-on-dark group rounded-sm font-semibold text-white no-underline"
             >
-              Explore our other work at tiesverse.com
+              Explore our other work at{' '}
+              <span className="underline decoration-white/40 underline-offset-4 group-hover:decoration-white">
+                {ORGANISER.websiteLabel.replace(/^www\./, '')}
+              </span>
             </a>
           </div>
         </div>

@@ -34,8 +34,11 @@
   .focus-on-dark:focus-visible {
     @apply ring-0 ring-offset-0;
     box-shadow: none;
-    /* Focus shows as a heavier version of the underline the link already has,
-       so the indicator lives on the word instead of boxing it. */
+  }
+  /* Focus thickens the rule that is already under the domain, so the indicator
+     lives on the link's own underline rather than boxing the sentence. The
+     underline belongs to the inner span now, which is where this has to land. */
+  .focus-on-dark:focus-visible span {
     text-decoration-color: #FFFFFF;
     text-decoration-thickness: 2px;
     text-underline-offset: 5px;
